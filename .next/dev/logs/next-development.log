@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 [00:00:01.638] Server  LOG      ✓ Ready in 1136ms
 [00:00:10.614] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
 [00:00:20.235] Server  ERROR   D:\Fullstacks\timetable\Timetable\.next\dev\server\chunks\[root-of-the-server]__415e426e._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
@@ -33,3 +34,23 @@
 [00:01:30.263] Server  LOG        Reload env: .env.local
 [00:01:33.749] Server  LOG        Reload env: .env.local
 [00:04:02.392] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+=======
+[00:00:02.665] Server  LOG      ✓ Ready in 1756ms
+[00:00:05.778] Server  LOG      ○ Compiling /admin/dashboard ...
+[00:00:07.154] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:00:22.841] Server  WARN     ⚠ Cross origin request detected from 10.98.161.123 to /_next/* resource. In a future major version of Next.js, you will need to explicitly configure "allowedDevOrigins" in next.config to allow this.
+Read more: https://nextjs.org/docs/app/api-reference/config/next-config-js/allowedDevOrigins
+[00:00:22.862] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:04:40.902] Server  LOG      ✓ Compiled in 0ms
+[00:04:58.615] Server  ERROR   D:\Timetable Project\.next\dev\server\chunks\ssr\[root-of-the-server]__15ef5c1c._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:04:58.621] Server  ERROR    ⨯ ReferenceError: Link is not defined
+[00:04:58.698] Server  ERROR   D:\Timetable Project\.next\dev\server\chunks\ssr\[root-of-the-server]__15ef5c1c._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:04:58.707] Server  ERROR    ⨯ ReferenceError: Link is not defined
+[00:04:59.024] Browser ERROR   uncaughtError: ReferenceError: Link is not defined
+[00:04:59.921] Browser ERROR   uncaughtError: ReferenceError: Link is not defined
+[00:05:02.914] Server  LOG      ✓ Compiled in 117ms
+[00:05:04.064] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:05:04.472] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:05:30.958] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:05:41.909] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+>>>>>>> 2e7f8203471e4f3cf84ec291942fa9a58cdb8a6d
