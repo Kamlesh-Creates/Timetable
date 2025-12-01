@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 14, "column": 0}, "map": {"version":3,"sources":["file:///D:/Timetable%20Project/app/%28dashboard%29/admin/manage-settings/page.js"],"sourcesContent":["export default function ManageSettingsPage() {\r\n  return <main>Manage Settings</main>;\r\n}\r\n\r\n\r\n"],"names":[],"mappings":";;;;;;AAAe,SAAS;IACtB,qBAAO,8OAAC;kBAAK;;;;;;AACf"}}]
+}
