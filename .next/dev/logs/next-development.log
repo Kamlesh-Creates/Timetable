@@ -1,19 +1,35 @@
-[00:00:01.001] Server  LOG      ✓ Ready in 657ms
-[00:00:03.252] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:00:03.540] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:00:40.373] Server  WARN     ⚠ Cross origin request detected from 10.98.161.123 to /_next/* resource. In a future major version of Next.js, you will need to explicitly configure "allowedDevOrigins" in next.config to allow this.
-Read more: https://nextjs.org/docs/app/api-reference/config/next-config-js/allowedDevOrigins
-[00:03:09.136] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:03:11.107] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:03:52.695] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:05:45.950] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:12:48.064] Server  LOG      ✓ Compiled in 523ms
-[00:12:51.634] Server  LOG      ✓ Compiled in 93ms
-[00:12:56.511] Server  LOG      ✓ Compiled in 46ms
-[00:12:58.448] Server  LOG      ✓ Compiled in 38ms
-[00:13:00.332] Server  LOG      ✓ Compiled in 46ms
-[00:14:16.026] Server  LOG      ✓ Compiled in 82ms
-[00:14:30.771] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:15:20.698] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:15:23.600] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:15:25.927] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:00:01.638] Server  LOG      ✓ Ready in 1136ms
+[00:00:10.614] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:00:20.235] Server  ERROR   D:\Fullstacks\timetable\Timetable\.next\dev\server\chunks\[root-of-the-server]__415e426e._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:00:20.243] Server  ERROR   D:\Fullstacks\timetable\Timetable\.next\dev\server\chunks\[turbopack]_runtime.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:00:20.288] Server  ERROR   D:\Fullstacks\timetable\Timetable\.next\dev\server\chunks\node_modules_06746118._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:00:20.293] Server  ERROR   D:\Fullstacks\timetable\Timetable\node_modules\next\dist\server\require-hook.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:00:20.295] Server  ERROR   D:\Fullstacks\timetable\Timetable\node_modules\next\dist\server\require.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:00:20.296] Server  ERROR   D:\Fullstacks\timetable\Timetable\node_modules\next\dist\server\load-components.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:00:20.312] Server  ERROR   D:\Fullstacks\timetable\Timetable\node_modules\next\dist\server\next-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:00:20.316] Server  ERROR   D:\Fullstacks\timetable\Timetable\node_modules\next\dist\server\lib\trace\tracer.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:00:20.323] Server  ERROR   D:\Fullstacks\timetable\Timetable\node_modules\next\dist\server\dev\next-dev-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:00:20.330] Server  ERROR   D:\Fullstacks\timetable\Timetable\node_modules\next\dist\server\base-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:00:20.331] Server  ERROR   D:\Fullstacks\timetable\Timetable\node_modules\next\dist\trace\trace.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:00:20.333] Server  ERROR   D:\Fullstacks\timetable\Timetable\node_modules\next\dist\server\lib\router-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:00:20.337] Server  ERROR   D:\Fullstacks\timetable\Timetable\node_modules\next\dist\server\lib\start-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:00:20.343] Server  ERROR    ⨯ Error: Please define the MONGODB_URI environment variable
+[00:00:50.701] Server  ERROR   D:\Fullstacks\timetable\Timetable\.next\dev\server\chunks\[root-of-the-server]__415e426e._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:00:50.703] Server  ERROR   D:\Fullstacks\timetable\Timetable\.next\dev\server\chunks\[turbopack]_runtime.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:00:50.704] Server  ERROR   D:\Fullstacks\timetable\Timetable\.next\dev\server\chunks\node_modules_06746118._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:00:50.705] Server  ERROR   D:\Fullstacks\timetable\Timetable\node_modules\next\dist\server\require-hook.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:00:50.706] Server  ERROR   D:\Fullstacks\timetable\Timetable\node_modules\next\dist\server\require.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:00:50.707] Server  ERROR   D:\Fullstacks\timetable\Timetable\node_modules\next\dist\server\load-components.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:00:50.709] Server  ERROR   D:\Fullstacks\timetable\Timetable\node_modules\next\dist\server\next-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:00:50.710] Server  ERROR   D:\Fullstacks\timetable\Timetable\node_modules\next\dist\server\lib\trace\tracer.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:00:50.713] Server  ERROR   D:\Fullstacks\timetable\Timetable\node_modules\next\dist\server\dev\next-dev-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:00:50.717] Server  ERROR   D:\Fullstacks\timetable\Timetable\node_modules\next\dist\server\base-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:00:50.718] Server  ERROR   D:\Fullstacks\timetable\Timetable\node_modules\next\dist\trace\trace.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:00:50.719] Server  ERROR   D:\Fullstacks\timetable\Timetable\node_modules\next\dist\server\lib\router-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:00:50.720] Server  ERROR   D:\Fullstacks\timetable\Timetable\node_modules\next\dist\server\lib\start-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:00:50.721] Server  ERROR    ⨯ Error: Please define the MONGODB_URI environment variable
+[00:01:24.716] Server  LOG        Reload env: .env.local
+[00:01:28.490] Server  LOG        Reload env: .env.local
+[00:01:30.263] Server  LOG        Reload env: .env.local
+[00:01:33.749] Server  LOG        Reload env: .env.local
+[00:04:02.392] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold

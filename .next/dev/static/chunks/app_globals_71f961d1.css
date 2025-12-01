@@ -396,10 +396,6 @@
     margin-bottom: calc(var(--spacing) * 6);
   }
 
-  .ml-1 {
-    margin-left: calc(var(--spacing) * 1);
-  }
-
   .block {
     display: block;
   }

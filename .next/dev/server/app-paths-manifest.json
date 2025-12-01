@@ -1,21 +1,6 @@
 {
   "/(auth)/admin/login/page": "app/(auth)/admin/login/page.js",
   "/(dashboard)/admin/dashboard/page": "app/(dashboard)/admin/dashboard/page.js",
-  "/(dashboard)/admin/manage-classroom/page": "app/(dashboard)/admin/manage-classroom/page.js",
-  "/(dashboard)/admin/manage-faculty/page": "app/(dashboard)/admin/manage-faculty/page.js",
-  "/(dashboard)/admin/manage-settings/page": "app/(dashboard)/admin/manage-settings/page.js",
-  "/(dashboard)/admin/manage-subjects/page": "app/(dashboard)/admin/manage-subjects/page.js",
-  "/api/admin/classrooms/route": "app/api/admin/classrooms/route.js",
-  "/api/admin/settings/route": "app/api/admin/settings/route.js",
-  "/api/admin/subjects/route": "app/api/admin/subjects/route.js",
-  "/api/admin/teachers/[id]/route": "app/api/admin/teachers/[id]/route.js",
-  "/api/admin/teachers/route": "app/api/admin/teachers/route.js",
   "/api/auth/admin/login/route": "app/api/auth/admin/login/route.js",
-  "/manage/classrooms/new/page": "app/manage/classrooms/new/page.js",
-  "/manage/classrooms/page": "app/manage/classrooms/page.js",
-  "/manage/faculty/new/page": "app/manage/faculty/new/page.js",
-  "/manage/faculty/page": "app/manage/faculty/page.js",
-  "/manage/settings/page": "app/manage/settings/page.js",
-  "/manage/subjects/page": "app/manage/subjects/page.js",
   "/page": "app/page.js"
 }
