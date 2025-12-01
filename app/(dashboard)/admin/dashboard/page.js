@@ -1,4 +1,5 @@
 import { redirect } from "next/navigation";
+import Link from "next/link";
 import { getAuthenticatedAdmin } from "../../../../lib/authMiddleware";
 
 export default async function AdminDashboardPage() {
@@ -57,6 +58,12 @@ export default async function AdminDashboardPage() {
             >
               Settings
             </a>
+            <a
+              href="/manage/timetable/generate"
+              className="mt-2 block rounded-md bg-[#1A4C8B] px-3 py-2 text-sm font-medium text-white transition hover:bg-blue-800"
+            >
+              Generate Timetable
+            </a>
           </nav>
 
           <div className="mt-4 rounded-md border border-[#E5E7EB] bg-[#F8FAFC] p-3 text-xs text-slate-700 shadow-sm">
@@ -81,9 +88,12 @@ export default async function AdminDashboardPage() {
                 High-level view of your institute&apos;s timetable setup.
               </p>
             </div>
-            <button className="inline-flex items-center justify-center rounded-md bg-[#1A4C8B] px-3.5 py-2 text-xs font-medium text-white shadow-sm transition hover:bg-blue-800">
+            <Link
+              href="/manage/timetable/generate"
+              className="inline-flex items-center justify-center rounded-md bg-[#1A4C8B] px-3.5 py-2 text-xs font-medium text-white shadow-sm transition hover:bg-blue-800"
+            >
               Generate Timetable
-            </button>
+            </Link>
           </header>
 
           {/* Summary cards */}

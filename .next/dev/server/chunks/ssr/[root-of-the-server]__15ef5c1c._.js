@@ -105,7 +105,9 @@ __turbopack_context__.s([
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/server/route-modules/app-page/vendored/rsc/react-jsx-dev-runtime.js [app-rsc] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$api$2f$navigation$2e$react$2d$server$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__$3c$locals$3e$__ = __turbopack_context__.i("[project]/node_modules/next/dist/api/navigation.react-server.js [app-rsc] (ecmascript) <locals>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$components$2f$navigation$2e$react$2d$server$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/client/components/navigation.react-server.js [app-rsc] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$react$2d$server$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/client/app-dir/link.react-server.js [app-rsc] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$authMiddleware$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/lib/authMiddleware.js [app-rsc] (ecmascript)");
+;
 ;
 ;
 ;
@@ -127,7 +129,7 @@ async function AdminDashboardPage() {
                             children: "Navigation"
                         }, void 0, false, {
                             fileName: "[project]/app/(dashboard)/admin/dashboard/page.js",
-                            lineNumber: 17,
+                            lineNumber: 18,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("nav", {
@@ -141,7 +143,7 @@ async function AdminDashboardPage() {
                                             children: "Overview"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(dashboard)/admin/dashboard/page.js",
-                                            lineNumber: 25,
+                                            lineNumber: 26,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -149,13 +151,13 @@ async function AdminDashboardPage() {
                                             children: "Active"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(dashboard)/admin/dashboard/page.js",
-                                            lineNumber: 26,
+                                            lineNumber: 27,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(dashboard)/admin/dashboard/page.js",
-                                    lineNumber: 21,
+                                    lineNumber: 22,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
@@ -164,7 +166,7 @@ async function AdminDashboardPage() {
                                     children: "Classrooms"
                                 }, void 0, false, {
                                     fileName: "[project]/app/(dashboard)/admin/dashboard/page.js",
-                                    lineNumber: 30,
+                                    lineNumber: 31,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
@@ -173,7 +175,7 @@ async function AdminDashboardPage() {
                                     children: "Divisions"
                                 }, void 0, false, {
                                     fileName: "[project]/app/(dashboard)/admin/dashboard/page.js",
-                                    lineNumber: 36,
+                                    lineNumber: 37,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
@@ -182,7 +184,7 @@ async function AdminDashboardPage() {
                                     children: "Faculty"
                                 }, void 0, false, {
                                     fileName: "[project]/app/(dashboard)/admin/dashboard/page.js",
-                                    lineNumber: 42,
+                                    lineNumber: 43,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
@@ -191,7 +193,7 @@ async function AdminDashboardPage() {
                                     children: "Subjects"
                                 }, void 0, false, {
                                     fileName: "[project]/app/(dashboard)/admin/dashboard/page.js",
-                                    lineNumber: 48,
+                                    lineNumber: 49,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
@@ -200,13 +202,22 @@ async function AdminDashboardPage() {
                                     children: "Settings"
                                 }, void 0, false, {
                                     fileName: "[project]/app/(dashboard)/admin/dashboard/page.js",
-                                    lineNumber: 54,
+                                    lineNumber: 55,
+                                    columnNumber: 13
+                                }, this),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
+                                    href: "/manage/timetable/generate",
+                                    className: "mt-2 block rounded-md bg-[#1A4C8B] px-3 py-2 text-sm font-medium text-white transition hover:bg-blue-800",
+                                    children: "Generate Timetable"
+                                }, void 0, false, {
+                                    fileName: "[project]/app/(dashboard)/admin/dashboard/page.js",
+                                    lineNumber: 61,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/(dashboard)/admin/dashboard/page.js",
-                            lineNumber: 20,
+                            lineNumber: 21,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -217,7 +228,7 @@ async function AdminDashboardPage() {
                                     children: "Tip for institutes"
                                 }, void 0, false, {
                                     fileName: "[project]/app/(dashboard)/admin/dashboard/page.js",
-                                    lineNumber: 63,
+                                    lineNumber: 70,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -225,19 +236,19 @@ async function AdminDashboardPage() {
                                     children: "Configure all classrooms, divisions, faculty and subjects before running the timetable generator for best results."
                                 }, void 0, false, {
                                     fileName: "[project]/app/(dashboard)/admin/dashboard/page.js",
-                                    lineNumber: 66,
+                                    lineNumber: 73,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/(dashboard)/admin/dashboard/page.js",
-                            lineNumber: 62,
+                            lineNumber: 69,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/(dashboard)/admin/dashboard/page.js",
-                    lineNumber: 16,
+                    lineNumber: 17,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
@@ -253,7 +264,7 @@ async function AdminDashboardPage() {
                                             children: "Dashboard"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(dashboard)/admin/dashboard/page.js",
-                                            lineNumber: 77,
+                                            lineNumber: 84,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -261,27 +272,28 @@ async function AdminDashboardPage() {
                                             children: "High-level view of your institute's timetable setup."
                                         }, void 0, false, {
                                             fileName: "[project]/app/(dashboard)/admin/dashboard/page.js",
-                                            lineNumber: 80,
+                                            lineNumber: 87,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(dashboard)/admin/dashboard/page.js",
-                                    lineNumber: 76,
+                                    lineNumber: 83,
                                     columnNumber: 13
                                 }, this),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$react$2d$server$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"], {
+                                    href: "/manage/timetable/generate",
                                     className: "inline-flex items-center justify-center rounded-md bg-[#1A4C8B] px-3.5 py-2 text-xs font-medium text-white shadow-sm transition hover:bg-blue-800",
                                     children: "Generate Timetable"
                                 }, void 0, false, {
                                     fileName: "[project]/app/(dashboard)/admin/dashboard/page.js",
-                                    lineNumber: 84,
+                                    lineNumber: 91,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/(dashboard)/admin/dashboard/page.js",
-                            lineNumber: 75,
+                            lineNumber: 82,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -295,7 +307,7 @@ async function AdminDashboardPage() {
                                             children: "Setup progress"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(dashboard)/admin/dashboard/page.js",
-                                            lineNumber: 92,
+                                            lineNumber: 102,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -303,7 +315,7 @@ async function AdminDashboardPage() {
                                             children: "3 / 4"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(dashboard)/admin/dashboard/page.js",
-                                            lineNumber: 95,
+                                            lineNumber: 105,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -311,7 +323,7 @@ async function AdminDashboardPage() {
                                             children: "Core modules configured (classrooms, faculty, subjects, divisions)."
                                         }, void 0, false, {
                                             fileName: "[project]/app/(dashboard)/admin/dashboard/page.js",
-                                            lineNumber: 98,
+                                            lineNumber: 108,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -320,18 +332,18 @@ async function AdminDashboardPage() {
                                                 className: "h-full w-3/4 rounded-full bg-[#1A4C8B]"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(dashboard)/admin/dashboard/page.js",
-                                                lineNumber: 103,
+                                                lineNumber: 113,
                                                 columnNumber: 17
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "[project]/app/(dashboard)/admin/dashboard/page.js",
-                                            lineNumber: 102,
+                                            lineNumber: 112,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(dashboard)/admin/dashboard/page.js",
-                                    lineNumber: 91,
+                                    lineNumber: 101,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -342,7 +354,7 @@ async function AdminDashboardPage() {
                                             children: "Timetable status"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(dashboard)/admin/dashboard/page.js",
-                                            lineNumber: 108,
+                                            lineNumber: 118,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -350,7 +362,7 @@ async function AdminDashboardPage() {
                                             children: "Ready to generate"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(dashboard)/admin/dashboard/page.js",
-                                            lineNumber: 111,
+                                            lineNumber: 121,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -358,13 +370,13 @@ async function AdminDashboardPage() {
                                             children: "All required entities exist. You can run the OR-Tools based scheduler from here."
                                         }, void 0, false, {
                                             fileName: "[project]/app/(dashboard)/admin/dashboard/page.js",
-                                            lineNumber: 114,
+                                            lineNumber: 124,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(dashboard)/admin/dashboard/page.js",
-                                    lineNumber: 107,
+                                    lineNumber: 117,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -375,7 +387,7 @@ async function AdminDashboardPage() {
                                             children: "Admin"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(dashboard)/admin/dashboard/page.js",
-                                            lineNumber: 121,
+                                            lineNumber: 131,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -388,13 +400,13 @@ async function AdminDashboardPage() {
                                                     children: admin.email
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(dashboard)/admin/dashboard/page.js",
-                                                    lineNumber: 126,
+                                                    lineNumber: 136,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/(dashboard)/admin/dashboard/page.js",
-                                            lineNumber: 124,
+                                            lineNumber: 134,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -402,19 +414,19 @@ async function AdminDashboardPage() {
                                             children: "Use the side navigation to manage institute data."
                                         }, void 0, false, {
                                             fileName: "[project]/app/(dashboard)/admin/dashboard/page.js",
-                                            lineNumber: 130,
+                                            lineNumber: 140,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(dashboard)/admin/dashboard/page.js",
-                                    lineNumber: 120,
+                                    lineNumber: 130,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/(dashboard)/admin/dashboard/page.js",
-                            lineNumber: 90,
+                            lineNumber: 100,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -431,7 +443,7 @@ async function AdminDashboardPage() {
                                                     children: "Recent activity"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(dashboard)/admin/dashboard/page.js",
-                                                    lineNumber: 140,
+                                                    lineNumber: 150,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -439,13 +451,13 @@ async function AdminDashboardPage() {
                                                     children: "Demo data"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/(dashboard)/admin/dashboard/page.js",
-                                                    lineNumber: 143,
+                                                    lineNumber: 153,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/(dashboard)/admin/dashboard/page.js",
-                                            lineNumber: 139,
+                                            lineNumber: 149,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("ul", {
@@ -458,7 +470,7 @@ async function AdminDashboardPage() {
                                                             children: "New classroom added for Block A"
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/(dashboard)/admin/dashboard/page.js",
-                                                            lineNumber: 149,
+                                                            lineNumber: 159,
                                                             columnNumber: 19
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -466,13 +478,13 @@ async function AdminDashboardPage() {
                                                             children: "2 min ago"
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/(dashboard)/admin/dashboard/page.js",
-                                                            lineNumber: 150,
+                                                            lineNumber: 160,
                                                             columnNumber: 19
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/app/(dashboard)/admin/dashboard/page.js",
-                                                    lineNumber: 148,
+                                                    lineNumber: 158,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
@@ -482,7 +494,7 @@ async function AdminDashboardPage() {
                                                             children: "Physics subject assigned to Division B"
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/(dashboard)/admin/dashboard/page.js",
-                                                            lineNumber: 153,
+                                                            lineNumber: 163,
                                                             columnNumber: 19
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -490,13 +502,13 @@ async function AdminDashboardPage() {
                                                             children: "10 min ago"
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/(dashboard)/admin/dashboard/page.js",
-                                                            lineNumber: 154,
+                                                            lineNumber: 164,
                                                             columnNumber: 19
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/app/(dashboard)/admin/dashboard/page.js",
-                                                    lineNumber: 152,
+                                                    lineNumber: 162,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
@@ -506,7 +518,7 @@ async function AdminDashboardPage() {
                                                             children: "Faculty load updated for Semester 1"
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/(dashboard)/admin/dashboard/page.js",
-                                                            lineNumber: 157,
+                                                            lineNumber: 167,
                                                             columnNumber: 19
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -514,25 +526,25 @@ async function AdminDashboardPage() {
                                                             children: "1 hr ago"
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/(dashboard)/admin/dashboard/page.js",
-                                                            lineNumber: 158,
+                                                            lineNumber: 168,
                                                             columnNumber: 19
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/app/(dashboard)/admin/dashboard/page.js",
-                                                    lineNumber: 156,
+                                                    lineNumber: 166,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/(dashboard)/admin/dashboard/page.js",
-                                            lineNumber: 147,
+                                            lineNumber: 157,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(dashboard)/admin/dashboard/page.js",
-                                    lineNumber: 138,
+                                    lineNumber: 148,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -543,7 +555,7 @@ async function AdminDashboardPage() {
                                             children: "Timetable snapshot"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(dashboard)/admin/dashboard/page.js",
-                                            lineNumber: 164,
+                                            lineNumber: 174,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -551,36 +563,36 @@ async function AdminDashboardPage() {
                                             children: "Once you generate a timetable, a quick summary of periods, conflicts and utilization will appear here to help you review the schedule before publishing it for the institute."
                                         }, void 0, false, {
                                             fileName: "[project]/app/(dashboard)/admin/dashboard/page.js",
-                                            lineNumber: 167,
+                                            lineNumber: 177,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(dashboard)/admin/dashboard/page.js",
-                                    lineNumber: 163,
+                                    lineNumber: 173,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/(dashboard)/admin/dashboard/page.js",
-                            lineNumber: 137,
+                            lineNumber: 147,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/(dashboard)/admin/dashboard/page.js",
-                    lineNumber: 74,
+                    lineNumber: 81,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/app/(dashboard)/admin/dashboard/page.js",
-            lineNumber: 14,
+            lineNumber: 15,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/app/(dashboard)/admin/dashboard/page.js",
-        lineNumber: 12,
+        lineNumber: 13,
         columnNumber: 5
     }, this);
 }
