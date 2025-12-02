@@ -5,6 +5,7 @@ import Division from "../../../../models/Division";
 import Subject from "../../../../models/Subject";
 import Teacher from "../../../../models/Teacher";
 import Setting from "../../../../models/Setting";
+import Timetable from "../../../../models/Timetable";
 
 const PYTHON_API_URL = process.env.PYTHON_API_URL || "http://localhost:8000";
 
@@ -149,10 +150,19 @@ export async function POST() {
 
     const timetable = await pythonResponse.json();
 
+    // Save timetable to MongoDB
+    const divisionNames = Object.keys(timetable);
+    const savedTimetable = await Timetable.create({
+      data: timetable,
+      generatedAt: new Date(),
+      divisions: divisionNames,
+    });
+
     return NextResponse.json(
       {
         message: "Timetable generated successfully",
         timetable,
+        timetableId: savedTimetable._id.toString(),
       },
       { status: 200 }
     );
