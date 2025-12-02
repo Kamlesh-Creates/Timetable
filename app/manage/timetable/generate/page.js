@@ -402,20 +402,18 @@ export default function GenerateTimetablePage() {
             <h2 className="text-lg font-semibold text-slate-900">
               Generated Timetable
             </h2>
-            <div className="flex gap-2">
-              {Object.keys(timetableData).length > 1 && (
-                <select
-                  value={currentDivisionForPdf}
-                  onChange={(e) => setCurrentDivisionForPdf(e.target.value)}
-                  className="rounded-md border border-[#CBD5E1] bg-white px-2 py-2 text-xs text-slate-700"
-                >
-                  {Object.keys(timetableData).map((divisionKey) => (
-                    <option key={divisionKey} value={divisionKey}>
-                      {divisionKey}
-                    </option>
-                  ))}
-                </select>
-              )}
+            <div className="flex flex-wrap items-center gap-2">
+              <select
+                value={currentDivisionForPdf}
+                onChange={(e) => setCurrentDivisionForPdf(e.target.value)}
+                className="rounded-md border border-[#CBD5E1] bg-white px-2 py-2 text-xs text-slate-700"
+              >
+                {Object.keys(timetableData).map((divisionKey) => (
+                  <option key={divisionKey} value={divisionKey}>
+                    {divisionKey}
+                  </option>
+                ))}
+              </select>
               <button
                 type="button"
                 onClick={handleDownloadCurrentPdf}
@@ -423,6 +421,49 @@ export default function GenerateTimetablePage() {
                 className="rounded-md bg-[#1A4C8B] px-3 py-2 text-xs font-medium text-white hover:bg-blue-800 disabled:opacity-50"
               >
                 {downloadingCurrentPdf ? "Generating PDF..." : "Download PDF"}
+              </button>
+              <button
+                type="button"
+                onClick={async () => {
+                  if (!latestTimetableId) {
+                    alert("Generate a timetable first.");
+                    return;
+                  }
+                  const divisions = Object.keys(timetableData || {});
+                  if (!divisions.length) {
+                    alert("No divisions found in timetable.");
+                    return;
+                  }
+                  // Sequentially download PDFs for each division
+                  for (const div of divisions) {
+                    try {
+                      const res = await fetch(
+                        `/api/timetable/${latestTimetableId}/pdf?division=${encodeURIComponent(
+                          div
+                        )}`
+                      );
+                      if (!res.ok) {
+                        // Skip this division on error but continue others
+                        // eslint-disable-next-line no-console
+                        console.error("Failed to generate PDF for", div);
+                        continue;
+                      }
+                      const blob = await res.blob();
+                      const url = URL.createObjectURL(blob);
+                      const a = document.createElement("a");
+                      a.href = url;
+                      a.download = `timetable-${div}.pdf`;
+                      a.click();
+                      URL.revokeObjectURL(url);
+                    } catch (e) {
+                      // eslint-disable-next-line no-console
+                      console.error("Error downloading PDF for", div, e);
+                    }
+                  }
+                }}
+                className="rounded-md border border-[#CBD5E1] bg-white px-3 py-2 text-xs font-medium text-slate-700 hover:bg-slate-50"
+              >
+                Download all division PDFs
               </button>
               <button
                 type="button"

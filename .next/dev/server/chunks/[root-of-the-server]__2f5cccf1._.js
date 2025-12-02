@@ -269,6 +269,9 @@ const timetableSchema = new __TURBOPACK__imported__module__$5b$externals$5d2f$mo
         type: Object,
         required: true
     },
+    result: {
+        type: Object
+    },
     generatedAt: {
         type: Date,
         default: Date.now
@@ -442,11 +445,14 @@ async function POST() {
                 status: 502
             });
         }
-        const timetable = await pythonResponse.json();
+        const rawTimetable = await pythonResponse.json();
+        // Unwrap if Python returns { timetable: { ... } }
+        const timetable = rawTimetable && typeof rawTimetable.timetable === "object" ? rawTimetable.timetable : rawTimetable;
         // Save timetable to MongoDB
-        const divisionNames = Object.keys(timetable);
+        const divisionNames = Object.keys(timetable || {});
         const savedTimetable = await __TURBOPACK__imported__module__$5b$project$5d2f$models$2f$Timetable$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].create({
             data: timetable,
+            result: timetable,
             generatedAt: new Date(),
             divisions: divisionNames
         });

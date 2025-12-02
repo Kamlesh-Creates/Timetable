@@ -148,10 +148,15 @@ export async function POST() {
       );
     }
 
-    const timetable = await pythonResponse.json();
+    const rawTimetable = await pythonResponse.json();
+    // Unwrap if Python returns { timetable: { ... } }
+    const timetable =
+      rawTimetable && typeof rawTimetable.timetable === "object"
+        ? rawTimetable.timetable
+        : rawTimetable;
 
     // Save timetable to MongoDB
-    const divisionNames = Object.keys(timetable);
+    const divisionNames = Object.keys(timetable || {});
     const savedTimetable = await Timetable.create({
       data: timetable,
       result: timetable,

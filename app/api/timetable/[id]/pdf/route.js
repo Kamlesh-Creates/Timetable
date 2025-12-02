@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import puppeteer from "puppeteer";
 import { connectToDatabase } from "../../../../../lib/db";
 import Timetable from "../../../../../models/Timetable";
+import Setting from "../../../../../models/Setting";
 import { getTimetableHtml } from "../../../../../lib/timetablePdf";
 
 export async function GET(request, { params }) {
@@ -11,37 +12,69 @@ export async function GET(request, { params }) {
   const division = searchParams.get("division");
 
   if (!id) {
-    return NextResponse.json({ message: "Timetable id is required" }, { status: 400 });
+    return NextResponse.json(
+      { message: "Timetable id is required" },
+      { status: 400 }
+    );
   }
 
   if (!division) {
-    return NextResponse.json({ message: "Query parameter 'division' is required" }, { status: 400 });
+    return NextResponse.json(
+      { message: "Query parameter 'division' is required" },
+      { status: 400 }
+    );
   }
 
-  await connectToDatabase();
-  const timetableDoc = await Timetable.findById(id);
-
-  if (!timetableDoc) {
-    return NextResponse.json({ message: "Timetable not found" }, { status: 404 });
-  }
-
-  const timetablePayload =
-    timetableDoc.result && Object.keys(timetableDoc.result).length > 0
-      ? timetableDoc.result
-      : timetableDoc.data || {};
-
-  const resultJson = {
-    ...JSON.parse(JSON.stringify(timetablePayload)),
-    _generatedAt: timetableDoc.generatedAt,
-    _updatedAt: timetableDoc.updatedAt,
-  };
-
-  const html = getTimetableHtml(resultJson, division);
-
-  let browser;
   try {
-    browser = await puppeteer.launch({
-      headless: "new",
+    await connectToDatabase();
+
+    const [timetableDoc, settings] = await Promise.all([
+      Timetable.findById(id),
+      Setting.findOne(),
+    ]);
+
+    if (!timetableDoc) {
+      return NextResponse.json(
+        { message: "Timetable not found" },
+        { status: 404 }
+      );
+    }
+
+    if (!settings) {
+      return NextResponse.json(
+        { message: "Settings not configured" },
+        { status: 400 }
+      );
+    }
+
+    const rawPayload =
+      timetableDoc.result && Object.keys(timetableDoc.result).length > 0
+        ? timetableDoc.result
+        : timetableDoc.data || {};
+
+    const timetablePayload =
+      rawPayload.timetable && typeof rawPayload.timetable === "object"
+        ? rawPayload.timetable
+        : rawPayload;
+
+    const trimmedDivision = division.trim();
+    const keys = Object.keys(timetablePayload || {});
+
+    // Try to match requested division; if not found, fall back to first available
+    const matchedKey =
+      keys.find(
+        (key) => key.trim().toLowerCase() === trimmedDivision.toLowerCase()
+      ) || keys[0];
+
+    const html = getTimetableHtml(
+      timetablePayload,
+      matchedKey,
+      settings,
+      timetableDoc.generatedAt
+    );
+
+    const browser = await puppeteer.launch({
+      headless: true,
       args: ["--no-sandbox", "--disable-setuid-sandbox"],
     });
     const page = await browser.newPage();
@@ -50,9 +83,13 @@ export async function GET(request, { params }) {
       format: "A4",
       landscape: true,
       printBackground: true,
-      margin: { top: "12mm", right: "12mm", bottom: "16mm", left: "12mm" },
+      margin: {
+        top: "20mm",
+        right: "20mm",
+        bottom: "20mm",
+        left: "20mm",
+      },
     });
-
     await browser.close();
 
     return new NextResponse(pdfBuffer, {
@@ -63,9 +100,6 @@ export async function GET(request, { params }) {
       },
     });
   } catch (error) {
-    if (browser) {
-      await browser.close();
-    }
     console.error("[Timetable PDF] generation failed:", error);
     return NextResponse.json(
       { message: "Failed to generate PDF", error: error.message },
