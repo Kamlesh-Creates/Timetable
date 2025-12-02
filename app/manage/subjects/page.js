@@ -74,13 +74,14 @@ export default function SubjectsPage() {
   }
 
   function handleExportCsv() {
-    const header = ["Name", "Type"];
+    const header = ["Name", "Type", "Frequency"];
     const lines = [
       header.join(","),
       ...filtered.map((s) =>
         [
           s.name,
           s.type || "theory",
+          s.frequency || 1,
         ].join(",")
       ),
     ];
@@ -158,6 +159,7 @@ export default function SubjectsPage() {
               <tr>
                 <th className="px-3 py-2">Name</th>
                 <th className="px-3 py-2">Type</th>
+                <th className="px-3 py-2">Frequency</th>
                 <th className="px-3 py-2 text-right">Actions</th>
               </tr>
             </thead>
@@ -165,7 +167,7 @@ export default function SubjectsPage() {
               {loading ? (
                 <tr>
                   <td
-                    colSpan={3}
+                    colSpan={4}
                     className="px-3 py-4 text-center text-sm text-slate-500"
                   >
                     Loading subjects…
@@ -174,7 +176,7 @@ export default function SubjectsPage() {
               ) : pageRows.length === 0 ? (
                 <tr>
                   <td
-                    colSpan={3}
+                    colSpan={4}
                     className="px-3 py-4 text-center text-sm text-slate-500"
                   >
                     No subjects found.
@@ -189,6 +191,7 @@ export default function SubjectsPage() {
                         {s.type || "theory"}
                       </span>
                     </td>
+                    <td className="px-3 py-2 text-slate-700">{s.frequency || 1}x/week</td>
                     <td className="px-3 py-2 text-right text-xs">
                       <Link
                         href={`/manage/subjects/${s._id}`}

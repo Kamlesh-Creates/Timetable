@@ -8,6 +8,7 @@ export default function GenerateTimetablePage() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [generating, setGenerating] = useState(false);
+  const [generatingPdf, setGeneratingPdf] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
   const [timetableData, setTimetableData] = useState(null);
@@ -79,6 +80,37 @@ export default function GenerateTimetablePage() {
     } catch (err) {
       setError("Something went wrong. Please try again.");
       setGenerating(false);
+    }
+  }
+
+  async function handleDownloadPDF() {
+    setGeneratingPdf(true);
+    try {
+      const res = await fetch("/api/timetable/pdf", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ timetableData }),
+      });
+
+      if (!res.ok) {
+        const data = await res.json();
+        alert(data.message || "Failed to generate PDF");
+        setGeneratingPdf(false);
+        return;
+      }
+
+      // Download the PDF
+      const blob = await res.blob();
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "timetable.pdf";
+      a.click();
+      URL.revokeObjectURL(url);
+    } catch (err) {
+      alert("Failed to generate PDF. Please try again.");
+    } finally {
+      setGeneratingPdf(false);
     }
   }
 
@@ -284,23 +316,33 @@ export default function GenerateTimetablePage() {
             <h2 className="text-lg font-semibold text-slate-900">
               Generated Timetable
             </h2>
-            <button
-              type="button"
-              onClick={() => {
-                const blob = new Blob([JSON.stringify(timetableData, null, 2)], {
-                  type: "application/json",
-                });
-                const url = URL.createObjectURL(blob);
-                const a = document.createElement("a");
-                a.href = url;
-                a.download = "timetable.json";
-                a.click();
-                URL.revokeObjectURL(url);
-              }}
-              className="rounded-md border border-[#CBD5E1] bg-white px-3 py-2 text-xs font-medium text-slate-700 hover:bg-slate-50"
-            >
-              Download JSON
-            </button>
+            <div className="flex gap-2">
+              <button
+                type="button"
+                onClick={handleDownloadPDF}
+                disabled={generatingPdf}
+                className="rounded-md bg-[#1A4C8B] px-3 py-2 text-xs font-medium text-white hover:bg-blue-800 disabled:opacity-50"
+              >
+                {generatingPdf ? "Generating PDF..." : "Download PDF"}
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  const blob = new Blob([JSON.stringify(timetableData, null, 2)], {
+                    type: "application/json",
+                  });
+                  const url = URL.createObjectURL(blob);
+                  const a = document.createElement("a");
+                  a.href = url;
+                  a.download = "timetable.json";
+                  a.click();
+                  URL.revokeObjectURL(url);
+                }}
+                className="rounded-md border border-[#CBD5E1] bg-white px-3 py-2 text-xs font-medium text-slate-700 hover:bg-slate-50"
+              >
+                Download JSON
+              </button>
+            </div>
           </div>
 
           <div className="overflow-x-auto">

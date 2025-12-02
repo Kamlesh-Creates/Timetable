@@ -8,6 +8,7 @@
   "/api/admin/teachers/route": "app/api/admin/teachers/route.js",
   "/api/auth/admin/login/route": "app/api/auth/admin/login/route.js",
   "/api/timetable/generate/route": "app/api/timetable/generate/route.js",
+  "/api/timetable/pdf/route": "app/api/timetable/pdf/route.js",
   "/manage/timetable/generate/page": "app/manage/timetable/generate/page.js",
   "/page": "app/page.js"
 }

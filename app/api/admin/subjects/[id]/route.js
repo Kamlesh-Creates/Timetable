@@ -16,7 +16,7 @@ export async function PUT(request, context) {
   await connectToDatabase();
   const { id } = await context.params;
   const body = await request.json();
-  const { name, type } = body || {};
+  const { name, type, frequency } = body || {};
 
   if (!name) {
     return NextResponse.json(
@@ -31,6 +31,7 @@ export async function PUT(request, context) {
       {
         name,
         type: type || "theory",
+        frequency: frequency || 1,
       },
       { new: true, runValidators: true }
     );

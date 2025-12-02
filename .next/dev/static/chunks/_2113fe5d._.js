@@ -21,6 +21,7 @@ function GenerateTimetablePage() {
     const router = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRouter"])();
     const [loading, setLoading] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
     const [generating, setGenerating] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
+    const [generatingPdf, setGeneratingPdf] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
     const [error, setError] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("");
     const [success, setSuccess] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
     const [timetableData, setTimetableData] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
@@ -88,6 +89,38 @@ function GenerateTimetablePage() {
             setGenerating(false);
         }
     }
+    async function handleDownloadPDF() {
+        setGeneratingPdf(true);
+        try {
+            const res = await fetch("/api/timetable/pdf", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    timetableData
+                })
+            });
+            if (!res.ok) {
+                const data = await res.json();
+                alert(data.message || "Failed to generate PDF");
+                setGeneratingPdf(false);
+                return;
+            }
+            // Download the PDF
+            const blob = await res.blob();
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = "timetable.pdf";
+            a.click();
+            URL.revokeObjectURL(url);
+        } catch (err) {
+            alert("Failed to generate PDF. Please try again.");
+        } finally{
+            setGeneratingPdf(false);
+        }
+    }
     const canGenerate = counts.classrooms > 0 && counts.divisions > 0 && counts.subjects > 0 && counts.teachers > 0 && counts.settings;
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("main", {
         className: "mx-auto max-w-6xl px-4 py-6",
@@ -100,7 +133,7 @@ function GenerateTimetablePage() {
                         children: "Generate Timetable"
                     }, void 0, false, {
                         fileName: "[project]/app/manage/timetable/generate/page.js",
-                        lineNumber: 95,
+                        lineNumber: 127,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -108,13 +141,13 @@ function GenerateTimetablePage() {
                         children: "Collect data from all sections and generate the optimal timetable using the Python algorithm."
                     }, void 0, false, {
                         fileName: "[project]/app/manage/timetable/generate/page.js",
-                        lineNumber: 98,
+                        lineNumber: 130,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/app/manage/timetable/generate/page.js",
-                lineNumber: 94,
+                lineNumber: 126,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
@@ -128,7 +161,7 @@ function GenerateTimetablePage() {
                                 children: "Classrooms"
                             }, void 0, false, {
                                 fileName: "[project]/app/manage/timetable/generate/page.js",
-                                lineNumber: 113,
+                                lineNumber: 145,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -136,7 +169,7 @@ function GenerateTimetablePage() {
                                 children: counts.classrooms
                             }, void 0, false, {
                                 fileName: "[project]/app/manage/timetable/generate/page.js",
-                                lineNumber: 116,
+                                lineNumber: 148,
                                 columnNumber: 11
                             }, this),
                             counts.classrooms === 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
@@ -145,13 +178,13 @@ function GenerateTimetablePage() {
                                 children: "Add classrooms →"
                             }, void 0, false, {
                                 fileName: "[project]/app/manage/timetable/generate/page.js",
-                                lineNumber: 120,
+                                lineNumber: 152,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/manage/timetable/generate/page.js",
-                        lineNumber: 106,
+                        lineNumber: 138,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -162,7 +195,7 @@ function GenerateTimetablePage() {
                                 children: "Divisions"
                             }, void 0, false, {
                                 fileName: "[project]/app/manage/timetable/generate/page.js",
-                                lineNumber: 136,
+                                lineNumber: 168,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -170,7 +203,7 @@ function GenerateTimetablePage() {
                                 children: counts.divisions
                             }, void 0, false, {
                                 fileName: "[project]/app/manage/timetable/generate/page.js",
-                                lineNumber: 139,
+                                lineNumber: 171,
                                 columnNumber: 11
                             }, this),
                             counts.divisions === 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
@@ -179,13 +212,13 @@ function GenerateTimetablePage() {
                                 children: "Add divisions →"
                             }, void 0, false, {
                                 fileName: "[project]/app/manage/timetable/generate/page.js",
-                                lineNumber: 143,
+                                lineNumber: 175,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/manage/timetable/generate/page.js",
-                        lineNumber: 129,
+                        lineNumber: 161,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -196,7 +229,7 @@ function GenerateTimetablePage() {
                                 children: "Subjects"
                             }, void 0, false, {
                                 fileName: "[project]/app/manage/timetable/generate/page.js",
-                                lineNumber: 159,
+                                lineNumber: 191,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -204,7 +237,7 @@ function GenerateTimetablePage() {
                                 children: counts.subjects
                             }, void 0, false, {
                                 fileName: "[project]/app/manage/timetable/generate/page.js",
-                                lineNumber: 162,
+                                lineNumber: 194,
                                 columnNumber: 11
                             }, this),
                             counts.subjects === 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
@@ -213,13 +246,13 @@ function GenerateTimetablePage() {
                                 children: "Add subjects →"
                             }, void 0, false, {
                                 fileName: "[project]/app/manage/timetable/generate/page.js",
-                                lineNumber: 166,
+                                lineNumber: 198,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/manage/timetable/generate/page.js",
-                        lineNumber: 152,
+                        lineNumber: 184,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -230,7 +263,7 @@ function GenerateTimetablePage() {
                                 children: "Faculty"
                             }, void 0, false, {
                                 fileName: "[project]/app/manage/timetable/generate/page.js",
-                                lineNumber: 182,
+                                lineNumber: 214,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -238,7 +271,7 @@ function GenerateTimetablePage() {
                                 children: counts.teachers
                             }, void 0, false, {
                                 fileName: "[project]/app/manage/timetable/generate/page.js",
-                                lineNumber: 185,
+                                lineNumber: 217,
                                 columnNumber: 11
                             }, this),
                             counts.teachers === 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
@@ -247,13 +280,13 @@ function GenerateTimetablePage() {
                                 children: "Add faculty →"
                             }, void 0, false, {
                                 fileName: "[project]/app/manage/timetable/generate/page.js",
-                                lineNumber: 189,
+                                lineNumber: 221,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/manage/timetable/generate/page.js",
-                        lineNumber: 175,
+                        lineNumber: 207,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -264,7 +297,7 @@ function GenerateTimetablePage() {
                                 children: "Settings"
                             }, void 0, false, {
                                 fileName: "[project]/app/manage/timetable/generate/page.js",
-                                lineNumber: 205,
+                                lineNumber: 237,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -272,7 +305,7 @@ function GenerateTimetablePage() {
                                 children: counts.settings ? "✓ Configured" : "✗ Missing"
                             }, void 0, false, {
                                 fileName: "[project]/app/manage/timetable/generate/page.js",
-                                lineNumber: 208,
+                                lineNumber: 240,
                                 columnNumber: 11
                             }, this),
                             !counts.settings && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
@@ -281,19 +314,19 @@ function GenerateTimetablePage() {
                                 children: "Configure →"
                             }, void 0, false, {
                                 fileName: "[project]/app/manage/timetable/generate/page.js",
-                                lineNumber: 212,
+                                lineNumber: 244,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/manage/timetable/generate/page.js",
-                        lineNumber: 198,
+                        lineNumber: 230,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/app/manage/timetable/generate/page.js",
-                lineNumber: 105,
+                lineNumber: 137,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
@@ -307,7 +340,7 @@ function GenerateTimetablePage() {
                                 children: "Generate Timetable"
                             }, void 0, false, {
                                 fileName: "[project]/app/manage/timetable/generate/page.js",
-                                lineNumber: 225,
+                                lineNumber: 257,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -315,13 +348,13 @@ function GenerateTimetablePage() {
                                 children: "This will collect all data from the sections above and send it to the Python algorithm server to generate an optimal timetable."
                             }, void 0, false, {
                                 fileName: "[project]/app/manage/timetable/generate/page.js",
-                                lineNumber: 228,
+                                lineNumber: 260,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/manage/timetable/generate/page.js",
-                        lineNumber: 224,
+                        lineNumber: 256,
                         columnNumber: 9
                     }, this),
                     !canGenerate && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -332,7 +365,7 @@ function GenerateTimetablePage() {
                                 children: "Please configure all required sections before generating the timetable."
                             }, void 0, false, {
                                 fileName: "[project]/app/manage/timetable/generate/page.js",
-                                lineNumber: 236,
+                                lineNumber: 268,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("ul", {
@@ -342,47 +375,47 @@ function GenerateTimetablePage() {
                                         children: "Add at least one classroom"
                                     }, void 0, false, {
                                         fileName: "[project]/app/manage/timetable/generate/page.js",
-                                        lineNumber: 241,
+                                        lineNumber: 273,
                                         columnNumber: 43
                                     }, this),
                                     counts.divisions === 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
                                         children: "Add at least one division"
                                     }, void 0, false, {
                                         fileName: "[project]/app/manage/timetable/generate/page.js",
-                                        lineNumber: 242,
+                                        lineNumber: 274,
                                         columnNumber: 42
                                     }, this),
                                     counts.subjects === 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
                                         children: "Add at least one subject"
                                     }, void 0, false, {
                                         fileName: "[project]/app/manage/timetable/generate/page.js",
-                                        lineNumber: 243,
+                                        lineNumber: 275,
                                         columnNumber: 41
                                     }, this),
                                     counts.teachers === 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
                                         children: "Add at least one faculty member"
                                     }, void 0, false, {
                                         fileName: "[project]/app/manage/timetable/generate/page.js",
-                                        lineNumber: 244,
+                                        lineNumber: 276,
                                         columnNumber: 41
                                     }, this),
                                     !counts.settings && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
                                         children: "Configure timetable settings"
                                     }, void 0, false, {
                                         fileName: "[project]/app/manage/timetable/generate/page.js",
-                                        lineNumber: 245,
+                                        lineNumber: 277,
                                         columnNumber: 36
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/manage/timetable/generate/page.js",
-                                lineNumber: 240,
+                                lineNumber: 272,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/manage/timetable/generate/page.js",
-                        lineNumber: 235,
+                        lineNumber: 267,
                         columnNumber: 11
                     }, this),
                     error && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -393,7 +426,7 @@ function GenerateTimetablePage() {
                                 children: "Error"
                             }, void 0, false, {
                                 fileName: "[project]/app/manage/timetable/generate/page.js",
-                                lineNumber: 252,
+                                lineNumber: 284,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -401,13 +434,13 @@ function GenerateTimetablePage() {
                                 children: error
                             }, void 0, false, {
                                 fileName: "[project]/app/manage/timetable/generate/page.js",
-                                lineNumber: 253,
+                                lineNumber: 285,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/manage/timetable/generate/page.js",
-                        lineNumber: 251,
+                        lineNumber: 283,
                         columnNumber: 11
                     }, this),
                     success && timetableData && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -418,7 +451,7 @@ function GenerateTimetablePage() {
                                 children: "Timetable generated successfully!"
                             }, void 0, false, {
                                 fileName: "[project]/app/manage/timetable/generate/page.js",
-                                lineNumber: 259,
+                                lineNumber: 291,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -426,13 +459,13 @@ function GenerateTimetablePage() {
                                 children: "The timetable has been generated and is displayed below."
                             }, void 0, false, {
                                 fileName: "[project]/app/manage/timetable/generate/page.js",
-                                lineNumber: 260,
+                                lineNumber: 292,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/manage/timetable/generate/page.js",
-                        lineNumber: 258,
+                        lineNumber: 290,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -443,13 +476,13 @@ function GenerateTimetablePage() {
                         children: generating ? "Generating timetable..." : canGenerate ? "Generate Timetable" : "Configure all sections first"
                     }, void 0, false, {
                         fileName: "[project]/app/manage/timetable/generate/page.js",
-                        lineNumber: 266,
+                        lineNumber: 298,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/app/manage/timetable/generate/page.js",
-                lineNumber: 223,
+                lineNumber: 255,
                 columnNumber: 7
             }, this),
             timetableData && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
@@ -463,35 +496,55 @@ function GenerateTimetablePage() {
                                 children: "Generated Timetable"
                             }, void 0, false, {
                                 fileName: "[project]/app/manage/timetable/generate/page.js",
-                                lineNumber: 284,
+                                lineNumber: 316,
                                 columnNumber: 13
                             }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                type: "button",
-                                onClick: ()=>{
-                                    const blob = new Blob([
-                                        JSON.stringify(timetableData, null, 2)
-                                    ], {
-                                        type: "application/json"
-                                    });
-                                    const url = URL.createObjectURL(blob);
-                                    const a = document.createElement("a");
-                                    a.href = url;
-                                    a.download = "timetable.json";
-                                    a.click();
-                                    URL.revokeObjectURL(url);
-                                },
-                                className: "rounded-md border border-[#CBD5E1] bg-white px-3 py-2 text-xs font-medium text-slate-700 hover:bg-slate-50",
-                                children: "Download JSON"
-                            }, void 0, false, {
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "flex gap-2",
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                        type: "button",
+                                        onClick: handleDownloadPDF,
+                                        disabled: generatingPdf,
+                                        className: "rounded-md bg-[#1A4C8B] px-3 py-2 text-xs font-medium text-white hover:bg-blue-800 disabled:opacity-50",
+                                        children: generatingPdf ? "Generating PDF..." : "Download PDF"
+                                    }, void 0, false, {
+                                        fileName: "[project]/app/manage/timetable/generate/page.js",
+                                        lineNumber: 320,
+                                        columnNumber: 15
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                        type: "button",
+                                        onClick: ()=>{
+                                            const blob = new Blob([
+                                                JSON.stringify(timetableData, null, 2)
+                                            ], {
+                                                type: "application/json"
+                                            });
+                                            const url = URL.createObjectURL(blob);
+                                            const a = document.createElement("a");
+                                            a.href = url;
+                                            a.download = "timetable.json";
+                                            a.click();
+                                            URL.revokeObjectURL(url);
+                                        },
+                                        className: "rounded-md border border-[#CBD5E1] bg-white px-3 py-2 text-xs font-medium text-slate-700 hover:bg-slate-50",
+                                        children: "Download JSON"
+                                    }, void 0, false, {
+                                        fileName: "[project]/app/manage/timetable/generate/page.js",
+                                        lineNumber: 328,
+                                        columnNumber: 15
+                                    }, this)
+                                ]
+                            }, void 0, true, {
                                 fileName: "[project]/app/manage/timetable/generate/page.js",
-                                lineNumber: 287,
+                                lineNumber: 319,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/manage/timetable/generate/page.js",
-                        lineNumber: 283,
+                        lineNumber: 315,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -501,28 +554,28 @@ function GenerateTimetablePage() {
                             children: JSON.stringify(timetableData, null, 2)
                         }, void 0, false, {
                             fileName: "[project]/app/manage/timetable/generate/page.js",
-                            lineNumber: 307,
+                            lineNumber: 349,
                             columnNumber: 13
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/app/manage/timetable/generate/page.js",
-                        lineNumber: 306,
+                        lineNumber: 348,
                         columnNumber: 11
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/app/manage/timetable/generate/page.js",
-                lineNumber: 282,
+                lineNumber: 314,
                 columnNumber: 9
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/app/manage/timetable/generate/page.js",
-        lineNumber: 93,
+        lineNumber: 125,
         columnNumber: 5
     }, this);
 }
-_s(GenerateTimetablePage, "WD3Nxn317u8UQrYL6WcKiCHabqQ=", false, function() {
+_s(GenerateTimetablePage, "4Uz0vpi4Iohkh2Bh90OLBZKKYeA=", false, function() {
     return [
         __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRouter"]
     ];

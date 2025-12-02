@@ -150,6 +150,11 @@ const subjectSchema = new __TURBOPACK__imported__module__$5b$externals$5d2f$mong
             "lab"
         ],
         default: "theory"
+    },
+    frequency: {
+        type: Number,
+        default: 1,
+        min: 1
     }
 }, {
     timestamps: true
@@ -332,7 +337,15 @@ async function POST() {
             classrooms: classrooms.map((c)=>({
                     id: c._id.toString(),
                     name: c.name,
-                    subjects: c.subjects.map((s)=>typeof s === "object" ? s._id.toString() : s.toString())
+                    subjects: c.subjects.map((s)=>{
+                        const subjectObj = typeof s === "object" ? s : subjects.find((sub)=>sub._id.toString() === s.toString());
+                        return {
+                            id: subjectObj._id.toString(),
+                            name: subjectObj.name,
+                            type: subjectObj.type || "theory",
+                            frequency: subjectObj.frequency || 1
+                        };
+                    })
                 })),
             divisions: divisions.map((d)=>({
                     id: d._id.toString(),
@@ -341,19 +354,29 @@ async function POST() {
             subjects: subjects.filter((s)=>s.type == "theory").map((s)=>({
                     id: s._id.toString(),
                     name: s.name,
-                    type: s.type || "theory"
+                    type: s.type || "theory",
+                    frequency: s.frequency || 1
                 })),
             labs: subjects.filter((s)=>s.type == "lab").map((s)=>({
                     id: s._id.toString(),
                     name: s.name,
-                    type: s.type || "lab"
+                    type: s.type || "lab",
+                    frequency: s.frequency || 1
                 })),
             teachers: teachers.map((t)=>({
                     id: t._id.toString(),
                     name: t.name,
                     email: t.email || "",
                     phone: t.phone || "",
-                    subjects: t.subjects.map((s)=>typeof s === "object" ? s._id.toString() : s.toString()),
+                    subjects: t.subjects.map((s)=>{
+                        const subjectObj = typeof s === "object" ? s : subjects.find((sub)=>sub._id.toString() === s.toString());
+                        return {
+                            id: subjectObj._id.toString(),
+                            name: subjectObj.name,
+                            type: subjectObj.type || "theory",
+                            frequency: subjectObj.frequency || 1
+                        };
+                    }),
                     availability: t.availability || [],
                     maxHoursPerDay: t.maxHoursPerDay || null,
                     maxHoursPerWeek: t.maxHoursPerWeek || null,

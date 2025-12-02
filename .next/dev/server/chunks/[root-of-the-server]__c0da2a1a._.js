@@ -102,6 +102,11 @@ const subjectSchema = new __TURBOPACK__imported__module__$5b$externals$5d2f$mong
             "lab"
         ],
         default: "theory"
+    },
+    frequency: {
+        type: Number,
+        default: 1,
+        min: 1
     }
 }, {
     timestamps: true
@@ -140,7 +145,7 @@ async function GET() {
 async function POST(request) {
     await (0, __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$db$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["connectToDatabase"])();
     const body = await request.json();
-    const { name, type } = body || {};
+    const { name, type, frequency } = body || {};
     if (!name) {
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
             message: "Name is required"
@@ -151,7 +156,8 @@ async function POST(request) {
     try {
         const subject = await __TURBOPACK__imported__module__$5b$project$5d2f$models$2f$Subject$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].create({
             name,
-            type: type || "theory"
+            type: type || "theory",
+            frequency: frequency || 1
         });
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
             subject

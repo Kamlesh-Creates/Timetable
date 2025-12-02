@@ -11,7 +11,7 @@ export async function GET() {
 export async function POST(request) {
   await connectToDatabase();
   const body = await request.json();
-  const { name, type } = body || {};
+  const { name, type, frequency } = body || {};
 
   if (!name) {
     return NextResponse.json(
@@ -24,6 +24,7 @@ export async function POST(request) {
     const subject = await Subject.create({
       name,
       type: type || "theory",
+      frequency: frequency || 1,
     });
 
     return NextResponse.json({ subject }, { status: 201 });

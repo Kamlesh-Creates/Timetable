@@ -35,18 +35,17 @@ export default function ManageSubjectsPage() {
           Subject management overview
         </p>
         <p className="mb-3">
-          Each subject should have a unique code, correct weekly hours, and
-          whether it requires lab sessions. This helps the generator distribute
+          Each subject should have a unique name, type (theory or lab), and frequency
+          (how many times per week). This helps the generator distribute
           teaching load correctly.
         </p>
         <ul className="list-disc space-y-1 pl-5">
-          <li>Ensure codes match your official academic records.</li>
+          <li>Ensure subject names match your official academic records.</li>
           <li>
-            Mark lab subjects and choose the right lab type so they use
-            suitable rooms.
+            Mark lab subjects appropriately so they use suitable rooms.
           </li>
           <li>
-            Check weekly hours and priorities to avoid over- or under-scheduling.
+            Set frequency to control how many times per week each subject is scheduled.
           </li>
         </ul>
       </section>

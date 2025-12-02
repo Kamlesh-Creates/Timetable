@@ -88,7 +88,7 @@ function ManageSubjectsPage() {
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                         className: "mb-3",
-                        children: "Each subject should have a unique code, correct weekly hours, and whether it requires lab sessions. This helps the generator distribute teaching load correctly."
+                        children: "Each subject should have a unique name, type (theory or lab), and frequency (how many times per week). This helps the generator distribute teaching load correctly."
                     }, void 0, false, {
                         fileName: "[project]/app/(dashboard)/admin/manage-subjects/page.js",
                         lineNumber: 37,
@@ -98,24 +98,24 @@ function ManageSubjectsPage() {
                         className: "list-disc space-y-1 pl-5",
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
-                                children: "Ensure codes match your official academic records."
+                                children: "Ensure subject names match your official academic records."
                             }, void 0, false, {
                                 fileName: "[project]/app/(dashboard)/admin/manage-subjects/page.js",
                                 lineNumber: 43,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
-                                children: "Mark lab subjects and choose the right lab type so they use suitable rooms."
+                                children: "Mark lab subjects appropriately so they use suitable rooms."
                             }, void 0, false, {
                                 fileName: "[project]/app/(dashboard)/admin/manage-subjects/page.js",
                                 lineNumber: 44,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
-                                children: "Check weekly hours and priorities to avoid over- or under-scheduling."
+                                children: "Set frequency to control how many times per week each subject is scheduled."
                             }, void 0, false, {
                                 fileName: "[project]/app/(dashboard)/admin/manage-subjects/page.js",
-                                lineNumber: 48,
+                                lineNumber: 47,
                                 columnNumber: 11
                             }, this)
                         ]

@@ -7,6 +7,7 @@ export default function NewSubjectPage() {
   const router = useRouter();
   const [name, setName] = useState("");
   const [type, setType] = useState("theory");
+  const [frequency, setFrequency] = useState(1);
   const [error, setError] = useState("");
   const [saving, setSaving] = useState(false);
 
@@ -19,7 +20,7 @@ export default function NewSubjectPage() {
       const res = await fetch("/api/admin/subjects", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, type }),
+        body: JSON.stringify({ name, type, frequency: parseInt(frequency) }),
       });
 
       const data = await res.json();
@@ -91,6 +92,25 @@ export default function NewSubjectPage() {
               <span>Lab</span>
             </label>
           </div>
+        </div>
+
+        <div className="space-y-1.5">
+          <label
+            htmlFor="frequency"
+            className="block text-sm font-medium text-slate-700"
+          >
+            Frequency (times per week)
+          </label>
+          <input
+            id="frequency"
+            type="number"
+            min="1"
+            max="10"
+            value={frequency}
+            onChange={(e) => setFrequency(e.target.value)}
+            required
+            className="block w-full rounded-md border border-[#CBD5E1] bg-white px-3 py-2 text-sm text-slate-900 outline-none ring-2 ring-transparent focus:border-[#1A4C8B] focus:ring-[#BFDBFE]"
+          />
         </div>
 
         {error && (

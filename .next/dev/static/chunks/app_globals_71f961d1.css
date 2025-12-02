@@ -432,6 +432,10 @@
     display: inline-flex;
   }
 
+  .table {
+    display: table;
+  }
+
   .h-1\.5 {
     height: calc(var(--spacing) * 1.5);
   }
@@ -502,6 +506,10 @@
 
   .flex-1 {
     flex: 1;
+  }
+
+  .border-collapse {
+    border-collapse: collapse;
   }
 
   .cursor-pointer {
