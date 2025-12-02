@@ -1,8 +1,23 @@
-[00:00:02.578] Server  LOG      ✓ Ready in 1957ms
-[00:00:05.934] Server  LOG      ○ Compiling / ...
-[00:00:11.874] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:00:38.145] Server  LOG     {}
-[00:00:38.147] Server  LOG     
-[00:07:43.754] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:07:47.122] Server  LOG     {}
-[00:07:47.124] Server  LOG     
+[00:00:01.732] Server  LOG      ✓ Ready in 1169ms
+[00:19:12.866] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:19:49.224] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:19:52.552] Server  LOG     {}
+[00:19:52.552] Server  LOG     
+[00:19:52.574] Server  ERROR   D:\Timetable Project\.next\dev\server\chunks\[root-of-the-server]__2f5cccf1._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:19:52.590] Server  ERROR   D:\Timetable Project\node_modules\next\dist\compiled\next-server\app-route-turbo.runtime.dev.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:19:52.606] Server  ERROR   D:\Timetable Project\.next\dev\server\chunks\node_modules_next_974e05ed._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:19:52.612] Server  ERROR   D:\Timetable Project\node_modules\next\dist\server\base-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:19:52.618] Server  ERROR   D:\Timetable Project\node_modules\next\dist\server\next-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:19:52.621] Server  ERROR   D:\Timetable Project\node_modules\next\dist\server\dev\next-dev-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:19:52.622] Server  ERROR   D:\Timetable Project\node_modules\next\dist\trace\trace.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:19:52.623] Server  ERROR   D:\Timetable Project\node_modules\next\dist\server\lib\router-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:19:52.624] Server  ERROR   D:\Timetable Project\node_modules\next\dist\server\lib\start-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:19:52.627] Server  ERROR   [Timetable] Generate error: TypeError: fetch failed
+[00:19:58.910] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:20:00.621] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:22:42.326] Server  LOG      ✓ Compiled in 74ms
+[00:22:53.335] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:25:48.357] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:29:52.500] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:34:06.886] Server  LOG      ✓ Compiled in 253ms
+[00:34:34.967] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold

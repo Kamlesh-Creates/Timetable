@@ -154,6 +154,7 @@ export async function POST() {
     const divisionNames = Object.keys(timetable);
     const savedTimetable = await Timetable.create({
       data: timetable,
+      result: timetable,
       generatedAt: new Date(),
       divisions: divisionNames,
     });

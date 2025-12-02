@@ -1,17 +1,22 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 export default function GenerateTimetablePage() {
-  const router = useRouter();
-  const [loading, setLoading] = useState(false);
+  const [loadingCounts, setLoadingCounts] = useState(false);
   const [generating, setGenerating] = useState(false);
-  const [generatingPdf, setGeneratingPdf] = useState(false);
+  const [downloadingCurrentPdf, setDownloadingCurrentPdf] = useState(false);
+  const [downloadingPdfId, setDownloadingPdfId] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
   const [timetableData, setTimetableData] = useState(null);
+  const [latestTimetableId, setLatestTimetableId] = useState("");
+  const [currentDivisionForPdf, setCurrentDivisionForPdf] = useState("");
+  const [timetables, setTimetables] = useState([]);
+  const [loadingTimetables, setLoadingTimetables] = useState(false);
+  const [timetableListError, setTimetableListError] = useState("");
+  const [selectedDivisionById, setSelectedDivisionById] = useState({});
 
   // Data counts for display
   const [counts, setCounts] = useState({
@@ -23,36 +28,83 @@ export default function GenerateTimetablePage() {
   });
 
   useEffect(() => {
-    async function loadCounts() {
-      try {
-        const [classroomsRes, divisionsRes, subjectsRes, teachersRes, settingsRes] =
-          await Promise.all([
-            fetch("/api/admin/classrooms"),
-            fetch("/api/admin/divisions"),
-            fetch("/api/admin/subjects"),
-            fetch("/api/admin/teachers"),
-            fetch("/api/admin/settings"),
-          ]);
-
-        const classrooms = await classroomsRes.json();
-        const divisions = await divisionsRes.json();
-        const subjects = await subjectsRes.json();
-        const teachers = await teachersRes.json();
-        const settings = await settingsRes.json();
-
-        setCounts({
-          classrooms: classrooms.classrooms?.length || 0,
-          divisions: divisions.divisions?.length || 0,
-          subjects: subjects.subjects?.length || 0,
-          teachers: teachers.teachers?.length || 0,
-          settings: !!settings.settings,
-        });
-      } catch (err) {
-        console.error("Failed to load counts:", err);
-      }
-    }
     loadCounts();
+    loadTimetables();
   }, []);
+
+  useEffect(() => {
+    if (timetableData) {
+      const firstDivision = Object.keys(timetableData)[0] || "";
+      setCurrentDivisionForPdf(firstDivision);
+    } else {
+      setCurrentDivisionForPdf("");
+    }
+  }, [timetableData]);
+
+  async function loadCounts() {
+    setLoadingCounts(true);
+    try {
+      const [classroomsRes, divisionsRes, subjectsRes, teachersRes, settingsRes] =
+        await Promise.all([
+          fetch("/api/admin/classrooms"),
+          fetch("/api/admin/divisions"),
+          fetch("/api/admin/subjects"),
+          fetch("/api/admin/teachers"),
+          fetch("/api/admin/settings"),
+        ]);
+
+      const classrooms = await classroomsRes.json();
+      const divisions = await divisionsRes.json();
+      const subjects = await subjectsRes.json();
+      const teachers = await teachersRes.json();
+      const settings = await settingsRes.json();
+
+      setCounts({
+        classrooms: classrooms.classrooms?.length || 0,
+        divisions: divisions.divisions?.length || 0,
+        subjects: subjects.subjects?.length || 0,
+        teachers: teachers.teachers?.length || 0,
+        settings: !!settings.settings,
+      });
+    } catch (err) {
+      console.error("Failed to load counts:", err);
+    } finally {
+      setLoadingCounts(false);
+    }
+  }
+
+  async function loadTimetables() {
+    setLoadingTimetables(true);
+    setTimetableListError("");
+    try {
+      const res = await fetch("/api/admin/timetable");
+      const data = await res.json();
+      if (!res.ok) {
+        setTimetableListError(data.message || "Failed to load timetables");
+        setTimetables([]);
+        return;
+      }
+      const list = (data.timetables || []).map((tt) => ({
+        ...tt,
+        result: tt.result || tt.data || {},
+      }));
+      setTimetables(list);
+      setSelectedDivisionById((prev) => {
+        const next = { ...prev };
+        list.forEach((t) => {
+          if (!next[t._id]) {
+            next[t._id] = t.divisions?.[0] || "";
+          }
+        });
+        return next;
+      });
+    } catch (err) {
+      console.error("Failed to load timetables:", err);
+      setTimetableListError("Something went wrong while loading timetables.");
+    } finally {
+      setLoadingTimetables(false);
+    }
+  }
 
   async function handleGenerate() {
     setError("");
@@ -75,42 +127,76 @@ export default function GenerateTimetablePage() {
       }
 
       setTimetableData(data.timetable);
+      setLatestTimetableId(data.timetableId || "");
       setSuccess(true);
       setGenerating(false);
+      loadTimetables();
     } catch (err) {
       setError("Something went wrong. Please try again.");
       setGenerating(false);
     }
   }
 
-  async function handleDownloadPDF() {
-    setGeneratingPdf(true);
+  async function handleDownloadCurrentPdf() {
+    if (!latestTimetableId || !currentDivisionForPdf) {
+      alert("Select a division before downloading the PDF.");
+      return;
+    }
+    setDownloadingCurrentPdf(true);
     try {
-      const res = await fetch("/api/timetable/pdf", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ timetableData }),
-      });
-
+      const res = await fetch(
+        `/api/timetable/${latestTimetableId}/pdf?division=${encodeURIComponent(
+          currentDivisionForPdf
+        )}`
+      );
       if (!res.ok) {
         const data = await res.json();
         alert(data.message || "Failed to generate PDF");
-        setGeneratingPdf(false);
+        setDownloadingCurrentPdf(false);
         return;
       }
 
-      // Download the PDF
       const blob = await res.blob();
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
-      a.download = "timetable.pdf";
+      a.download = `timetable-${currentDivisionForPdf}.pdf`;
       a.click();
       URL.revokeObjectURL(url);
     } catch (err) {
       alert("Failed to generate PDF. Please try again.");
     } finally {
-      setGeneratingPdf(false);
+      setDownloadingCurrentPdf(false);
+    }
+  }
+
+  async function handleDownloadPastPdf(timetableId, division) {
+    if (!division) {
+      alert("Select a division to download the PDF.");
+      return;
+    }
+    setDownloadingPdfId(timetableId);
+    try {
+      const res = await fetch(
+        `/api/timetable/${timetableId}/pdf?division=${encodeURIComponent(division)}`
+      );
+      if (!res.ok) {
+        const data = await res.json();
+        alert(data.message || "Failed to generate PDF");
+        setDownloadingPdfId("");
+        return;
+      }
+      const blob = await res.blob();
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `timetable-${division}.pdf`;
+      a.click();
+      URL.revokeObjectURL(url);
+    } catch (err) {
+      alert("Failed to generate PDF. Please try again.");
+    } finally {
+      setDownloadingPdfId("");
     }
   }
 
@@ -317,13 +403,26 @@ export default function GenerateTimetablePage() {
               Generated Timetable
             </h2>
             <div className="flex gap-2">
+              {Object.keys(timetableData).length > 1 && (
+                <select
+                  value={currentDivisionForPdf}
+                  onChange={(e) => setCurrentDivisionForPdf(e.target.value)}
+                  className="rounded-md border border-[#CBD5E1] bg-white px-2 py-2 text-xs text-slate-700"
+                >
+                  {Object.keys(timetableData).map((divisionKey) => (
+                    <option key={divisionKey} value={divisionKey}>
+                      {divisionKey}
+                    </option>
+                  ))}
+                </select>
+              )}
               <button
                 type="button"
-                onClick={handleDownloadPDF}
-                disabled={generatingPdf}
+                onClick={handleDownloadCurrentPdf}
+                disabled={downloadingCurrentPdf}
                 className="rounded-md bg-[#1A4C8B] px-3 py-2 text-xs font-medium text-white hover:bg-blue-800 disabled:opacity-50"
               >
-                {generatingPdf ? "Generating PDF..." : "Download PDF"}
+                {downloadingCurrentPdf ? "Generating PDF..." : "Download PDF"}
               </button>
               <button
                 type="button"
@@ -352,6 +451,133 @@ export default function GenerateTimetablePage() {
           </div>
         </section>
       )}
+
+      {/* Past Timetables */}
+      <section className="mt-8 rounded-lg bg-white p-6 shadow-sm ring-1 ring-[#E5E7EB]">
+        <div className="mb-4 flex items-center justify-between">
+          <div>
+            <h2 className="text-lg font-semibold text-slate-900">Past Timetables</h2>
+            <p className="text-sm text-slate-600">
+              Review and download previously generated timetables.
+            </p>
+          </div>
+          <button
+            type="button"
+            onClick={loadTimetables}
+            className="rounded-md border border-[#CBD5E1] bg-white px-3 py-2 text-xs font-medium text-slate-700 hover:bg-slate-100"
+          >
+            Refresh list
+          </button>
+        </div>
+
+        {timetableListError && (
+          <p className="mb-3 rounded-md border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">
+            {timetableListError}
+          </p>
+        )}
+
+        <div className="overflow-x-auto">
+          <table className="min-w-full text-left text-sm">
+            <thead className="border-b border-[#E5E7EB] bg-[#F8FAFC] text-xs font-medium text-slate-600">
+              <tr>
+                <th className="px-3 py-2">Generated on</th>
+                <th className="px-3 py-2">Divisions</th>
+                <th className="px-3 py-2">Actions</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-[#E5E7EB]">
+              {loadingTimetables ? (
+                <tr>
+                  <td colSpan={3} className="px-3 py-4 text-center text-sm text-slate-500">
+                    Loading timetables…
+                  </td>
+                </tr>
+              ) : timetables.length === 0 ? (
+                <tr>
+                  <td colSpan={3} className="px-3 py-4 text-center text-sm text-slate-500">
+                    No timetables generated yet.
+                  </td>
+                </tr>
+              ) : (
+                timetables.map((tt) => (
+                  <tr key={tt._id}>
+                    <td className="px-3 py-2 text-slate-900">
+                      {new Date(tt.generatedAt || tt.createdAt).toLocaleString()}
+                    </td>
+                    <td className="px-3 py-2 text-slate-700">
+                      <div className="flex flex-wrap gap-1 text-xs">
+                        {(tt.divisions || []).map((div) => (
+                          <span
+                            key={div}
+                            className="rounded-full bg-slate-100 px-2 py-0.5 text-slate-700"
+                          >
+                            {div}
+                          </span>
+                        ))}
+                      </div>
+                    </td>
+                    <td className="px-3 py-2 text-xs text-slate-700">
+                      <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
+                        <select
+                          value={selectedDivisionById[tt._id] || ""}
+                          onChange={(e) =>
+                            setSelectedDivisionById((prev) => ({
+                              ...prev,
+                              [tt._id]: e.target.value,
+                            }))
+                          }
+                          className="rounded-md border border-[#CBD5E1] bg-white px-2 py-1 text-xs text-slate-900"
+                        >
+                          <option value="">Select division</option>
+                          {(tt.divisions || []).map((div) => (
+                            <option key={div} value={div}>
+                              {div}
+                            </option>
+                          ))}
+                        </select>
+                        <button
+                          type="button"
+                          onClick={() =>
+                            handleDownloadPastPdf(tt._id, selectedDivisionById[tt._id])
+                          }
+                          disabled={downloadingPdfId === tt._id}
+                          className="rounded-md bg-[#1A4C8B] px-3 py-1.5 text-white hover:bg-blue-800 disabled:opacity-60"
+                        >
+                          {downloadingPdfId === tt._id ? "Preparing…" : "Download PDF"}
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            const blob = new Blob(
+                              [
+                                JSON.stringify(
+                                  tt.result || tt.data || {},
+                                  null,
+                                  2
+                                ),
+                              ],
+                              { type: "application/json" }
+                            );
+                            const url = URL.createObjectURL(blob);
+                            const a = document.createElement("a");
+                            a.href = url;
+                            a.download = `timetable-${tt._id}.json`;
+                            a.click();
+                            URL.revokeObjectURL(url);
+                          }}
+                          className="rounded-md border border-[#CBD5E1] bg-white px-3 py-1.5 text-slate-700 hover:bg-slate-50"
+                        >
+                          Download JSON
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))
+              )}
+            </tbody>
+          </table>
+        </div>
+      </section>
     </main>
   );
 }
