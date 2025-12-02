@@ -66,10 +66,15 @@ export async function POST() {
         id: d._id.toString(),
         name: d.name,
       })),
-      subjects: subjects.map((s) => ({
+      subjects: subjects.filter((s) => s.type == "theory").map((s) => ({
         id: s._id.toString(),
         name: s.name,
         type: s.type || "theory",
+      })),
+      labs: subjects.filter((s) => s.type == "lab").map((s) => ({
+        id: s._id.toString(),
+        name: s.name,
+        type: s.type || "lab",
       })),
       teachers: teachers.map((t) => ({
         id: t._id.toString(),
@@ -91,6 +96,9 @@ export async function POST() {
         lunch_start_hour: settings.lunch_start_hour || 12,
       },
     };
+
+    console.log(dataToSend);
+    console.log()
 
     // Send to Python API
     const pythonResponse = await fetch(`${PYTHON_API_URL}/generate`, {

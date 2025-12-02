@@ -1,18 +1,13 @@
 {
   "/(auth)/admin/login/page": "app/(auth)/admin/login/page.js",
   "/(dashboard)/admin/dashboard/page": "app/(dashboard)/admin/dashboard/page.js",
-<<<<<<< HEAD
-  "/api/auth/admin/login/route": "app/api/auth/admin/login/route.js",
-=======
-  "/(dashboard)/admin/manage-faculty/page": "app/(dashboard)/admin/manage-faculty/page.js",
   "/api/admin/classrooms/route": "app/api/admin/classrooms/route.js",
   "/api/admin/divisions/route": "app/api/admin/divisions/route.js",
   "/api/admin/settings/route": "app/api/admin/settings/route.js",
   "/api/admin/subjects/route": "app/api/admin/subjects/route.js",
   "/api/admin/teachers/route": "app/api/admin/teachers/route.js",
   "/api/auth/admin/login/route": "app/api/auth/admin/login/route.js",
-  "/manage/faculty/page": "app/manage/faculty/page.js",
+  "/api/timetable/generate/route": "app/api/timetable/generate/route.js",
   "/manage/timetable/generate/page": "app/manage/timetable/generate/page.js",
->>>>>>> 2e7f8203471e4f3cf84ec291942fa9a58cdb8a6d
   "/page": "app/page.js"
 }
