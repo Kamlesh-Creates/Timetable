@@ -121,6 +121,7 @@ export async function POST() {
         start_hour: settings.start_hour || 9,
         end_hour: settings.end_hour || 17,
         lunch_start_hour: settings.lunch_start_hour || 12,
+        batches_per_div: settings.batches_per_div || null,
       },
     };
 

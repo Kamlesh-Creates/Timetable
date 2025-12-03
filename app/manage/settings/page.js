@@ -14,6 +14,7 @@ export default function SettingsPage() {
   const [start_hour, setStartHour] = useState(9);
   const [end_hour, setEndHour] = useState(17);
   const [lunch_start_hour, setLunchStartHour] = useState(12);
+  const [batches_per_div, setBatchesPerDiv] = useState(1);
 
   useEffect(() => {
     async function loadSettings() {
@@ -26,6 +27,7 @@ export default function SettingsPage() {
           setStartHour(s.start_hour != null ? s.start_hour : 9);
           setEndHour(s.end_hour != null ? s.end_hour : 17);
           setLunchStartHour(s.lunch_start_hour != null ? s.lunch_start_hour : 12);
+          setBatchesPerDiv(s.batches_per_div != null ? s.batches_per_div : 1);
         }
       } catch (err) {
         setError("Failed to load settings");
@@ -57,6 +59,7 @@ export default function SettingsPage() {
           start_hour,
           end_hour,
           lunch_start_hour,
+          batches_per_div,
         }),
       });
 
@@ -190,6 +193,30 @@ export default function SettingsPage() {
           />
           <p className="text-xs text-slate-500">
             Hour when lunch break starts (0-23, e.g., 12 for 12 PM).
+          </p>
+        </div>
+
+        {/* Batches per Division */}
+        <div className="space-y-1.5">
+          <label
+            htmlFor="batches_per_div"
+            className="block text-sm font-medium text-slate-700"
+          >
+            Batches per Division
+          </label>
+          <input
+            id="batches_per_div"
+            type="number"
+            min={1}
+            max={20}
+            value={batches_per_div}
+            onChange={(e) => setBatchesPerDiv(Number(e.target.value))}
+            required
+            className="block w-full rounded-md border border-[#CBD5E1] bg-white px-3 py-2 text-sm text-slate-900 outline-none ring-2 ring-transparent focus:border-[#1A4C8B] focus:ring-[#BFDBFE]"
+          />
+          <p className="text-xs text-slate-500">
+            Maximum number of batches that can be scheduled for a single
+            division (1-20).
           </p>
         </div>
 

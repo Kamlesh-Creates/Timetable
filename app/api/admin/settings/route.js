@@ -11,6 +11,7 @@ async function getOrCreateSettings() {
       start_hour: 9,
       end_hour: 17,
       lunch_start_hour: 12,
+      batches_per_div: 1,
     });
   }
   return settings;
@@ -23,7 +24,8 @@ export async function GET() {
 
 export async function POST(request) {
   const body = await request.json();
-  const { days, start_hour, end_hour, lunch_start_hour } = body || {};
+  const { days, start_hour, end_hour, lunch_start_hour, batches_per_div } =
+    body || {};
 
   if (
     start_hour != null &&
@@ -50,6 +52,16 @@ export async function POST(request) {
     );
   }
 
+  if (
+    batches_per_div != null &&
+    (batches_per_div < 1 || batches_per_div > 20)
+  ) {
+    return NextResponse.json(
+      { message: "batches_per_div must be between 1 and 20" },
+      { status: 400 }
+    );
+  }
+
   const settings = await getOrCreateSettings();
 
   if (Array.isArray(days)) {
@@ -64,6 +76,9 @@ export async function POST(request) {
   if (lunch_start_hour != null) {
     settings.lunch_start_hour = lunch_start_hour;
   }
+   if (batches_per_div != null) {
+     settings.batches_per_div = batches_per_div;
+   }
 
   await settings.save();
 

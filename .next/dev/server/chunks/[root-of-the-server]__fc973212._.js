@@ -110,6 +110,13 @@ const settingSchema = new __TURBOPACK__imported__module__$5b$externals$5d2f$mong
         type: Number,
         min: 0,
         max: 23
+    },
+    // Maximum number of batches that can be scheduled for a single division
+    batches_per_div: {
+        type: Number,
+        min: 1,
+        max: 20,
+        default: 1
     }
 }, {
     timestamps: true
@@ -146,7 +153,8 @@ async function getOrCreateSettings() {
             ],
             start_hour: 9,
             end_hour: 17,
-            lunch_start_hour: 12
+            lunch_start_hour: 12,
+            batches_per_div: 1
         });
     }
     return settings;
@@ -161,7 +169,7 @@ async function GET() {
 }
 async function POST(request) {
     const body = await request.json();
-    const { days, start_hour, end_hour, lunch_start_hour } = body || {};
+    const { days, start_hour, end_hour, lunch_start_hour, batches_per_div } = body || {};
     if (start_hour != null && end_hour != null && (start_hour < 0 || start_hour > 23 || end_hour < 0 || end_hour > 23 || start_hour >= end_hour)) {
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
             message: "start_hour must be before end_hour (0-23)"
@@ -172,6 +180,13 @@ async function POST(request) {
     if (lunch_start_hour != null && (lunch_start_hour < 0 || lunch_start_hour > 23)) {
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
             message: "lunch_start_hour must be between 0 and 23"
+        }, {
+            status: 400
+        });
+    }
+    if (batches_per_div != null && (batches_per_div < 1 || batches_per_div > 20)) {
+        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+            message: "batches_per_div must be between 1 and 20"
         }, {
             status: 400
         });
@@ -188,6 +203,9 @@ async function POST(request) {
     }
     if (lunch_start_hour != null) {
         settings.lunch_start_hour = lunch_start_hour;
+    }
+    if (batches_per_div != null) {
+        settings.batches_per_div = batches_per_div;
     }
     await settings.save();
     return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
