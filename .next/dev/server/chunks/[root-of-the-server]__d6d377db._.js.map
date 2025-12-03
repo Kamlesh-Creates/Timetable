@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 46, "column": 0}, "map": {"version":3,"sources":["file:///D:/Timetable%20Project/app/api/auth/admin/logout/route.js"],"sourcesContent":["import { NextResponse } from \"next/server\";\r\n\r\nexport async function POST() {\r\n  const response = NextResponse.json(\r\n    { message: \"Logged out successfully\" },\r\n    { status: 200 }\r\n  );\r\n\r\n  response.cookies.set(\"admin_token\", \"\", {\r\n    httpOnly: true,\r\n    secure: process.env.NODE_ENV === \"production\",\r\n    sameSite: \"lax\",\r\n    path: \"/\",\r\n    maxAge: 0,\r\n  });\r\n\r\n  return response;\r\n}\r\n\r\n"],"names":[],"mappings":";;;;AAAA;;AAEO,eAAe;IACpB,MAAM,WAAW,gJAAY,CAAC,IAAI,CAChC;QAAE,SAAS;IAA0B,GACrC;QAAE,QAAQ;IAAI;IAGhB,SAAS,OAAO,CAAC,GAAG,CAAC,eAAe,IAAI;QACtC,UAAU;QACV,QAAQ,oDAAyB;QACjC,UAAU;QACV,MAAM;QACN,QAAQ;IACV;IAEA,OAAO;AACT"}}]
+}

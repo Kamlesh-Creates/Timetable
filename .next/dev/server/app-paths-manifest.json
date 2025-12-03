@@ -1,8 +1,6 @@
 {
   "/(auth)/admin/login/page": "app/(auth)/admin/login/page.js",
   "/(dashboard)/admin/dashboard/page": "app/(dashboard)/admin/dashboard/page.js",
-  "/(dashboard)/admin/manage-division/page": "app/(dashboard)/admin/manage-division/page.js",
-  "/(dashboard)/admin/manage-settings/page": "app/(dashboard)/admin/manage-settings/page.js",
   "/api/admin/classrooms/route": "app/api/admin/classrooms/route.js",
   "/api/admin/divisions/route": "app/api/admin/divisions/route.js",
   "/api/admin/settings/route": "app/api/admin/settings/route.js",
@@ -10,9 +8,8 @@
   "/api/admin/teachers/route": "app/api/admin/teachers/route.js",
   "/api/admin/timetable/route": "app/api/admin/timetable/route.js",
   "/api/auth/admin/login/route": "app/api/auth/admin/login/route.js",
-  "/api/timetable/[id]/pdf/route": "app/api/timetable/[id]/pdf/route.js",
-  "/api/timetable/generate/route": "app/api/timetable/generate/route.js",
-  "/manage/divisions/page": "app/manage/divisions/page.js",
+  "/api/auth/admin/logout/route": "app/api/auth/admin/logout/route.js",
+  "/api/auth/admin/me/route": "app/api/auth/admin/me/route.js",
   "/manage/timetable/generate/page": "app/manage/timetable/generate/page.js",
   "/page": "app/page.js"
 }
