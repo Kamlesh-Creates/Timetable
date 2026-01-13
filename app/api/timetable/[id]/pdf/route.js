@@ -1,9 +1,9 @@
 import { NextResponse } from "next/server";
-import puppeteer from "puppeteer";
 import { connectToDatabase } from "../../../../../lib/db";
 import Timetable from "../../../../../models/Timetable";
 import Setting from "../../../../../models/Setting";
-import { getTimetableHtml } from "../../../../../lib/timetablePdf";
+
+const PYTHON_API_URL = process.env.PYTHON_API_URL || "http://localhost:8000";
 
 export async function GET(request, { params }) {
   const resolvedParams = await params;
@@ -66,31 +66,42 @@ export async function GET(request, { params }) {
         (key) => key.trim().toLowerCase() === trimmedDivision.toLowerCase()
       ) || keys[0];
 
-    const html = getTimetableHtml(
-      timetablePayload,
-      matchedKey,
-      settings,
-      timetableDoc.generatedAt
-    );
+    // Filter timetable to only include the requested division
+    const filteredTimetable = {
+      [matchedKey]: timetablePayload[matchedKey]
+    };
 
-    const browser = await puppeteer.launch({
-      headless: true,
-      args: ["--no-sandbox", "--disable-setuid-sandbox"],
-    });
-    const page = await browser.newPage();
-    await page.setContent(html, { waitUntil: "networkidle0" });
-    const pdfBuffer = await page.pdf({
-      format: "A4",
-      landscape: true,
-      printBackground: true,
-      margin: {
-        top: "20mm",
-        right: "20mm",
-        bottom: "20mm",
-        left: "20mm",
+    // Send timetable data and settings to Python API for PDF generation
+    const pythonResponse = await fetch(`${PYTHON_API_URL}/generate-pdf`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
       },
+      body: JSON.stringify({
+        timetable: filteredTimetable,
+        settings: {
+          days: settings.days,
+          start_hour: settings.start_hour,
+          end_hour: settings.end_hour,
+          lunch_start_hour: settings.lunch_start_hour,
+        },
+      }),
     });
-    await browser.close();
+
+    if (!pythonResponse.ok) {
+      const errorText = await pythonResponse.text();
+      console.error("[PDF] Python API error:", errorText);
+      return NextResponse.json(
+        {
+          message: `Python PDF server returned an error: ${pythonResponse.status}`,
+          details: errorText,
+        },
+        { status: 502 }
+      );
+    }
+
+    // Get PDF buffer from Python API
+    const pdfBuffer = await pythonResponse.arrayBuffer();
 
     return new NextResponse(pdfBuffer, {
       status: 200,

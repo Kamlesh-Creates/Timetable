@@ -102,6 +102,11 @@ const subjectSchema = new __TURBOPACK__imported__module__$5b$externals$5d2f$mong
             "lab"
         ],
         default: "theory"
+    },
+    frequency: {
+        type: Number,
+        default: 1,
+        min: 1
     }
 }, {
     timestamps: true
@@ -128,12 +133,9 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$models$2f$Subject$2e$js__$5b
 ;
 ;
 ;
-async function GET(_request, { params }) {
+async function GET(_request, context) {
     await (0, __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$db$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["connectToDatabase"])();
-    const { id } = params;
-    console.log("[Subjects] GET by id", {
-        id
-    });
+    const { id } = await context.params;
     const subject = await __TURBOPACK__imported__module__$5b$project$5d2f$models$2f$Subject$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].findById(id);
     if (!subject) {
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
@@ -148,11 +150,11 @@ async function GET(_request, { params }) {
         status: 200
     });
 }
-async function PUT(request, { params }) {
+async function PUT(request, context) {
     await (0, __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$db$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["connectToDatabase"])();
-    const { id } = params;
+    const { id } = await context.params;
     const body = await request.json();
-    const { name, type } = body || {};
+    const { name, type, frequency } = body || {};
     if (!name) {
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
             message: "Name is required"
@@ -163,7 +165,8 @@ async function PUT(request, { params }) {
     try {
         const updated = await __TURBOPACK__imported__module__$5b$project$5d2f$models$2f$Subject$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].findByIdAndUpdate(id, {
             name,
-            type: type || "theory"
+            type: type || "theory",
+            frequency: frequency || 1
         }, {
             new: true,
             runValidators: true
@@ -188,12 +191,9 @@ async function PUT(request, { params }) {
         });
     }
 }
-async function DELETE(_request, { params }) {
+async function DELETE(_request, context) {
     await (0, __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$db$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["connectToDatabase"])();
-    const { id } = params;
-    console.log("[Subjects] DELETE by id", {
-        id
-    });
+    const { id } = await context.params;
     const deleted = await __TURBOPACK__imported__module__$5b$project$5d2f$models$2f$Subject$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].findByIdAndDelete(id);
     if (!deleted) {
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({

@@ -2,5 +2,5 @@
   "version": 3,
   "sources": [],
   "sections": [
-    {"offset": {"line": 14, "column": 0}, "map": {"version":3,"sources":["file:///D:/Timetable%20Project/app/page.js"],"sourcesContent":["import { redirect } from \"next/navigation\";\r\n\r\nexport default function HomePage() {\r\n  redirect(\"/admin/login\");\r\n}\r\n\r\n"],"names":[],"mappings":";;;;AAAA;AAAA;;AAEe,SAAS;IACtB,IAAA,iMAAQ,EAAC;AACX"}}]
+    {"offset": {"line": 14, "column": 0}, "map": {"version":3,"sources":["file:///D:/Fullstacks/timetable2026/Timetable/app/page.js"],"sourcesContent":["import { redirect } from \"next/navigation\";\r\n\r\nexport default function HomePage() {\r\n  redirect(\"/admin/login\");\r\n}\r\n\r\n"],"names":[],"mappings":";;;;AAAA;AAAA;;AAEe,SAAS;IACtB,IAAA,iMAAQ,EAAC;AACX"}}]
 }

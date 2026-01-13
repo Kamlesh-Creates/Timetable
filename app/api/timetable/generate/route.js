@@ -56,73 +56,40 @@ export async function POST() {
 
     // Format data for Python API (5 files as mentioned)
     const dataToSend = {
-      classrooms: classrooms.map((c) => ({
-    id: c._id.toString(),
-    name: c.name,
-    subjects: c.subjects.map((s) => {
-      const subjectObj =
-        typeof s === "object"
-          ? s
-          : subjects.find((sub) => sub._id.toString() === s.toString());
+  divisions: divisions.map(d => d.name),
 
-      return {
-        id: subjectObj._id.toString(),
-        name: subjectObj.name,
-        type: subjectObj.type || "theory",
-        frequency: subjectObj.frequency || 1,
-      };
-    }),
-  })),
+  lectures: subjects
+    .filter(s => s.type === "theory")
+    .map(s => s.name),
 
-      divisions: divisions.map((d) => ({
-        id: d._id.toString(),
-        name: d.name,
-      })),
-      subjects: subjects.filter((s) => s.type == "theory").map((s) => ({
-        id: s._id.toString(),
-        name: s.name,
-        type: s.type || "theory",
-        frequency: s.frequency || 1,
-      })),
-      labs: subjects.filter((s) => s.type == "lab").map((s) => ({
-        id: s._id.toString(),
-        name: s.name,
-        type: s.type || "lab",
-        frequency: s.frequency || 1,
-      })),
-      teachers: teachers.map((t) => ({
-        id: t._id.toString(),
-        name: t.name,
-        email: t.email || "",
-        phone: t.phone || "",
+  labs: subjects
+    .filter(s => s.type === "lab")
+    .map(s => s.name),
 
-        subjects: t.subjects.map((s) => {
-          const subjectObj =
-            typeof s === "object"
-              ? s
-              : subjects.find((sub) => sub._id.toString() === s.toString());
+  frequencies: [...subjects].reduce((acc, s) => {
+    acc[s.name] = s.frequency || 1;
+    return acc;
+  }, {}),
 
-          return {
-            id: subjectObj._id.toString(),
-            name: subjectObj.name,
-            type: subjectObj.type || "theory",
-            frequency: subjectObj.frequency || 1,
-          };
-        }),
+  rooms: classrooms.reduce((acc, c) => {
+    acc[c.name] = c.subjects.map(s => s.name);
+    return acc;
+  }, {}),
 
-        availability: t.availability || [],
-        maxHoursPerDay: t.maxHoursPerDay || null,
-        maxHoursPerWeek: t.maxHoursPerWeek || null,
-        unavailableDates: t.unavailableDates || [],
-      })),
+  teachers: teachers.reduce((acc, t) => {
+    acc[t.name] = t.subjects.map(s => s.name);
+    return acc;
+  }, {}),
 
-      settings: {
-        days: settings.days || [],
-        start_hour: settings.start_hour || 9,
-        end_hour: settings.end_hour || 17,
-        lunch_start_hour: settings.lunch_start_hour || 12,
-      },
-    };
+  settings: {
+    days: settings.days,
+    start_hour: settings.start_hour,
+    end_hour: settings.end_hour,
+    lunch_start_hour: settings.lunch_start_hour,
+    batches_per_division: 4
+  }
+};
+
 
     console.log(dataToSend);
     console.log()

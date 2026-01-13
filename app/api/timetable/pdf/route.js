@@ -12,75 +12,70 @@ export async function POST(request) {
       );
     }
 
-    // Build HTML string
     let html = `
       <html>
         <head>
           <style>
-            body { 
-              font-family: Arial, sans-serif; 
-              padding: 20px; 
+            body {
+              font-family: Arial, sans-serif;
+              padding: 20px;
             }
-            h1 { 
-              text-align: center; 
+            h1 {
+              text-align: center;
               margin-bottom: 30px;
-              color: #333;
             }
-            h2 { 
-              text-align: center; 
+            h2 {
               margin-top: 40px;
-              margin-bottom: 15px;
-              color: #2c3e50;
+              text-align: center;
               page-break-before: always;
             }
-            h2:first-of-type {
-              page-break-before: auto;
+            h3 {
+              margin-top: 25px;
+              text-align: center;
+              color: #2c3e50;
             }
-            table { 
-              border-collapse: collapse; 
-              width: 100%; 
-              margin-bottom: 50px;
+            table {
+              border-collapse: collapse;
+              width: 100%;
+              margin-bottom: 40px;
             }
-            th, td { 
-              border: 1px solid #333; 
-              padding: 10px; 
-              text-align: center; 
+            th, td {
+              border: 1px solid #333;
+              padding: 8px;
+              text-align: center;
               font-size: 11px;
-              vertical-align: middle;
             }
-            th { 
+            th {
               background-color: #34495e;
               color: white;
-              font-weight: bold;
-              font-size: 12px;
             }
             th.day-header {
               background-color: #2c3e50;
             }
-            td.free { 
+            td.free {
               background-color: #ecf0f1;
-              color: #95a5a6;
+              color: #7f8c8d;
               font-style: italic;
             }
-            td.lunch { 
+            td.lunch {
               background-color: #f39c12;
               color: white;
               font-weight: bold;
             }
-            .subject-name {
+            td.lab {
+              background-color: #d6eaf8;
+            }
+            .subject {
               font-weight: bold;
-              color: #2c3e50;
               font-size: 12px;
-              margin-bottom: 4px;
             }
-            .teacher-name {
-              color: #555;
+            .teacher {
               font-size: 10px;
-              margin-bottom: 2px;
+              color: #555;
             }
-            .room-name {
-              color: #777;
+            .room {
               font-size: 9px;
+              color: #777;
             }
           </style>
         </head>
@@ -88,81 +83,88 @@ export async function POST(request) {
           <h1>College Timetable</h1>
     `;
 
-    // Process each division
+    // Division level
     for (const division in timetableData) {
       html += `<h2>Division: ${division}</h2>`;
-      html += `<table>`;
-      
-      // Get days from the division data
-      const days = Object.keys(timetableData[division]);
-      const numSlots = timetableData[division][days[0]].length;
-      
-      // Create header row with Time Slot and Days
-      html += `<tr><th>Time Slot</th>`;
-      for (const day of days) {
-        html += `<th class="day-header">${day}</th>`;
-      }
-      html += `</tr>`;
 
-      // Create rows for each time slot
-      for (let slot = 0; slot < numSlots; slot++) {
-        html += `<tr>`;
-        html += `<td><strong>Slot ${slot + 1}</strong></td>`;
+      const batches = timetableData[division];
 
-        // Add cell for each day
+      // Batch level (DIV-A1, DIV-A2...)
+      for (const batch in batches) {
+        html += `<h3>Batch: ${batch}</h3>`;
+        html += `<table>`;
+
+        const days = Object.keys(batches[batch]);
+        const slotsCount = batches[batch][days[0]].length;
+
+        // Header
+        html += `<tr><th>Slot</th>`;
         for (const day of days) {
-          const entry = timetableData[division][day][slot];
-          let cellClass = "";
-          let cellContent = "";
+          html += `<th class="day-header">${day}</th>`;
+        }
+        html += `</tr>`;
 
-          if (entry.class === "FREE") {
-            cellClass = "free";
-            cellContent = "FREE";
-          } else if (entry.class === "LUNCH") {
-            cellClass = "lunch";
-            cellContent = "LUNCH BREAK";
-          } else {
-            // Regular class entry with subject, teacher, and classroom
-            cellContent = `
-              <div class="subject-name">${entry.class || "N/A"}</div>
-              ${entry.teacher ? `<div class="teacher-name">${entry.teacher}</div>` : ""}
-              ${entry.room ? `<div class="room-name">${entry.room}</div>` : ""}
-            `;
+        // Slots
+        for (let slot = 0; slot < slotsCount; slot++) {
+          html += `<tr>`;
+          html += `<td><strong>${slot + 1}</strong></td>`;
+
+          for (const day of days) {
+            const entry = batches[batch][day][slot];
+            let cellClass = "";
+            let content = "";
+
+            if (!entry || entry.type === "FREE") {
+              cellClass = "free";
+              content = "FREE";
+            } else if (entry.type === "COMMON" && entry.class === "LUNCH") {
+              cellClass = "lunch";
+              content = "LUNCH";
+            } else {
+              if (entry.type === "LAB") cellClass = "lab";
+
+              content = `
+                <div class="subject">${entry.class}</div>
+                ${entry.teacher ? `<div class="teacher">${entry.teacher}</div>` : ""}
+                ${entry.room ? `<div class="room">${entry.room}</div>` : ""}
+              `;
+            }
+
+            html += `<td class="${cellClass}">${content}</td>`;
           }
 
-          html += `<td class="${cellClass}">${cellContent}</td>`;
+          html += `</tr>`;
         }
 
-        html += `</tr>`;
+        html += `</table>`;
       }
-
-      html += `</table>`;
     }
 
     html += `</body></html>`;
 
-    // Launch Puppeteer and generate PDF
+    // Generate PDF
     const browser = await puppeteer.launch({
       headless: true,
       args: ["--no-sandbox", "--disable-setuid-sandbox"],
     });
+
     const page = await browser.newPage();
     await page.setContent(html, { waitUntil: "networkidle0" });
+
     const pdfBuffer = await page.pdf({
       format: "A4",
-      printBackground: true,
       landscape: true,
+      printBackground: true,
       margin: {
         top: "20px",
-        right: "20px",
         bottom: "20px",
         left: "20px",
+        right: "20px",
       },
     });
 
     await browser.close();
 
-    // Return PDF as response
     return new NextResponse(pdfBuffer, {
       status: 200,
       headers: {

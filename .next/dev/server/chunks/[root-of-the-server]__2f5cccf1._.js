@@ -370,59 +370,29 @@ async function POST() {
         }
         // Format data for Python API (5 files as mentioned)
         const dataToSend = {
-            classrooms: classrooms.map((c)=>({
-                    id: c._id.toString(),
-                    name: c.name,
-                    subjects: c.subjects.map((s)=>{
-                        const subjectObj = typeof s === "object" ? s : subjects.find((sub)=>sub._id.toString() === s.toString());
-                        return {
-                            id: subjectObj._id.toString(),
-                            name: subjectObj.name,
-                            type: subjectObj.type || "theory",
-                            frequency: subjectObj.frequency || 1
-                        };
-                    })
-                })),
-            divisions: divisions.map((d)=>({
-                    id: d._id.toString(),
-                    name: d.name
-                })),
-            subjects: subjects.filter((s)=>s.type == "theory").map((s)=>({
-                    id: s._id.toString(),
-                    name: s.name,
-                    type: s.type || "theory",
-                    frequency: s.frequency || 1
-                })),
-            labs: subjects.filter((s)=>s.type == "lab").map((s)=>({
-                    id: s._id.toString(),
-                    name: s.name,
-                    type: s.type || "lab",
-                    frequency: s.frequency || 1
-                })),
-            teachers: teachers.map((t)=>({
-                    id: t._id.toString(),
-                    name: t.name,
-                    email: t.email || "",
-                    phone: t.phone || "",
-                    subjects: t.subjects.map((s)=>{
-                        const subjectObj = typeof s === "object" ? s : subjects.find((sub)=>sub._id.toString() === s.toString());
-                        return {
-                            id: subjectObj._id.toString(),
-                            name: subjectObj.name,
-                            type: subjectObj.type || "theory",
-                            frequency: subjectObj.frequency || 1
-                        };
-                    }),
-                    availability: t.availability || [],
-                    maxHoursPerDay: t.maxHoursPerDay || null,
-                    maxHoursPerWeek: t.maxHoursPerWeek || null,
-                    unavailableDates: t.unavailableDates || []
-                })),
+            divisions: divisions.map((d)=>d.name),
+            lectures: subjects.filter((s)=>s.type === "theory").map((s)=>s.name),
+            labs: subjects.filter((s)=>s.type === "lab").map((s)=>s.name),
+            frequencies: [
+                ...subjects
+            ].reduce((acc, s)=>{
+                acc[s.name] = s.frequency || 1;
+                return acc;
+            }, {}),
+            rooms: classrooms.reduce((acc, c)=>{
+                acc[c.name] = c.subjects.map((s)=>s.name);
+                return acc;
+            }, {}),
+            teachers: teachers.reduce((acc, t)=>{
+                acc[t.name] = t.subjects.map((s)=>s.name);
+                return acc;
+            }, {}),
             settings: {
-                days: settings.days || [],
-                start_hour: settings.start_hour || 9,
-                end_hour: settings.end_hour || 17,
-                lunch_start_hour: settings.lunch_start_hour || 12
+                days: settings.days,
+                start_hour: settings.start_hour,
+                end_hour: settings.end_hour,
+                lunch_start_hour: settings.lunch_start_hour,
+                batches_per_division: 4
             }
         };
         console.log(dataToSend);
