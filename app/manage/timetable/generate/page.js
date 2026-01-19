@@ -34,7 +34,8 @@ export default function GenerateTimetablePage() {
 
   useEffect(() => {
     if (timetableData) {
-      const firstDivision = Object.keys(timetableData)[0] || "";
+      const divisionKeys = Object.keys(timetableData);
+      const firstDivision = divisionKeys[0] || "";
       setCurrentDivisionForPdf(firstDivision);
     } else {
       setCurrentDivisionForPdf("");
@@ -398,14 +399,22 @@ export default function GenerateTimetablePage() {
       {/* Timetable Results */}
       {timetableData && (
         <section className="mt-6 rounded-lg bg-white p-6 shadow-sm ring-1 ring-[#E5E7EB]">
-          <div className="mb-4 flex items-center justify-between">
-            <h2 className="text-lg font-semibold text-slate-900">
-              Generated Timetable
-            </h2>
+          <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <h2 className="text-lg font-semibold text-slate-900">
+                Generated Timetable
+              </h2>
+              <p className="text-xs text-slate-600 mt-1">
+                Preview the timetable by division. Rows are days, columns are time slots; each cell shows all batches.
+              </p>
+            </div>
             <div className="flex flex-wrap items-center gap-2">
               <select
                 value={currentDivisionForPdf}
-                onChange={(e) => setCurrentDivisionForPdf(e.target.value)}
+                onChange={(e) => {
+                  const nextDivision = e.target.value;
+                  setCurrentDivisionForPdf(nextDivision);
+                }}
                 className="rounded-md border border-[#CBD5E1] bg-white px-2 py-2 text-xs text-slate-700"
               >
                 {Object.keys(timetableData).map((divisionKey) => (
@@ -485,10 +494,409 @@ export default function GenerateTimetablePage() {
             </div>
           </div>
 
-          <div className="overflow-x-auto">
-            <pre className="max-h-96 overflow-auto rounded-md border border-[#E5E7EB] bg-[#F8FAFC] p-4 text-xs">
-              {JSON.stringify(timetableData, null, 2)}
-            </pre>
+          <div className="mt-4 overflow-x-auto rounded-md border border-[#E5E7EB] bg-white">
+            {currentDivisionForPdf ? (
+              <table className="min-w-full border-collapse text-xs">
+                <thead className="bg-[#F1F5F9] text-slate-600">
+                  <tr>
+                    <th className="border border-[#CBD5E1] px-3 py-2 text-center w-24">
+                      Day
+                    </th>
+                    <th className="border border-[#CBD5E1] px-3 py-2 text-center">
+                      9:00
+                    </th>
+                    <th className="border border-[#CBD5E1] px-3 py-2 text-center">
+                      10:00
+                    </th>
+                    <th className="border border-[#CBD5E1] px-3 py-2 text-center">
+                      11:00
+                    </th>
+                    <th className="border border-[#CBD5E1] px-3 py-2 text-center">
+                      12:00
+                    </th>
+                    <th className="border border-[#CBD5E1] px-1 py-2 text-center align-middle">
+                      <span
+                        className="inline-block text-[11px] font-semibold"
+                        style={{ writingMode: "vertical-rl", transform: "rotate(180deg)" }}
+                      >
+                        LUNCH BREAK
+                      </span>
+                    </th>
+                    <th className="border border-[#CBD5E1] px-3 py-2 text-center">
+                      1:00
+                    </th>
+                    <th className="border border-[#CBD5E1] px-3 py-2 text-center">
+                      2:00
+                    </th>
+                    <th className="border border-[#CBD5E1] px-3 py-2 text-center">
+                      3:00
+                    </th>
+                    <th className="border border-[#CBD5E1] px-3 py-2 text-center">
+                      4:00
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="text-slate-800">
+                  {(() => {
+                    const divisionData = timetableData[currentDivisionForPdf] || {};
+                    const batchKeys = Object.keys(divisionData);
+                    if (!batchKeys.length) return null;
+
+                    const firstBatchSchedule = divisionData[batchKeys[0]] || {};
+                    const dayKeys = Object.keys(firstBatchSchedule);
+
+                    const columns = [
+                      { label: "9:00", periodIndex: 0 },
+                      { label: "10:00", periodIndex: 1 },
+                      { label: "11:00", periodIndex: 2 },
+                      { label: "12:00", periodIndex: 3 },
+                      { label: "LUNCH BREAK", periodIndex: null, isLunchColumn: true },
+                      { label: "1:00", periodIndex: 4 },
+                      { label: "2:00", periodIndex: 5 },
+                      { label: "3:00", periodIndex: 6 },
+                      { label: "4:00", periodIndex: 7 },
+                    ];
+
+                    return dayKeys.map((day) => (
+                      <tr key={day}>
+                        <td className="border border-[#CBD5E1] px-3 py-2 font-semibold bg-[#F8FAFC] text-center">
+                          {day}
+                        </td>
+                        {(() => {
+                          const tds = [];
+                          for (let colIndex = 0; colIndex < columns.length; colIndex++) {
+                            const col = columns[colIndex];
+
+                            if (col.isLunchColumn) {
+                              tds.push(
+                                <td
+                                  key={`lunch-${colIndex}`}
+                                  className="border border-[#CBD5E1] px-1 py-2 bg-amber-50"
+                                />
+                              );
+                              continue;
+                            }
+
+                            const idx = col.periodIndex;
+
+                            const slotsForColumn = batchKeys.map((batchKey) => {
+                              const batchSchedule = divisionData[batchKey] || {};
+                              const slotsForDay = Array.isArray(batchSchedule[day])
+                                ? batchSchedule[day]
+                                : [];
+                              const slot =
+                                Array.isArray(slotsForDay) && idx != null
+                                  ? slotsForDay[idx]
+                                  : null;
+                              return { batchKey, slot };
+                            });
+
+                            const normalized = slotsForColumn.map(
+                              ({ batchKey, slot }) => {
+                                if (!slot || typeof slot !== "object") {
+                                  return { batchKey, slot: null, type: "", cls: "" };
+                                }
+                                const type = slot.type
+                                  ? String(slot.type).toUpperCase()
+                                  : "";
+                                const cls = slot.class
+                                  ? String(slot.class).toUpperCase()
+                                  : "";
+                                return { batchKey, slot, type, cls };
+                              }
+                            );
+
+                            const hasLunch = normalized.some(
+                              ({ cls }) => cls === "LUNCH"
+                            );
+                            const allFreeOrEmpty = normalized.every(
+                              ({ slot, type }) => {
+                                if (!slot || !Object.keys(slot).length) return true;
+                                return type === "FREE";
+                              }
+                            );
+
+                            // LUNCH overrides everything
+                            if (hasLunch) {
+                              tds.push(
+                                <td
+                                  key={`col-${colIndex}`}
+                                  className="border border-[#CBD5E1] px-2 py-2 align-middle text-center bg-amber-50"
+                                >
+                                  <span className="text-[11px] font-semibold text-amber-700">
+                                    LUNCH
+                                  </span>
+                                </td>
+                              );
+                              continue;
+                            }
+
+                            // Try to detect 2-hour LAB block starting at this column
+                            const nextCol = columns[colIndex + 1];
+                            let handledSpan = false;
+                            if (
+                              nextCol &&
+                              !nextCol.isLunchColumn &&
+                              typeof nextCol.periodIndex === "number" &&
+                              typeof idx === "number" &&
+                              nextCol.periodIndex === idx + 1
+                            ) {
+                              const idxNext = nextCol.periodIndex;
+                              const hasSpanningLab = batchKeys.some((batchKey) => {
+                                const batchSchedule = divisionData[batchKey] || {};
+                                const slotsForDay = Array.isArray(batchSchedule[day])
+                                  ? batchSchedule[day]
+                                  : [];
+                                const curr =
+                                  Array.isArray(slotsForDay) && idx != null
+                                    ? slotsForDay[idx]
+                                    : null;
+                                const next =
+                                  Array.isArray(slotsForDay) && idxNext != null
+                                    ? slotsForDay[idxNext]
+                                    : null;
+
+                                if (!curr || !next) return false;
+                                if (
+                                  typeof curr !== "object" ||
+                                  typeof next !== "object"
+                                ) {
+                                  return false;
+                                }
+
+                                const currType = curr.type
+                                  ? String(curr.type).toUpperCase()
+                                  : "";
+                                const nextType = next.type
+                                  ? String(next.type).toUpperCase()
+                                  : "";
+
+                                if (currType !== "LAB" || nextType !== "LAB")
+                                  return false;
+
+                                const currClass = curr.class || "";
+                                const nextClass = next.class || "";
+                                const currTeacher = curr.teacher || "";
+                                const nextTeacher = next.teacher || "";
+
+                                return (
+                                  currClass === nextClass &&
+                                  currTeacher === nextTeacher
+                                );
+                              });
+
+                              if (hasSpanningLab) {
+                                const labLines = batchKeys
+                                  .map((batchKey) => {
+                                    const batchSchedule =
+                                      divisionData[batchKey] || {};
+                                    const slotsForDay =
+                                      Array.isArray(batchSchedule[day])
+                                        ? batchSchedule[day]
+                                        : [];
+                                    const curr =
+                                      Array.isArray(slotsForDay) && idx != null
+                                        ? slotsForDay[idx]
+                                        : null;
+                                    const next =
+                                      Array.isArray(slotsForDay) &&
+                                      nextCol.periodIndex != null
+                                        ? slotsForDay[nextCol.periodIndex]
+                                        : null;
+
+                                    if (!curr || !next) return null;
+                                    if (
+                                      typeof curr !== "object" ||
+                                      typeof next !== "object"
+                                    ) {
+                                      return null;
+                                    }
+
+                                    const currType = curr.type
+                                      ? String(curr.type).toUpperCase()
+                                      : "";
+                                    const nextType = next.type
+                                      ? String(next.type).toUpperCase()
+                                      : "";
+
+                                    if (currType !== "LAB" || nextType !== "LAB")
+                                      return null;
+
+                                    const currClass = curr.class || "";
+                                    const nextClass = next.class || "";
+                                    const currTeacher = curr.teacher || "";
+                                    const nextTeacher = next.teacher || "";
+
+                                    if (
+                                      currClass !== nextClass ||
+                                      currTeacher !== nextTeacher
+                                    ) {
+                                      return null;
+                                    }
+
+                                    const parts = [];
+                                    if (curr.teacher)
+                                      parts.push(String(curr.teacher));
+                                    if (curr.room) parts.push(String(curr.room));
+                                    const suffix =
+                                      parts.length > 0
+                                        ? ` (${parts.join(" ")})`
+                                        : "";
+                                    const text = `${batchKey}: ${curr.class || ""}${suffix}`.trim();
+
+                                    return (
+                                      <div
+                                        key={batchKey}
+                                        className="text-[11px] leading-tight text-green-700"
+                                      >
+                                        {text}
+                                      </div>
+                                    );
+                                  })
+                                  .filter(Boolean);
+
+                                tds.push(
+                                  <td
+                                    key={`col-${colIndex}`}
+                                    colSpan={2}
+                                    className="border border-[#CBD5E1] px-2 py-2 align-top text-center bg-green-50"
+                                  >
+                                    {labLines.length > 0 ? (
+                                      <div className="space-y-0.5">{labLines}</div>
+                                    ) : (
+                                      <span className="text-[10px] text-slate-300">
+                                        &nbsp;
+                                      </span>
+                                    )}
+                                  </td>
+                                );
+                                handledSpan = true;
+                                colIndex++; // skip next column
+                              }
+                            }
+
+                            if (handledSpan) {
+                              continue;
+                            }
+
+                            if (allFreeOrEmpty) {
+                              tds.push(
+                                <td
+                                  key={`col-${colIndex}`}
+                                  className="border border-[#CBD5E1] px-2 py-2 align-top text-center"
+                                >
+                                  <span className="text-[10px] text-slate-300">
+                                    &nbsp;
+                                  </span>
+                                </td>
+                              );
+                              continue;
+                            }
+
+                            const lectureSlots = normalized.filter(
+                              ({ slot, type }) =>
+                                slot &&
+                                type === "LECTURE" &&
+                                (slot.class || slot.teacher || slot.room)
+                            );
+
+                            let content = null;
+
+                            if (lectureSlots.length > 0) {
+                              const { slot } = lectureSlots[0];
+                              const parts = [];
+                              if (slot.teacher) parts.push(String(slot.teacher));
+                              if (slot.room) parts.push(String(slot.room));
+                              const suffix =
+                                parts.length > 0 ? ` (${parts.join(" ")})` : "";
+                              const text = `${slot.class || ""}${suffix}`.trim();
+                              content = (
+                                <div className="text-[11px] leading-tight text-blue-700">
+                                  {text}
+                                </div>
+                              );
+                            } else {
+                              const labSlots = normalized.filter(
+                                ({ slot, type }) =>
+                                  slot &&
+                                  type === "LAB" &&
+                                  (slot.class || slot.teacher || slot.room)
+                              );
+
+                              if (labSlots.length > 0) {
+                                content = (
+                                  <div className="space-y-0.5">
+                                    {labSlots.map(({ batchKey, slot }) => {
+                                      const parts = [];
+                                      if (slot.teacher)
+                                        parts.push(String(slot.teacher));
+                                      if (slot.room) parts.push(String(slot.room));
+                                      const suffix =
+                                        parts.length > 0
+                                          ? ` (${parts.join(" ")})`
+                                          : "";
+                                      const text = `${batchKey}: ${slot.class || ""}${suffix}`.trim();
+                                      return (
+                                        <div
+                                          key={batchKey}
+                                          className="text-[11px] leading-tight text-green-700"
+                                        >
+                                          {text}
+                                        </div>
+                                      );
+                                    })}
+                                  </div>
+                                );
+                              } else {
+                                const nonFree = normalized.filter(
+                                  ({ slot, type }) =>
+                                    slot &&
+                                    type !== "FREE" &&
+                                    (slot.class || slot.teacher || slot.room)
+                                );
+                                if (nonFree.length > 0) {
+                                  const { slot } = nonFree[0];
+                                  const parts = [];
+                                  if (slot.teacher)
+                                    parts.push(String(slot.teacher));
+                                  if (slot.room) parts.push(String(slot.room));
+                                  const suffix =
+                                    parts.length > 0 ? ` (${parts.join(" ")})` : "";
+                                  const text = `${slot.class || ""}${suffix}`.trim();
+                                  content = (
+                                    <div className="text-[11px] leading-tight text-blue-700">
+                                      {text}
+                                    </div>
+                                  );
+                                }
+                              }
+                            }
+
+                            tds.push(
+                              <td
+                                key={`col-${colIndex}`}
+                                className="border border-[#CBD5E1] px-2 py-2 align-top text-center"
+                              >
+                                {content || (
+                                  <span className="text-[10px] text-slate-300">
+                                    &nbsp;
+                                  </span>
+                                )}
+                              </td>
+                            );
+                          }
+                          return tds;
+                        })()}
+                      </tr>
+                    ));
+                  })()}
+                </tbody>
+              </table>
+            ) : (
+              <div className="p-4 text-xs text-slate-500">
+                Select a division to preview the timetable.
+              </div>
+            )}
           </div>
         </section>
       )}

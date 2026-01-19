@@ -2,8 +2,8 @@ import { NextResponse } from "next/server";
 import { connectToDatabase } from "../../../../../lib/db";
 import Timetable from "../../../../../models/Timetable";
 import Setting from "../../../../../models/Setting";
-
-const PYTHON_API_URL = process.env.PYTHON_API_URL || "http://localhost:8000";
+import getTimetableHtml from "../../../../../lib/timetablePdf";
+import puppeteer from "puppeteer";
 
 export async function GET(request, { params }) {
   const resolvedParams = await params;
@@ -66,48 +66,46 @@ export async function GET(request, { params }) {
         (key) => key.trim().toLowerCase() === trimmedDivision.toLowerCase()
       ) || keys[0];
 
-    // Filter timetable to only include the requested division
-    const filteredTimetable = {
-      [matchedKey]: timetablePayload[matchedKey]
-    };
-
-    // Send timetable data and settings to Python API for PDF generation
-    const pythonResponse = await fetch(`${PYTHON_API_URL}/generate-pdf`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
+    // Generate HTML for the requested division (all batches in one grid)
+    const html = getTimetableHtml(
+      timetablePayload,
+      matchedKey,
+      {
+        days: settings.days,
+        start_hour: settings.start_hour,
+        end_hour: settings.end_hour,
+        lunch_start_hour: settings.lunch_start_hour,
       },
-      body: JSON.stringify({
-        timetable: filteredTimetable,
-        settings: {
-          days: settings.days,
-          start_hour: settings.start_hour,
-          end_hour: settings.end_hour,
-          lunch_start_hour: settings.lunch_start_hour,
-        },
-      }),
+      timetableDoc.generatedAt || new Date()
+    );
+
+    const browser = await puppeteer.launch({
+      headless: true,
+      args: ["--no-sandbox", "--disable-setuid-sandbox"],
     });
 
-    if (!pythonResponse.ok) {
-      const errorText = await pythonResponse.text();
-      console.error("[PDF] Python API error:", errorText);
-      return NextResponse.json(
-        {
-          message: `Python PDF server returned an error: ${pythonResponse.status}`,
-          details: errorText,
-        },
-        { status: 502 }
-      );
-    }
+    const page = await browser.newPage();
+    await page.setContent(html, { waitUntil: "networkidle0" });
 
-    // Get PDF buffer from Python API
-    const pdfBuffer = await pythonResponse.arrayBuffer();
+    const pdfBuffer = await page.pdf({
+      format: "A4",
+      landscape: true,
+      printBackground: true,
+      margin: {
+        top: "20px",
+        bottom: "20px",
+        left: "20px",
+        right: "20px",
+      },
+    });
+
+    await browser.close();
 
     return new NextResponse(pdfBuffer, {
       status: 200,
       headers: {
         "Content-Type": "application/pdf",
-        "Content-Disposition": `attachment; filename="timetable-${division}.pdf"`,
+        "Content-Disposition": `attachment; filename="timetable-${matchedKey}.pdf"`,
       },
     });
   } catch (error) {
