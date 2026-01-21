@@ -16,7 +16,7 @@ export async function PUT(request, context) {
   await connectToDatabase();
   const { id } = await context.params;
   const body = await request.json();
-  const { name, type, frequency } = body || {};
+  const { name, presetSubject, isMDM, type, frequency } = body || {};
 
   if (!name) {
     return NextResponse.json(
@@ -26,10 +26,29 @@ export async function PUT(request, context) {
   }
 
   try {
+    const trimmedName = String(name).trim();
+    const upper = trimmedName.toUpperCase();
+    const preset = presetSubject ? String(presetSubject).trim().toUpperCase() : "";
+
+    const normalizedName =
+      preset === "MDM"
+        ? "MDM"
+        : preset === "OE-DS"
+          ? "OE-DS"
+          : preset === "OE-ES"
+            ? "OE-ES"
+            : isMDM || upper === "MDM"
+              ? "MDM"
+              : upper === "OE-DS"
+                ? "OE-DS"
+                : upper === "OE-ES"
+                  ? "OE-ES"
+                  : trimmedName;
+
     const updated = await Subject.findByIdAndUpdate(
       id,
       {
-        name,
+        name: normalizedName,
         type: type || "theory",
         frequency: frequency || 1,
       },

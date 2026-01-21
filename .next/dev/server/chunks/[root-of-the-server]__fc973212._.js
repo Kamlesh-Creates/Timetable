@@ -110,6 +110,15 @@ const settingSchema = new __TURBOPACK__imported__module__$5b$externals$5d2f$mong
         type: Number,
         min: 0,
         max: 23
+    },
+    MDM_time: {
+        type: __TURBOPACK__imported__module__$5b$externals$5d2f$mongoose__$5b$external$5d$__$28$mongoose$2c$__cjs$29$__["default"].Schema.Types.Mixed
+    },
+    "OE-DS_time": {
+        type: __TURBOPACK__imported__module__$5b$externals$5d2f$mongoose__$5b$external$5d$__$28$mongoose$2c$__cjs$29$__["default"].Schema.Types.Mixed
+    },
+    "OE-ES_time": {
+        type: __TURBOPACK__imported__module__$5b$externals$5d2f$mongoose__$5b$external$5d$__$28$mongoose$2c$__cjs$29$__["default"].Schema.Types.Mixed
     }
 }, {
     timestamps: true
@@ -161,7 +170,7 @@ async function GET() {
 }
 async function POST(request) {
     const body = await request.json();
-    const { days, start_hour, end_hour, lunch_start_hour } = body || {};
+    const { days, start_hour, end_hour, lunch_start_hour, MDM_time, "OE-DS_time": OE_DS_time, "OE-ES_time": OE_ES_time } = body || {};
     if (start_hour != null && end_hour != null && (start_hour < 0 || start_hour > 23 || end_hour < 0 || end_hour > 23 || start_hour >= end_hour)) {
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
             message: "start_hour must be before end_hour (0-23)"
@@ -188,6 +197,15 @@ async function POST(request) {
     }
     if (lunch_start_hour != null) {
         settings.lunch_start_hour = lunch_start_hour;
+    }
+    if (MDM_time !== undefined) {
+        settings.MDM_time = MDM_time;
+    }
+    if (OE_DS_time !== undefined) {
+        settings["OE-DS_time"] = OE_DS_time;
+    }
+    if (OE_ES_time !== undefined) {
+        settings["OE-ES_time"] = OE_ES_time;
     }
     await settings.save();
     return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({

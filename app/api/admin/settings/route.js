@@ -23,7 +23,7 @@ export async function GET() {
 
 export async function POST(request) {
   const body = await request.json();
-  const { days, start_hour, end_hour, lunch_start_hour } = body || {};
+  const { days, start_hour, end_hour, lunch_start_hour, MDM_time, "OE-DS_time": OE_DS_time, "OE-ES_time": OE_ES_time } = body || {};
 
   if (
     start_hour != null &&
@@ -63,6 +63,15 @@ export async function POST(request) {
   }
   if (lunch_start_hour != null) {
     settings.lunch_start_hour = lunch_start_hour;
+  }
+  if (MDM_time !== undefined) {
+    settings.MDM_time = MDM_time;
+  }
+  if (OE_DS_time !== undefined) {
+    settings["OE-DS_time"] = OE_DS_time;
+  }
+  if (OE_ES_time !== undefined) {
+    settings["OE-ES_time"] = OE_ES_time;
   }
 
   await settings.save();

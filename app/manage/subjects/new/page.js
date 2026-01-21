@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 export default function NewSubjectPage() {
   const router = useRouter();
   const [name, setName] = useState("");
+  const [presetSubject, setPresetSubject] = useState("");
   const [type, setType] = useState("theory");
   const [frequency, setFrequency] = useState(1);
   const [error, setError] = useState("");
@@ -20,7 +21,12 @@ export default function NewSubjectPage() {
       const res = await fetch("/api/admin/subjects", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, type, frequency: parseInt(frequency) }),
+        body: JSON.stringify({
+          name: presetSubject ? presetSubject : name,
+          presetSubject,
+          type,
+          frequency: parseInt(frequency),
+        }),
       });
 
       const data = await res.json();
@@ -47,6 +53,43 @@ export default function NewSubjectPage() {
         onSubmit={handleSubmit}
         className="space-y-4 rounded-lg bg-white p-6 shadow-sm ring-1 ring-[#E5E7EB]"
       >
+        <div className="rounded-md border border-[#CBD5E1] bg-slate-50 px-3 py-2">
+          <p className="text-sm font-medium text-slate-700">Fixed-slot subjects</p>
+          <p className="text-xs text-slate-500">
+            Select to force exact naming (prevents case/typo issues in constraints).
+          </p>
+          <div className="mt-2 flex flex-wrap gap-4 text-sm text-slate-700">
+            {["MDM", "OE-DS", "OE-ES"].map((code) => (
+              <label key={code} className="flex items-center gap-2">
+                <input
+                  type="radio"
+                  name="presetSubject"
+                  value={code}
+                  checked={presetSubject === code}
+                  onChange={(e) => {
+                    const next = e.target.value;
+                    setPresetSubject(next);
+                    setName(next);
+                  }}
+                  className="h-4 w-4 border-[#CBD5E1] text-[#1A4C8B] focus:ring-[#BFDBFE]"
+                />
+                <span>{code}</span>
+              </label>
+            ))}
+            <label className="flex items-center gap-2">
+              <input
+                type="radio"
+                name="presetSubject"
+                value=""
+                checked={!presetSubject}
+                onChange={() => setPresetSubject("")}
+                className="h-4 w-4 border-[#CBD5E1] text-[#1A4C8B] focus:ring-[#BFDBFE]"
+              />
+              <span>Other</span>
+            </label>
+          </div>
+        </div>
+
         <div className="space-y-1.5">
           <label
             htmlFor="name"
@@ -58,6 +101,7 @@ export default function NewSubjectPage() {
             id="name"
             value={name}
             onChange={(e) => setName(e.target.value)}
+            disabled={!!presetSubject}
             required
             placeholder="e.g., Mathematics, Physics Lab"
             className="block w-full rounded-md border border-[#CBD5E1] bg-white px-3 py-2 text-sm text-slate-900 outline-none ring-2 ring-transparent focus:border-[#1A4C8B] focus:ring-[#BFDBFE]"
