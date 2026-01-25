@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { connectToDatabase } from "../../../../lib/db";
 import Teacher from "../../../../models/Teacher";
+import Subject from "../../../../models/Subject";
 
 export async function GET() {
   await connectToDatabase();
