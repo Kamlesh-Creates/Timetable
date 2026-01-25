@@ -9,10 +9,9 @@ const subjectSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-if (mongoose.models.Subject) {
-  delete mongoose.models.Subject;
-}
+const Subject =
+  mongoose.models.Subject || mongoose.model("Subject", subjectSchema);
 
-export default mongoose.model("Subject", subjectSchema);
+export default Subject;
 
 
