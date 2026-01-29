@@ -66,6 +66,17 @@ export async function GET(request, { params }) {
         (key) => key.trim().toLowerCase() === trimmedDivision.toLowerCase()
       ) || keys[0];
 
+    // Log for debugging
+    console.log("[PDF Debug] Division requested:", division);
+    console.log("[PDF Debug] Matched key:", matchedKey);
+    console.log("[PDF Debug] Available divisions:", keys);
+    console.log("[PDF Debug] Settings:", {
+      days: settings.days,
+      start_hour: settings.start_hour,
+      end_hour: settings.end_hour,
+      lunch_start_hour: settings.lunch_start_hour,
+    });
+
     // Generate HTML for the requested division (all batches in one grid)
     const html = getTimetableHtml(
       timetablePayload,
@@ -78,6 +89,8 @@ export async function GET(request, { params }) {
       },
       timetableDoc.generatedAt || new Date()
     );
+
+    console.log("[PDF Debug] HTML generated successfully");
 
     const browser = await puppeteer.launch({
       headless: true,
@@ -110,8 +123,13 @@ export async function GET(request, { params }) {
     });
   } catch (error) {
     console.error("[Timetable PDF] generation failed:", error);
+    console.error("[Timetable PDF] Stack trace:", error.stack);
     return NextResponse.json(
-      { message: "Failed to generate PDF", error: error.message },
+      { 
+        message: "Failed to generate PDF", 
+        error: error.message,
+        stack: error.stack 
+      },
       { status: 500 }
     );
   }

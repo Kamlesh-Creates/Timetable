@@ -90,18 +90,6 @@ export async function POST() {
   }
 };
 
-    // Add fixed timeslot constraints if they exist
-    if (settings.MDM_time) {
-      dataToSend.MDM_time = settings.MDM_time;
-    }
-    if (settings["OE-DS_time"]) {
-      dataToSend["OE-DS_time"] = settings["OE-DS_time"];
-    }
-    if (settings["OE-ES_time"]) {
-      dataToSend["OE-ES_time"] = settings["OE-ES_time"];
-    }
-
-
     console.log(dataToSend);
     console.log()
 

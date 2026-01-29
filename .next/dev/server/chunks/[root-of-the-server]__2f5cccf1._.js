@@ -248,7 +248,7 @@ const settingSchema = new __TURBOPACK__imported__module__$5b$externals$5d2f$mong
         type: Number,
         min: 0,
         max: 23
-    }
+    } // e.g. 12
 }, {
     timestamps: true
 });

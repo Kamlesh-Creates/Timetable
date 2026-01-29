@@ -14,12 +14,6 @@ export default function SettingsPage() {
   const [start_hour, setStartHour] = useState(9);
   const [end_hour, setEndHour] = useState(17);
   const [lunch_start_hour, setLunchStartHour] = useState(12);
-  
-  // Fixed timeslot constraints
-  const [mdmSlots, setMdmSlots] = useState([{ day: "", time: "" }]);
-  const [oeDsSlots, setOeDsSlots] = useState([{ day: "", time: "" }]);
-  const [oeEsDay, setOeEsDay] = useState("");
-  const [oeEsTime, setOeEsTime] = useState("");
 
   useEffect(() => {
     async function loadSettings() {
@@ -32,29 +26,6 @@ export default function SettingsPage() {
           setStartHour(s.start_hour != null ? s.start_hour : 9);
           setEndHour(s.end_hour != null ? s.end_hour : 17);
           setLunchStartHour(s.lunch_start_hour != null ? s.lunch_start_hour : 12);
-          
-          // Load fixed timeslot constraints
-          if (s.MDM_time) {
-            if (Array.isArray(s.MDM_time) && s.MDM_time.length > 0) {
-              setMdmSlots(s.MDM_time.map(slot => ({ day: slot.day || "", time: slot.time || "" })));
-            } else if (typeof s.MDM_time === "object" && s.MDM_time.day) {
-              // Support legacy single object format
-              setMdmSlots([{ day: s.MDM_time.day, time: s.MDM_time.time || "" }]);
-            }
-          }
-          if (s["OE-DS_time"] && Array.isArray(s["OE-DS_time"]) && s["OE-DS_time"].length > 0) {
-            setOeDsSlots(s["OE-DS_time"].map(slot => ({ day: slot.day || "", time: slot.time || "" })));
-          }
-          if (s["OE-ES_time"]) {
-            if (typeof s["OE-ES_time"] === "string" && s["OE-ES_time"].includes("@")) {
-              const [day, time] = s["OE-ES_time"].split("@");
-              setOeEsDay(day || "");
-              setOeEsTime(time || "");
-            } else if (typeof s["OE-ES_time"] === "object" && s["OE-ES_time"].day) {
-              setOeEsDay(s["OE-ES_time"].day);
-              setOeEsTime(s["OE-ES_time"].time || "");
-            }
-          }
         }
       } catch (err) {
         setError("Failed to load settings");
@@ -71,48 +42,11 @@ export default function SettingsPage() {
     );
   }
 
-  function addMdmSlot() {
-    setMdmSlots([...mdmSlots, { day: "", time: "" }]);
-  }
-
-  function removeMdmSlot(index) {
-    setMdmSlots(mdmSlots.filter((_, i) => i !== index));
-  }
-
-  function updateMdmSlot(index, field, value) {
-    const updated = [...mdmSlots];
-    updated[index] = { ...updated[index], [field]: value };
-    setMdmSlots(updated);
-  }
-
-  function addOeDsSlot() {
-    setOeDsSlots([...oeDsSlots, { day: "", time: "" }]);
-  }
-
-  function removeOeDsSlot(index) {
-    setOeDsSlots(oeDsSlots.filter((_, i) => i !== index));
-  }
-
-  function updateOeDsSlot(index, field, value) {
-    const updated = [...oeDsSlots];
-    updated[index] = { ...updated[index], [field]: value };
-    setOeDsSlots(updated);
-  }
-
   async function handleSubmit(e) {
     e.preventDefault();
     setError("");
     setSuccess("");
     setSaving(true);
-
-    // Build fixed timeslot constraints
-    const MDM_time = mdmSlots.filter(slot => slot.day && slot.time).length > 0
-      ? mdmSlots.filter(slot => slot.day && slot.time)
-      : null;
-    const OE_DS_time = oeDsSlots.filter(slot => slot.day && slot.time).length > 0
-      ? oeDsSlots.filter(slot => slot.day && slot.time)
-      : null;
-    const OE_ES_time = oeEsDay && oeEsTime ? `${oeEsDay}@${oeEsTime}` : null;
 
     try {
       const res = await fetch("/api/admin/settings", {
@@ -123,9 +57,6 @@ export default function SettingsPage() {
           start_hour,
           end_hour,
           lunch_start_hour,
-          MDM_time,
-          "OE-DS_time": OE_DS_time,
-          "OE-ES_time": OE_ES_time,
         }),
       });
 
@@ -260,158 +191,6 @@ export default function SettingsPage() {
           <p className="text-xs text-slate-500">
             Hour when lunch break starts (0-23, e.g., 12 for 12 PM).
           </p>
-        </div>
-
-        {/* Fixed Timeslot Constraints */}
-        <div className="space-y-4 border-t border-[#E5E7EB] pt-6">
-          <h2 className="text-lg font-semibold text-slate-900">
-            Fixed Timeslot Constraints
-          </h2>
-          <p className="text-xs text-slate-500">
-            Configure fixed timeslots for specific subjects. These constraints will be sent to the algorithm.
-          </p>
-
-          {/* MDM */}
-          <div className="space-y-2 rounded-md border border-[#E5E7EB] p-4">
-            <div className="flex items-center justify-between">
-              <label className="block text-sm font-medium text-slate-700">
-                MDM Fixed Timeslots
-              </label>
-              <button
-                type="button"
-                onClick={addMdmSlot}
-                className="text-xs text-[#1A4C8B] hover:underline"
-              >
-                + Add slot
-              </button>
-            </div>
-            {mdmSlots.map((slot, index) => (
-              <div key={index} className="flex gap-3 items-end">
-                <div className="flex-1">
-                  <label className="block text-xs text-slate-600 mb-1">Day</label>
-                  <select
-                    value={slot.day}
-                    onChange={(e) => updateMdmSlot(index, "day", e.target.value)}
-                    className="block w-full rounded-md border border-[#CBD5E1] bg-white px-3 py-2 text-sm text-slate-900 outline-none ring-2 ring-transparent focus:border-[#1A4C8B] focus:ring-[#BFDBFE]"
-                  >
-                    <option value="">Select day</option>
-                    {DAY_OPTIONS.map((day) => (
-                      <option key={day} value={day}>
-                        {day}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-                <div className="flex-1">
-                  <label className="block text-xs text-slate-600 mb-1">Time (e.g., 1-2)</label>
-                  <input
-                    type="text"
-                    value={slot.time}
-                    onChange={(e) => updateMdmSlot(index, "time", e.target.value)}
-                    placeholder="1-2"
-                    className="block w-full rounded-md border border-[#CBD5E1] bg-white px-3 py-2 text-sm text-slate-900 outline-none ring-2 ring-transparent focus:border-[#1A4C8B] focus:ring-[#BFDBFE]"
-                  />
-                </div>
-                {mdmSlots.length > 1 && (
-                  <button
-                    type="button"
-                    onClick={() => removeMdmSlot(index)}
-                    className="rounded-md border border-red-300 bg-red-50 px-3 py-2 text-xs font-medium text-red-700 hover:bg-red-100"
-                  >
-                    Remove
-                  </button>
-                )}
-              </div>
-            ))}
-          </div>
-
-          {/* OE-DS */}
-          <div className="space-y-2 rounded-md border border-[#E5E7EB] p-4">
-            <div className="flex items-center justify-between">
-              <label className="block text-sm font-medium text-slate-700">
-                OE-DS Fixed Timeslots
-              </label>
-              <button
-                type="button"
-                onClick={addOeDsSlot}
-                className="text-xs text-[#1A4C8B] hover:underline"
-              >
-                + Add slot
-              </button>
-            </div>
-            {oeDsSlots.map((slot, index) => (
-              <div key={index} className="flex gap-3 items-end">
-                <div className="flex-1">
-                  <label className="block text-xs text-slate-600 mb-1">Day</label>
-                  <select
-                    value={slot.day}
-                    onChange={(e) => updateOeDsSlot(index, "day", e.target.value)}
-                    className="block w-full rounded-md border border-[#CBD5E1] bg-white px-3 py-2 text-sm text-slate-900 outline-none ring-2 ring-transparent focus:border-[#1A4C8B] focus:ring-[#BFDBFE]"
-                  >
-                    <option value="">Select day</option>
-                    {DAY_OPTIONS.map((day) => (
-                      <option key={day} value={day}>
-                        {day}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-                <div className="flex-1">
-                  <label className="block text-xs text-slate-600 mb-1">Time (e.g., 2-3)</label>
-                  <input
-                    type="text"
-                    value={slot.time}
-                    onChange={(e) => updateOeDsSlot(index, "time", e.target.value)}
-                    placeholder="2-3"
-                    className="block w-full rounded-md border border-[#CBD5E1] bg-white px-3 py-2 text-sm text-slate-900 outline-none ring-2 ring-transparent focus:border-[#1A4C8B] focus:ring-[#BFDBFE]"
-                  />
-                </div>
-                {oeDsSlots.length > 1 && (
-                  <button
-                    type="button"
-                    onClick={() => removeOeDsSlot(index)}
-                    className="rounded-md border border-red-300 bg-red-50 px-3 py-2 text-xs font-medium text-red-700 hover:bg-red-100"
-                  >
-                    Remove
-                  </button>
-                )}
-              </div>
-            ))}
-          </div>
-
-          {/* OE-ES */}
-          <div className="space-y-2 rounded-md border border-[#E5E7EB] p-4">
-            <label className="block text-sm font-medium text-slate-700">
-              OE-ES Fixed Timeslot
-            </label>
-            <div className="flex gap-3">
-              <div className="flex-1">
-                <label className="block text-xs text-slate-600 mb-1">Day</label>
-                <select
-                  value={oeEsDay}
-                  onChange={(e) => setOeEsDay(e.target.value)}
-                  className="block w-full rounded-md border border-[#CBD5E1] bg-white px-3 py-2 text-sm text-slate-900 outline-none ring-2 ring-transparent focus:border-[#1A4C8B] focus:ring-[#BFDBFE]"
-                >
-                  <option value="">Select day</option>
-                  {DAY_OPTIONS.map((day) => (
-                    <option key={day} value={day}>
-                      {day}
-                    </option>
-                  ))}
-                </select>
-              </div>
-              <div className="flex-1">
-                <label className="block text-xs text-slate-600 mb-1">Time (e.g., 13-14)</label>
-                <input
-                  type="text"
-                  value={oeEsTime}
-                  onChange={(e) => setOeEsTime(e.target.value)}
-                  placeholder="13-14"
-                  className="block w-full rounded-md border border-[#CBD5E1] bg-white px-3 py-2 text-sm text-slate-900 outline-none ring-2 ring-transparent focus:border-[#1A4C8B] focus:ring-[#BFDBFE]"
-                />
-              </div>
-            </div>
-          </div>
         </div>
 
         {error && (
