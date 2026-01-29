@@ -10,8 +10,7 @@ const timetableSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-if (mongoose.models.Timetable) {
-  delete mongoose.models.Timetable;
-}
+const Timetable =
+  mongoose.models.Timetable || mongoose.model("Timetable", timetableSchema);
 
-export default mongoose.model("Timetable", timetableSchema);
+export default Timetable;

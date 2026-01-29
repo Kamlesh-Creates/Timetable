@@ -18,7 +18,30 @@ async function getOrCreateSettings() {
 
 export async function GET() {
   const settings = await getOrCreateSettings();
-  return NextResponse.json({ settings }, { status: 200 });
+  
+  // Clean up old fields if they exist
+  if (settings.MDM_time !== undefined) {
+    settings.MDM_time = undefined;
+  }
+  if (settings["OE-DS_time"] !== undefined) {
+    settings["OE-DS_time"] = undefined;
+  }
+  if (settings["OE-ES_time"] !== undefined) {
+    settings["OE-ES_time"] = undefined;
+  }
+  
+  // Remove the fields from document
+  await settings.updateOne({ 
+    $unset: { 
+      MDM_time: "", 
+      "OE-DS_time": "", 
+      "OE-ES_time": "" 
+    } 
+  });
+  
+  // Fetch clean settings
+  const cleanSettings = await Setting.findOne();
+  return NextResponse.json({ settings: cleanSettings }, { status: 200 });
 }
 
 export async function POST(request) {

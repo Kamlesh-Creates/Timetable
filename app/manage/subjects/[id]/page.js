@@ -44,7 +44,11 @@ export default function EditSubjectPage() {
       const res = await fetch(`/api/admin/subjects/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, type, frequency: parseInt(frequency) }),
+        body: JSON.stringify({
+          name,
+          type,
+          frequency: parseInt(frequency),
+        }),
       });
 
       const data = await res.json();

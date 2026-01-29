@@ -20,7 +20,11 @@ export default function NewSubjectPage() {
       const res = await fetch("/api/admin/subjects", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, type, frequency: parseInt(frequency) }),
+        body: JSON.stringify({
+          name,
+          type,
+          frequency: parseInt(frequency),
+        }),
       });
 
       const data = await res.json();

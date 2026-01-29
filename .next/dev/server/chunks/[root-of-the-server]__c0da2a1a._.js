@@ -111,10 +111,8 @@ const subjectSchema = new __TURBOPACK__imported__module__$5b$externals$5d2f$mong
 }, {
     timestamps: true
 });
-if (__TURBOPACK__imported__module__$5b$externals$5d2f$mongoose__$5b$external$5d$__$28$mongoose$2c$__cjs$29$__["default"].models.Subject) {
-    delete __TURBOPACK__imported__module__$5b$externals$5d2f$mongoose__$5b$external$5d$__$28$mongoose$2c$__cjs$29$__["default"].models.Subject;
-}
-const __TURBOPACK__default__export__ = __TURBOPACK__imported__module__$5b$externals$5d2f$mongoose__$5b$external$5d$__$28$mongoose$2c$__cjs$29$__["default"].model("Subject", subjectSchema);
+const Subject = __TURBOPACK__imported__module__$5b$externals$5d2f$mongoose__$5b$external$5d$__$28$mongoose$2c$__cjs$29$__["default"].models.Subject || __TURBOPACK__imported__module__$5b$externals$5d2f$mongoose__$5b$external$5d$__$28$mongoose$2c$__cjs$29$__["default"].model("Subject", subjectSchema);
+const __TURBOPACK__default__export__ = Subject;
 }),
 "[project]/app/api/admin/subjects/route.js [app-route] (ecmascript)", ((__turbopack_context__) => {
 "use strict";
@@ -145,7 +143,7 @@ async function GET() {
 async function POST(request) {
     await (0, __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$db$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["connectToDatabase"])();
     const body = await request.json();
-    const { name, type, frequency } = body || {};
+    const { name, presetSubject, isMDM, type, frequency } = body || {};
     if (!name) {
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
             message: "Name is required"
@@ -154,8 +152,12 @@ async function POST(request) {
         });
     }
     try {
+        const trimmedName = String(name).trim();
+        const upper = trimmedName.toUpperCase();
+        const preset = presetSubject ? String(presetSubject).trim().toUpperCase() : "";
+        const normalizedName = preset === "MDM" ? "MDM" : preset === "OE-DS" ? "OE-DS" : preset === "OE-ES" ? "OE-ES" : isMDM || upper === "MDM" ? "MDM" : upper === "OE-DS" ? "OE-DS" : upper === "OE-ES" ? "OE-ES" : trimmedName;
         const subject = await __TURBOPACK__imported__module__$5b$project$5d2f$models$2f$Subject$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].create({
-            name,
+            name: normalizedName,
             type: type || "theory",
             frequency: frequency || 1
         });

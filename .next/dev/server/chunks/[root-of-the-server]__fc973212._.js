@@ -110,7 +110,7 @@ const settingSchema = new __TURBOPACK__imported__module__$5b$externals$5d2f$mong
         type: Number,
         min: 0,
         max: 23
-    }
+    } // e.g. 12
 }, {
     timestamps: true
 });
@@ -153,8 +153,28 @@ async function getOrCreateSettings() {
 }
 async function GET() {
     const settings = await getOrCreateSettings();
+    // Clean up old fields if they exist
+    if (settings.MDM_time !== undefined) {
+        settings.MDM_time = undefined;
+    }
+    if (settings["OE-DS_time"] !== undefined) {
+        settings["OE-DS_time"] = undefined;
+    }
+    if (settings["OE-ES_time"] !== undefined) {
+        settings["OE-ES_time"] = undefined;
+    }
+    // Remove the fields from document
+    await settings.updateOne({
+        $unset: {
+            MDM_time: "",
+            "OE-DS_time": "",
+            "OE-ES_time": ""
+        }
+    });
+    // Fetch clean settings
+    const cleanSettings = await __TURBOPACK__imported__module__$5b$project$5d2f$models$2f$Setting$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].findOne();
     return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-        settings
+        settings: cleanSettings
     }, {
         status: 200
     });

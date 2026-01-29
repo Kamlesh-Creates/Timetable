@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
-import puppeteer from "puppeteer";
+import puppeteer from "puppeteer-core";
+import chromium from "@sparticuz/chromium-min";
 
 export async function POST(request) {
   try {
@@ -143,10 +144,50 @@ export async function POST(request) {
     html += `</body></html>`;
 
     // Generate PDF
-    const browser = await puppeteer.launch({
-      headless: true,
-      args: ["--no-sandbox", "--disable-setuid-sandbox"],
-    });
+    // Check if running locally or in production (Vercel/Render/etc)
+    const isLocal = process.env.NODE_ENV === "development" && !process.env.VERCEL && !process.env.RENDER;
+    
+    let browser;
+    try {
+      if (isLocal) {
+        // Local development: use local Chromium
+        console.log("[PDF Debug] Launching local Chromium");
+        const puppeteerFull = await import("puppeteer");
+        browser = await puppeteerFull.default.launch({
+          headless: true,
+          args: ["--no-sandbox", "--disable-setuid-sandbox"],
+        });
+      } else {
+        // Production (Vercel): use serverless Chromium
+        console.log("[PDF Debug] Launching serverless Chromium");
+        
+        const executablePath = await chromium.executablePath(
+          "https://github.com/Sparticuz/chromium/releases/download/v131.0.0/chromium-v131.0.0-pack.tar"
+        );
+        console.log("[PDF Debug] Chromium path:", executablePath);
+        
+        // Set executable permissions and wait a bit
+        const fs = await import("fs");
+        const { chmod } = fs.promises;
+        try {
+          await chmod(executablePath, 0o755);
+          // Small delay to ensure file is ready
+          await new Promise(resolve => setTimeout(resolve, 100));
+        } catch (permError) {
+          console.log("[PDF Debug] Permission setting (non-critical):", permError.message);
+        }
+        
+        browser = await puppeteer.launch({
+          args: chromium.args,
+          defaultViewport: chromium.defaultViewport,
+          executablePath,
+          headless: chromium.headless,
+        });
+      }
+    } catch (launchError) {
+      console.error("[PDF Debug] Browser launch failed:", launchError);
+      throw launchError;
+    }
 
     const page = await browser.newPage();
     await page.setContent(html, { waitUntil: "networkidle0" });

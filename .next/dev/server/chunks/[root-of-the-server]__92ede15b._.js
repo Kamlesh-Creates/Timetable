@@ -109,10 +109,8 @@ const timetableSchema = new __TURBOPACK__imported__module__$5b$externals$5d2f$mo
 }, {
     timestamps: true
 });
-if (__TURBOPACK__imported__module__$5b$externals$5d2f$mongoose__$5b$external$5d$__$28$mongoose$2c$__cjs$29$__["default"].models.Timetable) {
-    delete __TURBOPACK__imported__module__$5b$externals$5d2f$mongoose__$5b$external$5d$__$28$mongoose$2c$__cjs$29$__["default"].models.Timetable;
-}
-const __TURBOPACK__default__export__ = __TURBOPACK__imported__module__$5b$externals$5d2f$mongoose__$5b$external$5d$__$28$mongoose$2c$__cjs$29$__["default"].model("Timetable", timetableSchema);
+const Timetable = __TURBOPACK__imported__module__$5b$externals$5d2f$mongoose__$5b$external$5d$__$28$mongoose$2c$__cjs$29$__["default"].models.Timetable || __TURBOPACK__imported__module__$5b$externals$5d2f$mongoose__$5b$external$5d$__$28$mongoose$2c$__cjs$29$__["default"].model("Timetable", timetableSchema);
+const __TURBOPACK__default__export__ = Timetable;
 }),
 "[project]/models/Setting.js [app-route] (ecmascript)", ((__turbopack_context__) => {
 "use strict";
@@ -144,7 +142,7 @@ const settingSchema = new __TURBOPACK__imported__module__$5b$externals$5d2f$mong
         type: Number,
         min: 0,
         max: 23
-    }
+    } // e.g. 12
 }, {
     timestamps: true
 });
@@ -201,44 +199,40 @@ function getTimetableHtml(timetableData, divisionName, settings = {}, generatedA
     }
     const firstBatchSchedule = batchesForDivision[batchKeys[0]] || {};
     const days = settings.days?.length ? settings.days : Object.keys(firstBatchSchedule);
-    // Fixed college-style columns with explicit times and a dedicated lunch column.
-    // Mapping: 0–7 indices from JSON → 8 teaching periods; lunch column has no index.
+    // Fixed college-style columns with time ranges.
+    // Mapping: 0–7 indices from JSON → 8 teaching periods; period index 3 is lunch.
     const columns = [
         {
-            label: "9:00",
+            label: "9:00–10:00",
             periodIndex: 0
         },
         {
-            label: "10:00",
+            label: "10:00–11:00",
             periodIndex: 1
         },
         {
-            label: "11:00",
+            label: "11:00–12:00",
             periodIndex: 2
         },
         {
-            label: "12:00",
-            periodIndex: 3
-        },
-        {
             label: "LUNCH BREAK",
-            periodIndex: null,
+            periodIndex: 3,
             isLunchColumn: true
         },
         {
-            label: "1:00",
+            label: "1:00–2:00",
             periodIndex: 4
         },
         {
-            label: "2:00",
+            label: "2:00–3:00",
             periodIndex: 5
         },
         {
-            label: "3:00",
+            label: "3:00–4:00",
             periodIndex: 6
         },
         {
-            label: "4:00",
+            label: "4:00–5:00",
             periodIndex: 7
         }
     ];
@@ -290,18 +284,16 @@ function getTimetableHtml(timetableData, divisionName, settings = {}, generatedA
     const tableHead = `
     <thead>
       <tr>
-        <th style="border:2px solid #000;padding:6px;text-align:center;width:72px;font-size:11px;">Day</th>
+        <th class="day-column" style="border:2px solid #000;padding:6px;text-align:center;font-size:11px;">Day</th>
         ${columns.map((col)=>{
         if (col.isLunchColumn) {
             return `
-                <th style="border:2px solid #000;padding:0 4px;text-align:center;width:40px;vertical-align:middle;">
-                  <div style="writing-mode:vertical-rl;transform:rotate(180deg);font-size:11px;font-weight:700;">
-                    LUNCH BREAK
-                  </div>
+                <th class="period-column" style="border:2px solid #000;padding:6px 4px;text-align:center;font-size:11px;vertical-align:middle;">
+                  ${col.label}
                 </th>
               `;
         }
-        return `<th style="border:2px solid #000;padding:6px 4px;text-align:center;font-size:11px;">${col.label}</th>`;
+        return `<th class="period-column" style="border:2px solid #000;padding:6px 4px;text-align:center;font-size:11px;">${col.label}</th>`;
     }).join("")}
       </tr>
     </thead>
@@ -311,13 +303,13 @@ function getTimetableHtml(timetableData, divisionName, settings = {}, generatedA
       ${days.map((day)=>{
         return `
             <tr>
-              <td style="border:2px solid #000;padding:6px 4px;font-weight:700;background-color:#f5f5f5;text-align:center;font-size:11px;">${day}</td>
+              <td class="day-column" style="border:2px solid #000;padding:6px 4px;font-weight:700;background-color:#f5f5f5;text-align:center;font-size:11px;">${day}</td>
               ${(()=>{
             const cells = [];
             for(let colIndex = 0; colIndex < columns.length; colIndex++){
                 const col = columns[colIndex];
                 if (col.isLunchColumn) {
-                    cells.push(`<td style="border:2px solid #000;padding:0;background-color:#fff9c4;"></td>`);
+                    cells.push(`<td class="period-column" style="border:2px solid #000;padding:6px 4px;text-align:center;vertical-align:middle;background-color:#fff9c4;font-size:11px;font-weight:700;">LUNCH</td>`);
                     continue;
                 }
                 const idx = col.periodIndex;
@@ -353,11 +345,8 @@ function getTimetableHtml(timetableData, divisionName, settings = {}, generatedA
                     if (!slot || !Object.keys(slot).length) return true;
                     return type === "FREE";
                 });
-                // LUNCH overrides everything
+                // If lunch is detected in regular period, skip it (lunch has dedicated column)
                 if (hasLunch) {
-                    cells.push(`<td style="border:2px solid #000;padding:4px 3px;text-align:center;vertical-align:middle;background-color:#fff9c4;font-size:11px;font-weight:700;">
-                        LUNCH
-                      </td>`);
                     continue;
                 }
                 // Try to detect 2-hour LAB block starting at this column
@@ -406,7 +395,7 @@ function getTimetableHtml(timetableData, divisionName, settings = {}, generatedA
                             }
                             return renderSlotLine(batchKey, curr, "lab");
                         }).filter((html)=>html && html.trim().length > 0).join("");
-                        cells.push(`<td colspan="2" style="border:2px solid #000;padding:4px 3px;text-align:center;vertical-align:top;background-color:#dcedc8;font-size:11px;">
+                        cells.push(`<td colspan="2" class="period-column" style="border:2px solid #000;padding:4px 3px;text-align:center;vertical-align:top;background-color:#dcedc8;font-size:11px;">
                           ${labLines}
                         </td>`);
                         usedColspan2 = true;
@@ -415,7 +404,7 @@ function getTimetableHtml(timetableData, divisionName, settings = {}, generatedA
                     }
                 }
                 if (allFreeOrEmpty) {
-                    cells.push(`<td style="border:2px solid #000;padding:4px 3px;text-align:center;vertical-align:top;background-color:#ffffff;font-size:11px;">
+                    cells.push(`<td class="period-column" style="border:2px solid #000;padding:4px 3px;text-align:center;vertical-align:top;background-color:#ffffff;font-size:11px;">
                       </td>`);
                     continue;
                 }
@@ -445,7 +434,7 @@ function getTimetableHtml(timetableData, divisionName, settings = {}, generatedA
                         }
                     }
                 }
-                cells.push(`<td style="border:2px solid #000;padding:4px 3px;text-align:center;vertical-align:top;background-color:${bgColor};font-size:11px;">
+                cells.push(`<td class="period-column" style="border:2px solid #000;padding:4px 3px;text-align:center;vertical-align:top;background-color:${bgColor};font-size:11px;">
                       ${cellHtml}
                     </td>`);
             }
@@ -470,11 +459,30 @@ function getTimetableHtml(timetableData, divisionName, settings = {}, generatedA
             color: #000000;
             background-color: #ffffff;
           }
+          .timetable-main {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+            border: 2px solid #000;
+            table-layout: fixed;
+          }
+          .timetable-main th,
+          .timetable-main td {
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            white-space: normal;
+          }
+          .day-column {
+            width: 60px;
+          }
+          .period-column {
+            width: calc((100% - 60px) / 8);
+          }
         </style>
       </head>
       <body>
         ${headerHtml}
-        <table style="width:100%;border-collapse:collapse;font-size:12px;border:2px solid #000;">
+        <table class="timetable-main">
           ${tableHead}
           ${tableBody}
         </table>
@@ -564,6 +572,16 @@ async function GET(request, { params }) {
         const keys = Object.keys(timetablePayload || {});
         // Try to match requested division; if not found, fall back to first available
         const matchedKey = keys.find((key)=>key.trim().toLowerCase() === trimmedDivision.toLowerCase()) || keys[0];
+        // Log for debugging
+        console.log("[PDF Debug] Division requested:", division);
+        console.log("[PDF Debug] Matched key:", matchedKey);
+        console.log("[PDF Debug] Available divisions:", keys);
+        console.log("[PDF Debug] Settings:", {
+            days: settings.days,
+            start_hour: settings.start_hour,
+            end_hour: settings.end_hour,
+            lunch_start_hour: settings.lunch_start_hour
+        });
         // Generate HTML for the requested division (all batches in one grid)
         const html = (0, __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$timetablePdf$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"])(timetablePayload, matchedKey, {
             days: settings.days,
@@ -571,6 +589,7 @@ async function GET(request, { params }) {
             end_hour: settings.end_hour,
             lunch_start_hour: settings.lunch_start_hour
         }, timetableDoc.generatedAt || new Date());
+        console.log("[PDF Debug] HTML generated successfully");
         const browser = await __TURBOPACK__imported__module__$5b$externals$5d2f$puppeteer__$5b$external$5d$__$28$puppeteer$2c$__esm_import$29$__["default"].launch({
             headless: true,
             args: [
@@ -603,9 +622,11 @@ async function GET(request, { params }) {
         });
     } catch (error) {
         console.error("[Timetable PDF] generation failed:", error);
+        console.error("[Timetable PDF] Stack trace:", error.stack);
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
             message: "Failed to generate PDF",
-            error: error.message
+            error: error.message,
+            stack: error.stack
         }, {
             status: 500
         });

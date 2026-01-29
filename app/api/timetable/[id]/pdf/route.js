@@ -3,7 +3,8 @@ import { connectToDatabase } from "../../../../../lib/db";
 import Timetable from "../../../../../models/Timetable";
 import Setting from "../../../../../models/Setting";
 import getTimetableHtml from "../../../../../lib/timetablePdf";
-import puppeteer from "puppeteer";
+import puppeteer from "puppeteer-core";
+import chromium from "@sparticuz/chromium-min";
 
 export async function GET(request, { params }) {
   const resolvedParams = await params;
@@ -66,6 +67,17 @@ export async function GET(request, { params }) {
         (key) => key.trim().toLowerCase() === trimmedDivision.toLowerCase()
       ) || keys[0];
 
+    // Log for debugging
+    console.log("[PDF Debug] Division requested:", division);
+    console.log("[PDF Debug] Matched key:", matchedKey);
+    console.log("[PDF Debug] Available divisions:", keys);
+    console.log("[PDF Debug] Settings:", {
+      days: settings.days,
+      start_hour: settings.start_hour,
+      end_hour: settings.end_hour,
+      lunch_start_hour: settings.lunch_start_hour,
+    });
+
     // Generate HTML for the requested division (all batches in one grid)
     const html = getTimetableHtml(
       timetablePayload,
@@ -79,10 +91,52 @@ export async function GET(request, { params }) {
       timetableDoc.generatedAt || new Date()
     );
 
-    const browser = await puppeteer.launch({
-      headless: true,
-      args: ["--no-sandbox", "--disable-setuid-sandbox"],
-    });
+    console.log("[PDF Debug] HTML generated successfully");
+
+    // Check if running locally or in production (Vercel/Render/etc)
+    const isLocal = process.env.NODE_ENV === "development" && !process.env.VERCEL && !process.env.RENDER;
+    
+    let browser;
+    try {
+      if (isLocal) {
+        // Local development: use local Chromium
+        console.log("[PDF Debug] Launching local Chromium");
+        const puppeteerFull = await import("puppeteer");
+        browser = await puppeteerFull.default.launch({
+          headless: true,
+          args: ["--no-sandbox", "--disable-setuid-sandbox"],
+        });
+      } else {
+        // Production (Vercel): use serverless Chromium
+        console.log("[PDF Debug] Launching serverless Chromium");
+        
+        const executablePath = await chromium.executablePath(
+          "https://github.com/Sparticuz/chromium/releases/download/v131.0.0/chromium-v131.0.0-pack.tar"
+        );
+        console.log("[PDF Debug] Chromium path:", executablePath);
+        
+        // Set executable permissions and wait a bit
+        const fs = await import("fs");
+        const { chmod } = fs.promises;
+        try {
+          await chmod(executablePath, 0o755);
+          // Small delay to ensure file is ready
+          await new Promise(resolve => setTimeout(resolve, 100));
+        } catch (permError) {
+          console.log("[PDF Debug] Permission setting (non-critical):", permError.message);
+        }
+        
+        browser = await puppeteer.launch({
+          args: chromium.args,
+          defaultViewport: chromium.defaultViewport,
+          executablePath,
+          headless: chromium.headless,
+        });
+      }
+    } catch (launchError) {
+      console.error("[PDF Debug] Browser launch failed:", launchError);
+      throw launchError;
+    }
 
     const page = await browser.newPage();
     await page.setContent(html, { waitUntil: "networkidle0" });
@@ -110,8 +164,13 @@ export async function GET(request, { params }) {
     });
   } catch (error) {
     console.error("[Timetable PDF] generation failed:", error);
+    console.error("[Timetable PDF] Stack trace:", error.stack);
     return NextResponse.json(
-      { message: "Failed to generate PDF", error: error.message },
+      { 
+        message: "Failed to generate PDF", 
+        error: error.message,
+        stack: error.stack 
+      },
       { status: 500 }
     );
   }
