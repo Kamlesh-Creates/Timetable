@@ -3,7 +3,8 @@ import { connectToDatabase } from "../../../../../lib/db";
 import Timetable from "../../../../../models/Timetable";
 import Setting from "../../../../../models/Setting";
 import getTimetableHtml from "../../../../../lib/timetablePdf";
-import puppeteer from "puppeteer";
+import puppeteer from "puppeteer-core";
+import chromium from "@sparticuz/chromium";
 
 export async function GET(request, { params }) {
   const resolvedParams = await params;
@@ -93,8 +94,10 @@ export async function GET(request, { params }) {
     console.log("[PDF Debug] HTML generated successfully");
 
     const browser = await puppeteer.launch({
-      headless: true,
-      args: ["--no-sandbox", "--disable-setuid-sandbox"],
+      args: chromium.args,
+      defaultViewport: chromium.defaultViewport,
+      executablePath: await chromium.executablePath(),
+      headless: chromium.headless,
     });
 
     const page = await browser.newPage();
