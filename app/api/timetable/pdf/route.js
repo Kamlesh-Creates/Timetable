@@ -144,8 +144,8 @@ export async function POST(request) {
     html += `</body></html>`;
 
     // Generate PDF
-    // Check if running locally or in production
-    const isLocal = process.env.NODE_ENV === "development" || !process.env.VERCEL;
+    // Check if running locally or in production (Vercel/Render/etc)
+    const isLocal = process.env.NODE_ENV === "development" && !process.env.VERCEL && !process.env.RENDER;
     
     let browser;
     try {

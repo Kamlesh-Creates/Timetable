@@ -93,8 +93,8 @@ export async function GET(request, { params }) {
 
     console.log("[PDF Debug] HTML generated successfully");
 
-    // Check if running locally or in production
-    const isLocal = process.env.NODE_ENV === "development" || !process.env.VERCEL;
+    // Check if running locally or in production (Vercel/Render/etc)
+    const isLocal = process.env.NODE_ENV === "development" && !process.env.VERCEL && !process.env.RENDER;
     
     let browser;
     try {
