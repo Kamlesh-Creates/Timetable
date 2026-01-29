@@ -8,6 +8,8 @@ export default function GenerateTimetablePage() {
   const [generating, setGenerating] = useState(false);
   const [downloadingCurrentPdf, setDownloadingCurrentPdf] = useState(false);
   const [downloadingPdfId, setDownloadingPdfId] = useState("");
+  const [downloadingFacultyPdf, setDownloadingFacultyPdf] = useState(false);
+  const [downloadingFreeSlotsPdf, setDownloadingFreeSlotsPdf] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
   const [timetableData, setTimetableData] = useState(null);
@@ -198,6 +200,72 @@ export default function GenerateTimetablePage() {
       alert("Failed to generate PDF. Please try again.");
     } finally {
       setDownloadingPdfId("");
+    }
+  }
+
+  async function handleDownloadFacultyPdf() {
+    if (!success || !timetableData) {
+      alert("Please generate timetable first before downloading faculty timetable.");
+      return;
+    }
+    setDownloadingFacultyPdf(true);
+    try {
+      const res = await fetch("/api/timetable/faculty-pdf");
+      if (!res.ok) {
+        const data = await res.json();
+        alert(data.message || "Failed to generate faculty timetable");
+        setDownloadingFacultyPdf(false);
+        return;
+      }
+
+      // Get the HTML content and open in new window for printing
+      const html = await res.text();
+      const printWindow = window.open("", "_blank");
+      printWindow.document.write(html);
+      printWindow.document.close();
+      
+      // Wait a moment for content to load, then trigger print
+      setTimeout(() => {
+        printWindow.print();
+      }, 500);
+    } catch (err) {
+      console.error("Faculty PDF error:", err);
+      alert("Failed to generate faculty timetable. Please try again.");
+    } finally {
+      setDownloadingFacultyPdf(false);
+    }
+  }
+
+  async function handleDownloadFreeSlotsPdf() {
+    if (!success || !timetableData) {
+      alert("Please generate timetable first before downloading free slots.");
+      return;
+    }
+    setDownloadingFreeSlotsPdf(true);
+    try {
+      const res = await fetch("/api/timetable/free-slots-pdf");
+      if (!res.ok) {
+        const data = await res.json();
+        alert(data.message || "Failed to generate free slots");
+        setDownloadingFreeSlotsPdf(false);
+        return;
+      }
+
+      // Get the HTML content and open in new window for printing
+      const html = await res.text();
+      const printWindow = window.open("", "_blank");
+      printWindow.document.write(html);
+      printWindow.document.close();
+      
+      // Wait a moment for content to load, then trigger print
+      setTimeout(() => {
+        printWindow.print();
+      }, 500);
+    } catch (err) {
+      console.error("Free Slots PDF error:", err);
+      alert("Failed to generate free slots. Please try again.");
+    } finally {
+      setDownloadingFreeSlotsPdf(false);
     }
   }
 
@@ -430,6 +498,22 @@ export default function GenerateTimetablePage() {
                 className="rounded-md bg-[#1A4C8B] px-3 py-2 text-xs font-medium text-white hover:bg-blue-800 disabled:opacity-50"
               >
                 {downloadingCurrentPdf ? "Generating PDF..." : "Download PDF"}
+              </button>
+              <button
+                type="button"
+                onClick={handleDownloadFacultyPdf}
+                disabled={downloadingFacultyPdf}
+                className="rounded-md bg-emerald-600 px-3 py-2 text-xs font-medium text-white hover:bg-emerald-700 disabled:opacity-50"
+              >
+                {downloadingFacultyPdf ? "Generating..." : "Download Faculty Timetable"}
+              </button>
+              <button
+                type="button"
+                onClick={handleDownloadFreeSlotsPdf}
+                disabled={downloadingFreeSlotsPdf}
+                className="rounded-md bg-purple-600 px-3 py-2 text-xs font-medium text-white hover:bg-purple-700 disabled:opacity-50"
+              >
+                {downloadingFreeSlotsPdf ? "Generating..." : "Download Free Slots"}
               </button>
               <button
                 type="button"

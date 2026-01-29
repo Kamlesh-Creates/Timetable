@@ -1,0 +1,3 @@
+{
+  "/api/timetable/faculty-pdf/route": "app/api/timetable/faculty-pdf/route.js"
+}

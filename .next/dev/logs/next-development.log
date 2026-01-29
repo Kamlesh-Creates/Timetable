@@ -1,547 +1,76 @@
-[00:00:06.165] Server  LOG      ✓ Ready in 6s
-[00:00:10.142] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:00:10.521] Server  ERROR   C:\Projects\Timetable\.next\dev\server\chunks\[root-of-the-server]__7d15d048._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:00:10.527] Server  ERROR   C:\Projects\Timetable\.next\dev\server\chunks\[turbopack]_runtime.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:00:10.546] Server  ERROR   C:\Projects\Timetable\.next\dev\server\chunks\node_modules_2c8500c6._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:00:10.548] Server  ERROR   C:\Projects\Timetable\node_modules\next\dist\server\require-hook.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:00:10.548] Server  ERROR   C:\Projects\Timetable\node_modules\next\dist\server\require.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:00:10.549] Server  ERROR   C:\Projects\Timetable\node_modules\next\dist\server\load-components.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:00:10.551] Server  ERROR   C:\Projects\Timetable\node_modules\next\dist\server\next-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:00:10.551] Server  ERROR   C:\Projects\Timetable\node_modules\next\dist\server\lib\trace\tracer.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:00:10.553] Server  ERROR   C:\Projects\Timetable\node_modules\next\dist\server\dev\next-dev-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:00:10.555] Server  ERROR   C:\Projects\Timetable\node_modules\next\dist\server\base-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:00:10.556] Server  ERROR   C:\Projects\Timetable\node_modules\next\dist\trace\trace.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:00:10.560] Server  ERROR    ⨯ Error: Please define the JWT_SECRET environment variable
-[00:00:10.802] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:00:10.831] Server  ERROR   C:\Projects\Timetable\.next\dev\server\chunks\[root-of-the-server]__7d15d048._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:00:10.831] Server  ERROR   C:\Projects\Timetable\.next\dev\server\chunks\[turbopack]_runtime.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:00:10.832] Server  ERROR   C:\Projects\Timetable\.next\dev\server\chunks\node_modules_2c8500c6._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:00:10.833] Server  ERROR   C:\Projects\Timetable\node_modules\next\dist\server\require-hook.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:00:10.833] Server  ERROR   C:\Projects\Timetable\node_modules\next\dist\server\require.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:00:10.834] Server  ERROR   C:\Projects\Timetable\node_modules\next\dist\server\load-components.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:00:10.835] Server  ERROR   C:\Projects\Timetable\node_modules\next\dist\server\next-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:00:10.835] Server  ERROR   C:\Projects\Timetable\node_modules\next\dist\server\lib\trace\tracer.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:00:10.836] Server  ERROR   C:\Projects\Timetable\node_modules\next\dist\server\dev\next-dev-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:00:10.837] Server  ERROR   C:\Projects\Timetable\node_modules\next\dist\server\base-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:00:10.837] Server  ERROR   C:\Projects\Timetable\node_modules\next\dist\trace\trace.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:00:10.839] Server  ERROR    ⨯ Error: Please define the JWT_SECRET environment variable
-[00:00:11.333] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:00:11.353] Server  ERROR   C:\Projects\Timetable\.next\dev\server\chunks\[root-of-the-server]__7d15d048._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:00:11.353] Server  ERROR   C:\Projects\Timetable\.next\dev\server\chunks\[turbopack]_runtime.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:00:11.354] Server  ERROR   C:\Projects\Timetable\.next\dev\server\chunks\node_modules_2c8500c6._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:00:11.354] Server  ERROR   C:\Projects\Timetable\node_modules\next\dist\server\require-hook.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:00:11.355] Server  ERROR   C:\Projects\Timetable\node_modules\next\dist\server\require.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:00:11.355] Server  ERROR   C:\Projects\Timetable\node_modules\next\dist\server\load-components.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:00:11.356] Server  ERROR   C:\Projects\Timetable\node_modules\next\dist\server\next-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:00:11.356] Server  ERROR   C:\Projects\Timetable\node_modules\next\dist\server\lib\trace\tracer.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:00:11.356] Server  ERROR   C:\Projects\Timetable\node_modules\next\dist\server\dev\next-dev-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:00:11.357] Server  ERROR   C:\Projects\Timetable\node_modules\next\dist\server\base-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:00:11.357] Server  ERROR   C:\Projects\Timetable\node_modules\next\dist\trace\trace.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:00:11.359] Server  ERROR    ⨯ Error: Please define the JWT_SECRET environment variable
-[00:00:28.587] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:00:28.608] Server  ERROR   C:\Projects\Timetable\.next\dev\server\chunks\[root-of-the-server]__7d15d048._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:00:28.609] Server  ERROR   C:\Projects\Timetable\.next\dev\server\chunks\[turbopack]_runtime.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:00:28.609] Server  ERROR   C:\Projects\Timetable\.next\dev\server\chunks\node_modules_2c8500c6._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:00:28.610] Server  ERROR   C:\Projects\Timetable\node_modules\next\dist\server\require-hook.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:00:28.610] Server  ERROR   C:\Projects\Timetable\node_modules\next\dist\server\require.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:00:28.610] Server  ERROR   C:\Projects\Timetable\node_modules\next\dist\server\load-components.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:00:28.611] Server  ERROR   C:\Projects\Timetable\node_modules\next\dist\server\next-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:00:28.611] Server  ERROR   C:\Projects\Timetable\node_modules\next\dist\server\lib\trace\tracer.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:00:28.612] Server  ERROR   C:\Projects\Timetable\node_modules\next\dist\server\dev\next-dev-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:00:28.612] Server  ERROR   C:\Projects\Timetable\node_modules\next\dist\server\base-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:00:28.613] Server  ERROR   C:\Projects\Timetable\node_modules\next\dist\trace\trace.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:00:28.613] Server  ERROR    ⨯ Error: Please define the JWT_SECRET environment variable
-[00:01:01.075] Server  ERROR   C:\Projects\Timetable\.next\dev\server\chunks\[root-of-the-server]__415e426e._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:01:01.076] Server  ERROR   C:\Projects\Timetable\.next\dev\server\chunks\[turbopack]_runtime.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:01:01.100] Server  ERROR   C:\Projects\Timetable\.next\dev\server\chunks\node_modules_06746118._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:01:01.101] Server  ERROR   C:\Projects\Timetable\node_modules\next\dist\server\require-hook.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:01:01.102] Server  ERROR   C:\Projects\Timetable\node_modules\next\dist\server\require.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:01:01.102] Server  ERROR   C:\Projects\Timetable\node_modules\next\dist\server\load-components.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:01:01.103] Server  ERROR   C:\Projects\Timetable\node_modules\next\dist\server\next-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:01:01.103] Server  ERROR   C:\Projects\Timetable\node_modules\next\dist\server\lib\trace\tracer.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:01:01.103] Server  ERROR   C:\Projects\Timetable\node_modules\next\dist\server\dev\next-dev-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:01:01.105] Server  ERROR   C:\Projects\Timetable\node_modules\next\dist\server\base-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:01:01.105] Server  ERROR   C:\Projects\Timetable\node_modules\next\dist\trace\trace.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:01:01.106] Server  ERROR   C:\Projects\Timetable\node_modules\next\dist\server\lib\router-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:01:01.106] Server  ERROR   C:\Projects\Timetable\node_modules\next\dist\server\lib\start-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:01:01.107] Server  ERROR    ⨯ Error: Please define the MONGODB_URI environment variable
-[00:04:13.357] Server  LOG        Reload env: .env.local
-[00:04:18.935] Server  LOG        Reload env: .env.local
-[00:16:37.098] Server  LOG      ✓ Compiled in 55ms
-[00:17:26.973] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:17:29.308] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:17:46.946] Server  LOG     {}
-[00:17:46.947] Server  LOG     
-[00:17:46.959] Server  ERROR   C:\Projects\Timetable\.next\dev\server\chunks\[root-of-the-server]__2f5cccf1._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:17:46.975] Server  ERROR   C:\Projects\Timetable\node_modules\next\dist\compiled\next-server\app-route-turbo.runtime.dev.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:17:46.982] Server  ERROR   C:\Projects\Timetable\.next\dev\server\chunks\node_modules_next_974e05ed._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:17:46.984] Server  ERROR   C:\Projects\Timetable\node_modules\next\dist\server\base-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:17:46.985] Server  ERROR   C:\Projects\Timetable\node_modules\next\dist\server\next-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:17:46.985] Server  ERROR   C:\Projects\Timetable\node_modules\next\dist\server\dev\next-dev-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:17:46.987] Server  ERROR   C:\Projects\Timetable\node_modules\next\dist\trace\trace.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:17:46.987] Server  ERROR   C:\Projects\Timetable\node_modules\next\dist\server\lib\router-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:17:46.988] Server  ERROR   C:\Projects\Timetable\node_modules\next\dist\server\lib\start-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
-[00:17:46.989] Server  ERROR   [Timetable] Generate error: TypeError: fetch failed
-[00:25:30.686] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:33:45.719] Server  LOG      ✓ Compiled in 87ms
-[00:33:46.125] Browser ERROR   ./app/manage/timetable/generate/page.js:590:37
-Parsing ecmascript source code failed
-  588 |                               if (!slot.class && !slot.teacher && !slot.room) return null;
-  589 |
-> 590 |                               const parts: string[] = [];
-      |                                     ^^^^^
-  591 |                               if (slot.teacher) parts.push(String(slot.teacher));
-  592 |                               if (slot.room) parts.push(String(slot.room));
-  593 |
-
-'const' declarations must be initialized
-
-Import traces:
-  Client Component Browser:
-    ./app/manage/timetable/generate/page.js [Client Component Browser]
-    ./app/manage/timetable/generate/page.js [Server Component]
-
-  Client Component SSR:
-    ./app/manage/timetable/generate/page.js [Client Component SSR]
-    ./app/manage/timetable/generate/page.js [Server Component]
-[00:33:46.125] Browser ERROR   ./app/manage/timetable/generate/page.js:590:42
-Parsing ecmascript source code failed
-  588 |                               if (!slot.class && !slot.teacher && !slot.room) return null;
-  589 |
-> 590 |                               const parts: string[] = [];
-      |                                          ^
-  591 |                               if (slot.teacher) parts.push(String(slot.teacher));
-  592 |                               if (slot.room) parts.push(String(slot.room));
-  593 |
-
-Expected a semicolon
-
-Import traces:
-  Client Component Browser:
-    ./app/manage/timetable/generate/page.js [Client Component Browser]
-    ./app/manage/timetable/generate/page.js [Server Component]
-
-  Client Component SSR:
-    ./app/manage/timetable/generate/page.js [Client Component SSR]
-    ./app/manage/timetable/generate/page.js [Server Component]
-[00:34:08.124] Browser ERROR   ./app/manage/timetable/generate/page.js:590:37
-Parsing ecmascript source code failed
-  588 |                               if (!slot.class && !slot.teacher && !slot.room) return null;
-  589 |
-> 590 |                               const parts: string[] = [];
-      |                                     ^^^^^
-  591 |                               if (slot.teacher) parts.push(String(slot.teacher));
-  592 |                               if (slot.room) parts.push(String(slot.room));
-  593 |
-
-'const' declarations must be initialized
-
-Import traces:
-  Client Component Browser:
-    ./app/manage/timetable/generate/page.js [Client Component Browser]
-    ./app/manage/timetable/generate/page.js [Server Component]
-
-  Client Component SSR:
-    ./app/manage/timetable/generate/page.js [Client Component SSR]
-    ./app/manage/timetable/generate/page.js [Server Component]
-[00:34:08.124] Browser ERROR   ./app/manage/timetable/generate/page.js:590:42
-Parsing ecmascript source code failed
-  588 |                               if (!slot.class && !slot.teacher && !slot.room) return null;
-  589 |
-> 590 |                               const parts: string[] = [];
-      |                                          ^
-  591 |                               if (slot.teacher) parts.push(String(slot.teacher));
-  592 |                               if (slot.room) parts.push(String(slot.room));
-  593 |
-
-Expected a semicolon
-
-Import traces:
-  Client Component Browser:
-    ./app/manage/timetable/generate/page.js [Client Component Browser]
-    ./app/manage/timetable/generate/page.js [Server Component]
-
-  Client Component SSR:
-    ./app/manage/timetable/generate/page.js [Client Component SSR]
-    ./app/manage/timetable/generate/page.js [Server Component]
-[00:34:33.114] Browser ERROR   ./app/manage/timetable/generate/page.js:590:37
-Parsing ecmascript source code failed
-  588 |                               if (!slot.class && !slot.teacher && !slot.room) return null;
-  589 |
-> 590 |                               const parts: string[] = [];
-      |                                     ^^^^^
-  591 |                               if (slot.teacher) parts.push(String(slot.teacher));
-  592 |                               if (slot.room) parts.push(String(slot.room));
-  593 |
-
-'const' declarations must be initialized
-
-Import traces:
-  Client Component Browser:
-    ./app/manage/timetable/generate/page.js [Client Component Browser]
-    ./app/manage/timetable/generate/page.js [Server Component]
-
-  Client Component SSR:
-    ./app/manage/timetable/generate/page.js [Client Component SSR]
-    ./app/manage/timetable/generate/page.js [Server Component]
-[00:34:33.114] Browser ERROR   ./app/manage/timetable/generate/page.js:590:42
-Parsing ecmascript source code failed
-  588 |                               if (!slot.class && !slot.teacher && !slot.room) return null;
-  589 |
-> 590 |                               const parts: string[] = [];
-      |                                          ^
-  591 |                               if (slot.teacher) parts.push(String(slot.teacher));
-  592 |                               if (slot.room) parts.push(String(slot.room));
-  593 |
-
-Expected a semicolon
-
-Import traces:
-  Client Component Browser:
-    ./app/manage/timetable/generate/page.js [Client Component Browser]
-    ./app/manage/timetable/generate/page.js [Server Component]
-
-  Client Component SSR:
-    ./app/manage/timetable/generate/page.js [Client Component SSR]
-    ./app/manage/timetable/generate/page.js [Server Component]
-[00:34:53.812] Server  ERROR    ⨯ ./app/manage/timetable/generate/page.js:590:37
-Parsing ecmascript source code failed
-  588 |                               if (!slot.class && !slot.teacher && !slot.room) return null;
-  589 |
-> 590 |                               const parts: string[] = [];
-      |                                     ^^^^^
-  591 |                               if (slot.teacher) parts.push(String(slot.teacher));
-  592 |                               if (slot.room) parts.push(String(slot.room));
-  593 |
-
-'const' declarations must be initialized
-
-Import traces:
-  Client Component Browser:
-    ./app/manage/timetable/generate/page.js [Client Component Browser]
-    ./app/manage/timetable/generate/page.js [Server Component]
-
-  Client Component SSR:
-    ./app/manage/timetable/generate/page.js [Client Component SSR]
-    ./app/manage/timetable/generate/page.js [Server Component]
-
-
-
-./app/manage/timetable/generate/page.js:590:42
-Parsing ecmascript source code failed
-  588 |                               if (!slot.class && !slot.teacher && !slot.room) return null;
-  589 |
-> 590 |                               const parts: string[] = [];
-      |                                          ^
-  591 |                               if (slot.teacher) parts.push(String(slot.teacher));
-  592 |                               if (slot.room) parts.push(String(slot.room));
-  593 |
-
-Expected a semicolon
-
-Import traces:
-  Client Component Browser:
-    ./app/manage/timetable/generate/page.js [Client Component Browser]
-    ./app/manage/timetable/generate/page.js [Server Component]
-
-  Client Component SSR:
-    ./app/manage/timetable/generate/page.js [Client Component SSR]
-    ./app/manage/timetable/generate/page.js [Server Component]
-
-
-[00:34:53.942] Browser ERROR   ./app/manage/timetable/generate/page.js:590:37
-Parsing ecmascript source code failed
-  588 |                               if (!slot.class && !slot.teacher && !slot.room) return null;
-  589 |
-> 590 |                               const parts: string[] = [];
-      |                                     ^^^^^
-  591 |                               if (slot.teacher) parts.push(String(slot.teacher));
-  592 |                               if (slot.room) parts.push(String(slot.room));
-  593 |
-
-'const' declarations must be initialized
-
-Import traces:
-  Client Component Browser:
-    ./app/manage/timetable/generate/page.js [Client Component Browser]
-    ./app/manage/timetable/generate/page.js [Server Component]
-
-  Client Component SSR:
-    ./app/manage/timetable/generate/page.js [Client Component SSR]
-    ./app/manage/timetable/generate/page.js [Server Component]
-[00:34:53.942] Browser ERROR   ./app/manage/timetable/generate/page.js:590:42
-Parsing ecmascript source code failed
-  588 |                               if (!slot.class && !slot.teacher && !slot.room) return null;
-  589 |
-> 590 |                               const parts: string[] = [];
-      |                                          ^
-  591 |                               if (slot.teacher) parts.push(String(slot.teacher));
-  592 |                               if (slot.room) parts.push(String(slot.room));
-  593 |
-
-Expected a semicolon
-
-Import traces:
-  Client Component Browser:
-    ./app/manage/timetable/generate/page.js [Client Component Browser]
-    ./app/manage/timetable/generate/page.js [Server Component]
-
-  Client Component SSR:
-    ./app/manage/timetable/generate/page.js [Client Component SSR]
-    ./app/manage/timetable/generate/page.js [Server Component]
-[00:34:54.040] Browser ERROR   uncaughtError: Error: ./app/manage/timetable/generate/page.js:590:37
-Parsing ecmascript source code failed
-  588 |                               if (!slot.class && !slot.teacher && !slot.room) return null;
-  589 |
-> 590 |                               const parts: string[] = [];
-      |                                     ^^^^^
-  591 |                               if (slot.teacher) parts.push(String(slot.teacher));
-  592 |                               if (slot.room) parts.push(String(slot.room));
-  593 |
-
-'const' declarations must be initialized
-
-Import traces:
-  Client Component Browser:
-    ./app/manage/timetable/generate/page.js [Client Component Browser]
-    ./app/manage/timetable/generate/page.js [Server Component]
-
-  Client Component SSR:
-    ./app/manage/timetable/generate/page.js [Client Component SSR]
-    ./app/manage/timetable/generate/page.js [Server Component]
-
-
-[00:34:54.221] Browser ERROR   ./app/manage/timetable/generate/page.js:590:37
-Parsing ecmascript source code failed
-  588 |                               if (!slot.class && !slot.teacher && !slot.room) return null;
-  589 |
-> 590 |                               const parts: string[] = [];
-      |                                     ^^^^^
-  591 |                               if (slot.teacher) parts.push(String(slot.teacher));
-  592 |                               if (slot.room) parts.push(String(slot.room));
-  593 |
-
-'const' declarations must be initialized
-
-Import traces:
-  Client Component Browser:
-    ./app/manage/timetable/generate/page.js [Client Component Browser]
-    ./app/manage/timetable/generate/page.js [Server Component]
-
-  Client Component SSR:
-    ./app/manage/timetable/generate/page.js [Client Component SSR]
-    ./app/manage/timetable/generate/page.js [Server Component]
-[00:34:54.221] Browser ERROR   ./app/manage/timetable/generate/page.js:590:42
-Parsing ecmascript source code failed
-  588 |                               if (!slot.class && !slot.teacher && !slot.room) return null;
-  589 |
-> 590 |                               const parts: string[] = [];
-      |                                          ^
-  591 |                               if (slot.teacher) parts.push(String(slot.teacher));
-  592 |                               if (slot.room) parts.push(String(slot.room));
-  593 |
-
-Expected a semicolon
-
-Import traces:
-  Client Component Browser:
-    ./app/manage/timetable/generate/page.js [Client Component Browser]
-    ./app/manage/timetable/generate/page.js [Server Component]
-
-  Client Component SSR:
-    ./app/manage/timetable/generate/page.js [Client Component SSR]
-    ./app/manage/timetable/generate/page.js [Server Component]
-[00:34:54.221] Browser ERROR   ./app/manage/timetable/generate/page.js:590:37
-Parsing ecmascript source code failed
-  588 |                               if (!slot.class && !slot.teacher && !slot.room) return null;
-  589 |
-> 590 |                               const parts: string[] = [];
-      |                                     ^^^^^
-  591 |                               if (slot.teacher) parts.push(String(slot.teacher));
-  592 |                               if (slot.room) parts.push(String(slot.room));
-  593 |
-
-'const' declarations must be initialized
-
-Import traces:
-  Client Component Browser:
-    ./app/manage/timetable/generate/page.js [Client Component Browser]
-    ./app/manage/timetable/generate/page.js [Server Component]
-
-  Client Component SSR:
-    ./app/manage/timetable/generate/page.js [Client Component SSR]
-    ./app/manage/timetable/generate/page.js [Server Component]
-[00:34:54.221] Browser ERROR   ./app/manage/timetable/generate/page.js:590:42
-Parsing ecmascript source code failed
-  588 |                               if (!slot.class && !slot.teacher && !slot.room) return null;
-  589 |
-> 590 |                               const parts: string[] = [];
-      |                                          ^
-  591 |                               if (slot.teacher) parts.push(String(slot.teacher));
-  592 |                               if (slot.room) parts.push(String(slot.room));
-  593 |
-
-Expected a semicolon
-
-Import traces:
-  Client Component Browser:
-    ./app/manage/timetable/generate/page.js [Client Component Browser]
-    ./app/manage/timetable/generate/page.js [Server Component]
-
-  Client Component SSR:
-    ./app/manage/timetable/generate/page.js [Client Component SSR]
-    ./app/manage/timetable/generate/page.js [Server Component]
-[00:34:54.372] Server  ERROR    ⨯ ./app/manage/timetable/generate/page.js:590:37
-Parsing ecmascript source code failed
-  588 |                               if (!slot.class && !slot.teacher && !slot.room) return null;
-  589 |
-> 590 |                               const parts: string[] = [];
-      |                                     ^^^^^
-  591 |                               if (slot.teacher) parts.push(String(slot.teacher));
-  592 |                               if (slot.room) parts.push(String(slot.room));
-  593 |
-
-'const' declarations must be initialized
-
-Import traces:
-  Client Component Browser:
-    ./app/manage/timetable/generate/page.js [Client Component Browser]
-    ./app/manage/timetable/generate/page.js [Server Component]
-
-  Client Component SSR:
-    ./app/manage/timetable/generate/page.js [Client Component SSR]
-    ./app/manage/timetable/generate/page.js [Server Component]
-
-
-
-./app/manage/timetable/generate/page.js:590:42
-Parsing ecmascript source code failed
-  588 |                               if (!slot.class && !slot.teacher && !slot.room) return null;
-  589 |
-> 590 |                               const parts: string[] = [];
-      |                                          ^
-  591 |                               if (slot.teacher) parts.push(String(slot.teacher));
-  592 |                               if (slot.room) parts.push(String(slot.room));
-  593 |
-
-Expected a semicolon
-
-Import traces:
-  Client Component Browser:
-    ./app/manage/timetable/generate/page.js [Client Component Browser]
-    ./app/manage/timetable/generate/page.js [Server Component]
-
-  Client Component SSR:
-    ./app/manage/timetable/generate/page.js [Client Component SSR]
-    ./app/manage/timetable/generate/page.js [Server Component]
-
-
-[00:34:54.462] Browser ERROR   uncaughtError: Error: ./app/manage/timetable/generate/page.js:590:37
-Parsing ecmascript source code failed
-  588 |                               if (!slot.class && !slot.teacher && !slot.room) return null;
-  589 |
-> 590 |                               const parts: string[] = [];
-      |                                     ^^^^^
-  591 |                               if (slot.teacher) parts.push(String(slot.teacher));
-  592 |                               if (slot.room) parts.push(String(slot.room));
-  593 |
-
-'const' declarations must be initialized
-
-Import traces:
-  Client Component Browser:
-    ./app/manage/timetable/generate/page.js [Client Component Browser]
-    ./app/manage/timetable/generate/page.js [Server Component]
-
-  Client Component SSR:
-    ./app/manage/timetable/generate/page.js [Client Component SSR]
-    ./app/manage/timetable/generate/page.js [Server Component]
-
-
-[00:34:54.610] Browser ERROR   ./app/manage/timetable/generate/page.js:590:37
-Parsing ecmascript source code failed
-  588 |                               if (!slot.class && !slot.teacher && !slot.room) return null;
-  589 |
-> 590 |                               const parts: string[] = [];
-      |                                     ^^^^^
-  591 |                               if (slot.teacher) parts.push(String(slot.teacher));
-  592 |                               if (slot.room) parts.push(String(slot.room));
-  593 |
-
-'const' declarations must be initialized
-
-Import traces:
-  Client Component Browser:
-    ./app/manage/timetable/generate/page.js [Client Component Browser]
-    ./app/manage/timetable/generate/page.js [Server Component]
-
-  Client Component SSR:
-    ./app/manage/timetable/generate/page.js [Client Component SSR]
-    ./app/manage/timetable/generate/page.js [Server Component]
-[00:34:54.610] Browser ERROR   ./app/manage/timetable/generate/page.js:590:42
-Parsing ecmascript source code failed
-  588 |                               if (!slot.class && !slot.teacher && !slot.room) return null;
-  589 |
-> 590 |                               const parts: string[] = [];
-      |                                          ^
-  591 |                               if (slot.teacher) parts.push(String(slot.teacher));
-  592 |                               if (slot.room) parts.push(String(slot.room));
-  593 |
-
-Expected a semicolon
-
-Import traces:
-  Client Component Browser:
-    ./app/manage/timetable/generate/page.js [Client Component Browser]
-    ./app/manage/timetable/generate/page.js [Server Component]
-
-  Client Component SSR:
-    ./app/manage/timetable/generate/page.js [Client Component SSR]
-    ./app/manage/timetable/generate/page.js [Server Component]
-[00:34:54.610] Browser ERROR   ./app/manage/timetable/generate/page.js:590:37
-Parsing ecmascript source code failed
-  588 |                               if (!slot.class && !slot.teacher && !slot.room) return null;
-  589 |
-> 590 |                               const parts: string[] = [];
-      |                                     ^^^^^
-  591 |                               if (slot.teacher) parts.push(String(slot.teacher));
-  592 |                               if (slot.room) parts.push(String(slot.room));
-  593 |
-
-'const' declarations must be initialized
-
-Import traces:
-  Client Component Browser:
-    ./app/manage/timetable/generate/page.js [Client Component Browser]
-    ./app/manage/timetable/generate/page.js [Server Component]
-
-  Client Component SSR:
-    ./app/manage/timetable/generate/page.js [Client Component SSR]
-    ./app/manage/timetable/generate/page.js [Server Component]
-[00:34:54.610] Browser ERROR   ./app/manage/timetable/generate/page.js:590:42
-Parsing ecmascript source code failed
-  588 |                               if (!slot.class && !slot.teacher && !slot.room) return null;
-  589 |
-> 590 |                               const parts: string[] = [];
-      |                                          ^
-  591 |                               if (slot.teacher) parts.push(String(slot.teacher));
-  592 |                               if (slot.room) parts.push(String(slot.room));
-  593 |
-
-Expected a semicolon
-
-Import traces:
-  Client Component Browser:
-    ./app/manage/timetable/generate/page.js [Client Component Browser]
-    ./app/manage/timetable/generate/page.js [Server Component]
-
-  Client Component SSR:
-    ./app/manage/timetable/generate/page.js [Client Component SSR]
-    ./app/manage/timetable/generate/page.js [Server Component]
-[00:35:17.921] Server  LOG      ✓ Compiled in 29ms
-[00:35:18.206] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:41:03.539] Server  LOG      ✓ Compiled in 39ms
-[00:41:49.937] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:49:32.993] Server  LOG      ✓ Compiled in 50ms
-[00:50:08.804] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:58:36.226] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:00:02.625] Server  LOG      ✓ Ready in 1807ms
+[00:00:33.252] Server  LOG      ○ Compiling / ...
+[00:04:09.581] Server  LOG      ✓ Compiled in 271ms
+[00:04:19.264] Server  LOG      ✓ Compiled in 75ms
+[00:04:34.350] Server  LOG      ✓ Compiled in 270ms
+[00:05:04.809] Server  LOG     {}
+[00:05:04.811] Server  LOG     
+[00:05:04.911] Server  ERROR   D:\Fullstacks\timetable2026\Timetable\.next\dev\server\chunks\[root-of-the-server]__2f5cccf1._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:05:05.017] Server  ERROR   D:\Fullstacks\timetable2026\Timetable\node_modules\next\dist\compiled\next-server\app-route-turbo.runtime.dev.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:05:05.107] Server  ERROR   D:\Fullstacks\timetable2026\Timetable\.next\dev\server\chunks\node_modules_next_974e05ed._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:05:05.126] Server  ERROR   D:\Fullstacks\timetable2026\Timetable\node_modules\next\dist\server\base-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:05:05.145] Server  ERROR   D:\Fullstacks\timetable2026\Timetable\node_modules\next\dist\server\next-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:05:05.154] Server  ERROR   D:\Fullstacks\timetable2026\Timetable\node_modules\next\dist\server\dev\next-dev-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:05:05.157] Server  ERROR   D:\Fullstacks\timetable2026\Timetable\node_modules\next\dist\trace\trace.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:05:05.163] Server  ERROR   D:\Fullstacks\timetable2026\Timetable\node_modules\next\dist\server\lib\router-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:05:05.169] Server  ERROR   D:\Fullstacks\timetable2026\Timetable\node_modules\next\dist\server\lib\start-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:05:05.182] Server  ERROR   [Timetable] Generate error: TypeError: fetch failed
+[00:05:06.622] Server  LOG     {}
+[00:05:06.623] Server  LOG     
+[00:05:06.635] Server  ERROR   D:\Fullstacks\timetable2026\Timetable\.next\dev\server\chunks\[root-of-the-server]__2f5cccf1._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:05:06.638] Server  ERROR   D:\Fullstacks\timetable2026\Timetable\node_modules\next\dist\compiled\next-server\app-route-turbo.runtime.dev.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:05:06.641] Server  ERROR   D:\Fullstacks\timetable2026\Timetable\.next\dev\server\chunks\node_modules_next_974e05ed._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:05:06.643] Server  ERROR   D:\Fullstacks\timetable2026\Timetable\node_modules\next\dist\server\base-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:05:06.646] Server  ERROR   D:\Fullstacks\timetable2026\Timetable\node_modules\next\dist\server\next-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:05:06.647] Server  ERROR   D:\Fullstacks\timetable2026\Timetable\node_modules\next\dist\server\dev\next-dev-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:05:06.648] Server  ERROR   D:\Fullstacks\timetable2026\Timetable\node_modules\next\dist\trace\trace.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:05:06.650] Server  ERROR   D:\Fullstacks\timetable2026\Timetable\node_modules\next\dist\server\lib\router-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:05:06.651] Server  ERROR   D:\Fullstacks\timetable2026\Timetable\node_modules\next\dist\server\lib\start-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:05:06.654] Server  ERROR   [Timetable] Generate error: TypeError: fetch failed
+[00:05:07.555] Server  LOG     {}
+[00:05:07.556] Server  LOG     
+[00:05:07.565] Server  ERROR   D:\Fullstacks\timetable2026\Timetable\.next\dev\server\chunks\[root-of-the-server]__2f5cccf1._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:05:07.569] Server  ERROR   D:\Fullstacks\timetable2026\Timetable\node_modules\next\dist\compiled\next-server\app-route-turbo.runtime.dev.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:05:07.570] Server  ERROR   D:\Fullstacks\timetable2026\Timetable\.next\dev\server\chunks\node_modules_next_974e05ed._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:05:07.572] Server  ERROR   D:\Fullstacks\timetable2026\Timetable\node_modules\next\dist\server\base-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:05:07.573] Server  ERROR   D:\Fullstacks\timetable2026\Timetable\node_modules\next\dist\server\next-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:05:07.575] Server  ERROR   D:\Fullstacks\timetable2026\Timetable\node_modules\next\dist\server\dev\next-dev-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:05:07.577] Server  ERROR   D:\Fullstacks\timetable2026\Timetable\node_modules\next\dist\trace\trace.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:05:07.579] Server  ERROR   D:\Fullstacks\timetable2026\Timetable\node_modules\next\dist\server\lib\router-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:05:07.581] Server  ERROR   D:\Fullstacks\timetable2026\Timetable\node_modules\next\dist\server\lib\start-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:05:07.584] Server  ERROR   [Timetable] Generate error: TypeError: fetch failed
+[00:05:09.731] Server  LOG     {}
+[00:05:09.733] Server  LOG     
+[00:05:09.749] Server  ERROR   D:\Fullstacks\timetable2026\Timetable\.next\dev\server\chunks\[root-of-the-server]__2f5cccf1._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:05:09.754] Server  ERROR   D:\Fullstacks\timetable2026\Timetable\node_modules\next\dist\compiled\next-server\app-route-turbo.runtime.dev.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:05:09.757] Server  ERROR   D:\Fullstacks\timetable2026\Timetable\.next\dev\server\chunks\node_modules_next_974e05ed._.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:05:09.761] Server  ERROR   D:\Fullstacks\timetable2026\Timetable\node_modules\next\dist\server\base-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:05:09.763] Server  ERROR   D:\Fullstacks\timetable2026\Timetable\node_modules\next\dist\server\next-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:05:09.766] Server  ERROR   D:\Fullstacks\timetable2026\Timetable\node_modules\next\dist\server\dev\next-dev-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:05:09.768] Server  ERROR   D:\Fullstacks\timetable2026\Timetable\node_modules\next\dist\trace\trace.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:05:09.770] Server  ERROR   D:\Fullstacks\timetable2026\Timetable\node_modules\next\dist\server\lib\router-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:05:09.773] Server  ERROR   D:\Fullstacks\timetable2026\Timetable\node_modules\next\dist\server\lib\start-server.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:05:09.778] Server  ERROR   [Timetable] Generate error: TypeError: fetch failed
+[00:05:41.840] Server  LOG     {}
+[00:05:41.843] Server  LOG     
+[00:06:30.134] Server  ERROR   [Timetable] Python API error: "{\"detail\":\"Server error: 500: Timetable generation failed. Check constraints.\"}"
+[00:06:33.216] Server  LOG     {}
+[00:06:33.217] Server  LOG     
+[00:07:18.606] Server  ERROR   [Timetable] Python API error: "{\"detail\":\"Server error: 500: Timetable generation failed. Check constraints.\"}"
+[00:07:21.292] Server  LOG     {}
+[00:07:21.293] Server  LOG     
+[00:08:05.645] Server  LOG        Reload env: .env.local
+[00:08:23.575] Server  LOG        Reload env: .env.local
+[00:08:26.617] Server  LOG        Reload env: .env.local
+[00:13:24.901] Server  LOG      ✓ Compiled in 631ms
+[00:13:43.047] Server  LOG     {}
+[00:13:43.048] Server  LOG     
+[00:14:29.327] Server  ERROR   [Timetable] Python API error: "{\"detail\":\"Server error: 500: Timetable generation failed. Check constraints.\"}"
+[00:14:32.356] Server  LOG     {}
+[00:14:32.358] Server  LOG     
+[00:15:23.866] Server  ERROR   [Timetable] Python API error: "{\"detail\":\"Server error: 500: Timetable generation failed. Check constraints.\"}"
+[00:15:26.436] Server  LOG     {}
+[00:15:26.437] Server  LOG     
+[00:16:09.731] Server  ERROR   [Timetable] Python API error: "{\"detail\":\"Server error: 500: Timetable generation failed. Check constraints.\"}"
+[00:16:11.834] Server  LOG     {}
+[00:16:11.836] Server  LOG     

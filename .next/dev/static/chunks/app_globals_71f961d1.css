@@ -68,6 +68,7 @@
     --color-green-700: #008138;
     --color-emerald-50: #ecfdf5;
     --color-emerald-200: #a4f4cf;
+    --color-emerald-600: #009767;
     --color-emerald-700: #007956;
     --color-emerald-800: #005f46;
     --color-blue-50: #eff6ff;
@@ -78,6 +79,8 @@
     --color-blue-800: #193cb8;
     --color-indigo-50: #eef2ff;
     --color-indigo-600: #4f39f6;
+    --color-purple-600: #9810fa;
+    --color-purple-700: #8200da;
     --color-slate-50: #f8fafc;
     --color-slate-100: #f1f5f9;
     --color-slate-200: #e2e8f0;
@@ -143,6 +146,7 @@
       --color-green-700: lab(47.0329% -47.0239 31.4788);
       --color-emerald-50: lab(97.8462% -6.94963 1.85487);
       --color-emerald-200: lab(90.2247% -31.039 9.47084);
+      --color-emerald-600: lab(55.0481% -49.9246 15.93);
       --color-emerald-700: lab(44.4871% -41.0396 11.0361);
       --color-emerald-800: lab(35.3675% -33.1188 8.04002);
       --color-blue-50: lab(96.492% -1.14647 -5.11479);
@@ -153,6 +157,8 @@
       --color-blue-800: lab(30.2514% 27.7854 -70.2699);
       --color-indigo-50: lab(95.4818% .411302 -6.78529);
       --color-indigo-600: lab(38.4009% 52.6132 -92.3857);
+      --color-purple-600: lab(43.0295% 75.21 -86.5669);
+      --color-purple-700: lab(36.1758% 69.8525 -80.0381);
       --color-slate-50: lab(98.1434% -.369549 -1.05968);
       --color-slate-100: lab(96.286% -.852466 -2.46847);
       --color-slate-200: lab(91.7353% -.998765 -4.76968);
@@ -583,10 +589,6 @@
     max-height: calc(var(--spacing) * 64);
   }
 
-  .max-h-96 {
-    max-height: calc(var(--spacing) * 96);
-  }
-
   .min-h-screen {
     min-height: 100vh;
   }
@@ -819,10 +821,6 @@
     border-color: #e5e7eb;
   }
 
-  .overflow-auto {
-    overflow: auto;
-  }
-
   .overflow-hidden {
     overflow: hidden;
   }
@@ -930,8 +928,16 @@
     background-color: var(--color-emerald-50);
   }
 
+  .bg-emerald-600 {
+    background-color: var(--color-emerald-600);
+  }
+
   .bg-green-50 {
     background-color: var(--color-green-50);
+  }
+
+  .bg-purple-600 {
+    background-color: var(--color-purple-600);
   }
 
   .bg-red-50 {
@@ -1445,6 +1451,18 @@
   @media (hover: hover) {
     .hover\:bg-blue-800:hover {
       background-color: var(--color-blue-800);
+    }
+  }
+
+  @media (hover: hover) {
+    .hover\:bg-emerald-700:hover {
+      background-color: var(--color-emerald-700);
+    }
+  }
+
+  @media (hover: hover) {
+    .hover\:bg-purple-700:hover {
+      background-color: var(--color-purple-700);
     }
   }
 
