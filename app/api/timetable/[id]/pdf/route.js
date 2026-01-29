@@ -112,11 +112,22 @@ export async function GET(request, { params }) {
         
         // Configure chromium for serverless environment
         chromium.setGraphicsMode = false;
+        chromium.setHeadlessMode = true;
+        
+        const executablePath = await chromium.executablePath();
+        console.log("[PDF Debug] Chromium path:", executablePath);
         
         browser = await puppeteer.launch({
-          args: [...chromium.args, "--disable-dev-shm-usage", "--disable-gpu"],
+          args: [
+            ...chromium.args,
+            "--disable-dev-shm-usage",
+            "--disable-gpu",
+            "--single-process",
+            "--no-zygote",
+            "--disable-software-rasterizer"
+          ],
           defaultViewport: chromium.defaultViewport,
-          executablePath: await chromium.executablePath(),
+          executablePath,
           headless: chromium.headless,
           ignoreHTTPSErrors: true,
         });
