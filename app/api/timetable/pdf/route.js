@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import puppeteer from "puppeteer-core";
-import chromium from "@sparticuz/chromium";
+import chromium from "@sparticuz/chromium-min";
 
 export async function POST(request) {
   try {
@@ -161,26 +161,16 @@ export async function POST(request) {
         // Production (Vercel): use serverless Chromium
         console.log("[PDF Debug] Launching serverless Chromium");
         
-        // Configure chromium for serverless environment
-        chromium.setGraphicsMode = false;
-        chromium.setHeadlessMode = true;
-        
-        const executablePath = await chromium.executablePath();
+        const executablePath = await chromium.executablePath(
+          "https://github.com/Sparticuz/chromium/releases/download/v131.0.0/chromium-v131.0.0-pack.tar"
+        );
         console.log("[PDF Debug] Chromium path:", executablePath);
         
         browser = await puppeteer.launch({
-          args: [
-            ...chromium.args,
-            "--disable-dev-shm-usage",
-            "--disable-gpu",
-            "--single-process",
-            "--no-zygote",
-            "--disable-software-rasterizer"
-          ],
+          args: chromium.args,
           defaultViewport: chromium.defaultViewport,
           executablePath,
           headless: chromium.headless,
-          ignoreHTTPSErrors: true,
         });
       }
     } catch (launchError) {
