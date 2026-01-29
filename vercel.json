@@ -1,0 +1,12 @@
+{
+  "functions": {
+    "app/api/timetable/[id]/pdf/route.js": {
+      "maxDuration": 30,
+      "memory": 1024
+    },
+    "app/api/timetable/pdf/route.js": {
+      "maxDuration": 30,
+      "memory": 1024
+    }
+  }
+}

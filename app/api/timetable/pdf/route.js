@@ -144,12 +144,33 @@ export async function POST(request) {
     html += `</body></html>`;
 
     // Generate PDF
-    const browser = await puppeteer.launch({
-      args: chromium.args,
-      defaultViewport: chromium.defaultViewport,
-      executablePath: await chromium.executablePath(),
-      headless: chromium.headless,
-    });
+    // Check if running locally or in production
+    const isLocal = process.env.NODE_ENV === "development" || !process.env.VERCEL;
+    
+    let browser;
+    try {
+      if (isLocal) {
+        // Local development: use local Chromium
+        console.log("[PDF Debug] Launching local Chromium");
+        const puppeteerFull = await import("puppeteer");
+        browser = await puppeteerFull.default.launch({
+          headless: true,
+          args: ["--no-sandbox", "--disable-setuid-sandbox"],
+        });
+      } else {
+        // Production (Vercel): use serverless Chromium
+        console.log("[PDF Debug] Launching serverless Chromium");
+        browser = await puppeteer.launch({
+          args: chromium.args,
+          defaultViewport: chromium.defaultViewport,
+          executablePath: await chromium.executablePath(),
+          headless: chromium.headless,
+        });
+      }
+    } catch (launchError) {
+      console.error("[PDF Debug] Browser launch failed:", launchError);
+      throw launchError;
+    }
 
     const page = await browser.newPage();
     await page.setContent(html, { waitUntil: "networkidle0" });
