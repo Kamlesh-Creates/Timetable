@@ -111,10 +111,8 @@ const subjectSchema = new __TURBOPACK__imported__module__$5b$externals$5d2f$mong
 }, {
     timestamps: true
 });
-if (__TURBOPACK__imported__module__$5b$externals$5d2f$mongoose__$5b$external$5d$__$28$mongoose$2c$__cjs$29$__["default"].models.Subject) {
-    delete __TURBOPACK__imported__module__$5b$externals$5d2f$mongoose__$5b$external$5d$__$28$mongoose$2c$__cjs$29$__["default"].models.Subject;
-}
-const __TURBOPACK__default__export__ = __TURBOPACK__imported__module__$5b$externals$5d2f$mongoose__$5b$external$5d$__$28$mongoose$2c$__cjs$29$__["default"].model("Subject", subjectSchema);
+const Subject = __TURBOPACK__imported__module__$5b$externals$5d2f$mongoose__$5b$external$5d$__$28$mongoose$2c$__cjs$29$__["default"].models.Subject || __TURBOPACK__imported__module__$5b$externals$5d2f$mongoose__$5b$external$5d$__$28$mongoose$2c$__cjs$29$__["default"].model("Subject", subjectSchema);
+const __TURBOPACK__default__export__ = Subject;
 }),
 "[project]/app/api/admin/subjects/route.js [app-route] (ecmascript)", ((__turbopack_context__) => {
 "use strict";

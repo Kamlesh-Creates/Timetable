@@ -80,7 +80,7 @@ async function connectToDatabase() {
     return cached.conn;
 }
 }),
-"[project]/models/Timetable.js [app-route] (ecmascript)", ((__turbopack_context__) => {
+"[project]/models/Classroom.js [app-route] (ecmascript)", ((__turbopack_context__) => {
 "use strict";
 
 __turbopack_context__.s([
@@ -89,89 +89,108 @@ __turbopack_context__.s([
 ]);
 var __TURBOPACK__imported__module__$5b$externals$5d2f$mongoose__$5b$external$5d$__$28$mongoose$2c$__cjs$29$__ = __turbopack_context__.i("[externals]/mongoose [external] (mongoose, cjs)");
 ;
-const timetableSchema = new __TURBOPACK__imported__module__$5b$externals$5d2f$mongoose__$5b$external$5d$__$28$mongoose$2c$__cjs$29$__["default"].Schema({
-    data: {
-        type: Object,
-        required: true
+const classroomSchema = new __TURBOPACK__imported__module__$5b$externals$5d2f$mongoose__$5b$external$5d$__$28$mongoose$2c$__cjs$29$__["default"].Schema({
+    name: {
+        type: String,
+        required: true,
+        trim: true
     },
-    result: {
-        type: Object
-    },
-    generatedAt: {
-        type: Date,
-        default: Date.now
-    },
-    divisions: [
+    subjects: [
         {
-            type: String
+            type: __TURBOPACK__imported__module__$5b$externals$5d2f$mongoose__$5b$external$5d$__$28$mongoose$2c$__cjs$29$__["default"].Schema.Types.ObjectId,
+            ref: "Subject"
         }
     ]
 }, {
     timestamps: true
 });
-const Timetable = __TURBOPACK__imported__module__$5b$externals$5d2f$mongoose__$5b$external$5d$__$28$mongoose$2c$__cjs$29$__["default"].models.Timetable || __TURBOPACK__imported__module__$5b$externals$5d2f$mongoose__$5b$external$5d$__$28$mongoose$2c$__cjs$29$__["default"].model("Timetable", timetableSchema);
-const __TURBOPACK__default__export__ = Timetable;
+const Classroom = __TURBOPACK__imported__module__$5b$externals$5d2f$mongoose__$5b$external$5d$__$28$mongoose$2c$__cjs$29$__["default"].models.Classroom || __TURBOPACK__imported__module__$5b$externals$5d2f$mongoose__$5b$external$5d$__$28$mongoose$2c$__cjs$29$__["default"].model("Classroom", classroomSchema);
+const __TURBOPACK__default__export__ = Classroom;
 }),
-"[project]/app/api/admin/timetable/route.js [app-route] (ecmascript)", ((__turbopack_context__) => {
+"[project]/models/Subject.js [app-route] (ecmascript)", ((__turbopack_context__) => {
 "use strict";
 
 __turbopack_context__.s([
-    "DELETE",
-    ()=>DELETE,
+    "default",
+    ()=>__TURBOPACK__default__export__
+]);
+var __TURBOPACK__imported__module__$5b$externals$5d2f$mongoose__$5b$external$5d$__$28$mongoose$2c$__cjs$29$__ = __turbopack_context__.i("[externals]/mongoose [external] (mongoose, cjs)");
+;
+const subjectSchema = new __TURBOPACK__imported__module__$5b$externals$5d2f$mongoose__$5b$external$5d$__$28$mongoose$2c$__cjs$29$__["default"].Schema({
+    name: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    type: {
+        type: String,
+        enum: [
+            "theory",
+            "lab"
+        ],
+        default: "theory"
+    },
+    frequency: {
+        type: Number,
+        default: 1,
+        min: 1
+    }
+}, {
+    timestamps: true
+});
+const Subject = __TURBOPACK__imported__module__$5b$externals$5d2f$mongoose__$5b$external$5d$__$28$mongoose$2c$__cjs$29$__["default"].models.Subject || __TURBOPACK__imported__module__$5b$externals$5d2f$mongoose__$5b$external$5d$__$28$mongoose$2c$__cjs$29$__["default"].model("Subject", subjectSchema);
+const __TURBOPACK__default__export__ = Subject;
+}),
+"[project]/app/api/admin/classrooms/route.js [app-route] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+__turbopack_context__.s([
     "GET",
-    ()=>GET
+    ()=>GET,
+    "POST",
+    ()=>POST
 ]);
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/server.js [app-route] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$db$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/lib/db.js [app-route] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$models$2f$Timetable$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/models/Timetable.js [app-route] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$models$2f$Classroom$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/models/Classroom.js [app-route] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$models$2f$Subject$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/models/Subject.js [app-route] (ecmascript)");
+;
 ;
 ;
 ;
 async function GET() {
-    try {
-        await (0, __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$db$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["connectToDatabase"])();
-        const timetables = await __TURBOPACK__imported__module__$5b$project$5d2f$models$2f$Timetable$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].find().sort({
-            createdAt: -1
-        }).lean();
-        const normalized = timetables.map((doc)=>({
-                ...doc,
-                _id: doc._id.toString(),
-                result: doc.result || doc.data || {},
-                data: doc.data || doc.result || {}
-            }));
-        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-            timetables: normalized
-        }, {
-            status: 200
-        });
-    } catch (error) {
-        console.error("[Timetable] Failed to fetch timetables:", error);
-        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-            message: "Failed to fetch timetables"
-        }, {
-            status: 500
-        });
-    }
+    await (0, __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$db$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["connectToDatabase"])();
+    const classrooms = await __TURBOPACK__imported__module__$5b$project$5d2f$models$2f$Classroom$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].find().populate("subjects").sort({
+        name: 1
+    });
+    return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+        classrooms
+    }, {
+        status: 200
+    });
 }
-async function DELETE() {
-    try {
-        await (0, __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$db$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["connectToDatabase"])();
-        await __TURBOPACK__imported__module__$5b$project$5d2f$models$2f$Timetable$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].deleteMany({});
+async function POST(request) {
+    await (0, __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$db$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["connectToDatabase"])();
+    const body = await request.json();
+    const { name, subjects } = body || {};
+    if (!name) {
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-            message: "All timetables deleted successfully"
+            message: "Name is required"
         }, {
-            status: 200
-        });
-    } catch (error) {
-        console.error("[Timetable] Failed to delete timetables:", error);
-        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-            message: "Failed to delete timetables"
-        }, {
-            status: 500
+            status: 400
         });
     }
+    const classroom = await __TURBOPACK__imported__module__$5b$project$5d2f$models$2f$Classroom$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].create({
+        name,
+        subjects: Array.isArray(subjects) ? subjects : []
+    });
+    return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+        classroom
+    }, {
+        status: 201
+    });
 }
 }),
 ];
 
-//# sourceMappingURL=%5Broot-of-the-server%5D__21d3be32._.js.map
+//# sourceMappingURL=%5Broot-of-the-server%5D__2bd82545._.js.map

@@ -1,3 +1,11 @@
-[00:00:09.343] Server  LOG      ✓ Ready in 7.6s
-[00:00:12.472] Server  LOG      ○ Compiling / ...
-[00:00:20.275] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:00:01.246] Server  LOG      ✓ Ready in 818ms
+[00:00:07.826] Server  LOG      ○ Compiling /manage/timetable/generate ...
+[00:00:12.137] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:00:15.421] Server  LOG      ○ Compiling /api/auth/admin/me ...
+[00:00:21.791] Server  LOG     {}
+[00:00:21.792] Server  LOG     
+[00:00:57.829] Server  LOG     [PDF Debug] Division requested: "DIV-A"
+[00:00:57.830] Server  LOG     [PDF Debug] Matched key: "DIV-A"
+[00:00:57.831] Server  LOG     [PDF Debug] Available divisions: ["DIV-A","DIV-B","DIV-C","DIV-D"]
+[00:00:57.833] Server  LOG     [PDF Debug] Settings: {}
+[00:00:57.886] Server  LOG     [PDF Debug] HTML generated successfully
