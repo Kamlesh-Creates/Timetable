@@ -166,6 +166,17 @@ export async function POST(request) {
         );
         console.log("[PDF Debug] Chromium path:", executablePath);
         
+        // Set executable permissions and wait a bit
+        const fs = await import("fs");
+        const { chmod } = fs.promises;
+        try {
+          await chmod(executablePath, 0o755);
+          // Small delay to ensure file is ready
+          await new Promise(resolve => setTimeout(resolve, 100));
+        } catch (permError) {
+          console.log("[PDF Debug] Permission setting (non-critical):", permError.message);
+        }
+        
         browser = await puppeteer.launch({
           args: chromium.args,
           defaultViewport: chromium.defaultViewport,
