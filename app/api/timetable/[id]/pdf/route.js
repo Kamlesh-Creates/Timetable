@@ -109,11 +109,16 @@ export async function GET(request, { params }) {
       } else {
         // Production (Vercel): use serverless Chromium
         console.log("[PDF Debug] Launching serverless Chromium");
+        
+        // Configure chromium for serverless environment
+        chromium.setGraphicsMode = false;
+        
         browser = await puppeteer.launch({
-          args: chromium.args,
+          args: [...chromium.args, "--disable-dev-shm-usage", "--disable-gpu"],
           defaultViewport: chromium.defaultViewport,
           executablePath: await chromium.executablePath(),
           headless: chromium.headless,
+          ignoreHTTPSErrors: true,
         });
       }
     } catch (launchError) {
